@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: Shizsun's blog
 subtitle:
 description:
 keywords:
-author: John Doe
+author: Zhen-Hua Chen
 language:
 timezone:
 
@@ -78,4 +78,9 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repository: https://github.com/shizsun0609tw/shizsun0609tw.github.io.git
+  branch: master
+
+# Disqus
+disqus_shortname: shizsun0609tw
