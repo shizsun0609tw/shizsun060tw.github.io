@@ -17,8 +17,8 @@ category:
 * [Amazing Counters](#Amazing-Counters) (網站歷史流量統計)
 
 <!--more-->
-<br/>
-<br/>
+
+---
 
 ### Disqus
 相信大家應該也希望有人在逛逛你的網站的同時能有可以互動的留言板吧
@@ -62,8 +62,7 @@ Disqus 是用來讓部落格的文章有留言回復的功能的常用第三方�
 
 最後在重新 generate 一次就能成功完成
 
-<br/>
-<br/>
+---
 
 ### whos-amung-us
 在網路上查詢了一下統計人數的掛載方式幾乎都是大陸做的，實在是不敢用RR
@@ -87,8 +86,7 @@ Disqus 是用來讓部落格的文章有留言回復的功能的常用第三方�
 
 {% asset_img who_step2_1.png %}
 
-<br/>
-<br/>
+---
 
 ### Amazing-Counters
 一樣是一個簡單使用的統計平台，可以顯示歷史瀏覽人數
