@@ -228,20 +228,22 @@ First 和 Follow 是 function 寫作 First(a) 或 Follow(a)
 
 **Follow**
 
-Follow 比較麻煩一點，有幾條規則需要注意
+Follow 比較麻煩一點，有幾條小弟自己整理出來的規則可以參考看看
 
 假設參數為 A
 
 * A 是開始符號，在集合尾巴放進 \$
 * 有條產生式為 S -> Ab ， b 為 terminal ，則把 b 加入進集合
 * 有條產生式為 S -> AB ， B 為 nonterminal ，則把 <font color='red'>First(B)</font> 加入進集合
-* 有條產生式為 S -> AB ， B 為 nonterminal <font color='red'>且 First(B) 可能為 ε ，則把 Follow(B)加入進集合</font>
+* 有條產生式為 S -> ABC， B 為 nonterminal <font color='red'>且 B 可能為 ε ，則把 Follow(B)</font> 加入進集合
+* 有條產生式為 S -> AB ， B 為 nonterminal <font color='red'>且 B 可能為 ε ，則把 Follow(S)</font> 加入進集合
 
 在換的過程中小弟是用有點像遞迴的方式去理解，邊用筆記錄換到哪才不會換到亂掉
 
 <div style='width:50%;' align=left>
 {% asset_img Follow01.jpg %}
 </div>
+<br/>
 <div style='width:50%;' align=left>
 {% asset_img Follow02.jpg %}
 </div>
