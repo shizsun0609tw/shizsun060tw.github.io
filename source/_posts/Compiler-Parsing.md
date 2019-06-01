@@ -48,7 +48,7 @@ Parsing 就是要將輸入字串對於我們定義的規則查詢、分析，確
 
 * L input 從左到右
 * L 最左優先推導
-* 1 每一格只能有一種選擇 
+* 1 每一格只能有一種選擇(查表的時候只有一種可能)
 * 不能有左遞迴
 * 不能有 Ambiguous
 
@@ -61,13 +61,58 @@ Parsing 就是要將輸入字串對於我們定義的規則查詢、分析，確
 
 **Example**
 
+*E -> TE'
+E' -> +TE' | ε
+T -> FT'
+T' -> *FT' | ε
+F -> (E) | id
+
+First(E) = First(T) = First(F) = {(, id)}
+First(E') = {+, ε}
+First(T') = {*, ε}
+
+Follow(E) = Follow(E') = {), $)}
+Follow(T) = Follow(T') = {+, ), $}
+Follow(F) = {+, *, ), $}
+
+<div style="width:60%;">
+{% asset_img LLtable01.jpg %}
+</div>
+
+
 **Parse**
 
+* 根據 input 將開始符號放入 stack 中 向左展開至目標 nonterminal 後消除
+* 查表讓 nonterminal 往 input 的目標 terminal 轉換
 
+String: id + id * id
+
+<div style="width:60%;">
+{% asset_img LLtable02.jpg %}
+</div>
+
+**<font color='red'>How it works?</font>**
+
+<font color='red'>
+如果我們需要將開始符號往目標字串轉換<br/>
+由於此方法屬於最左優先推導，因此將 first 放入表中後，透過查表就能知道此 nonterminal 要如何往左換出目標 terminal<br/>
+如果遇到 ε 的情況，由於 nonterminal 被換成 ε 所以他的 follow 也有可能讓他展開到目標 terminal
+</font>
 
 ---
 
 ### LL(0)
+
+語法不存在著選擇性用來單一的判斷
+
+##### Example
+
+G -> AB
+A -> BC
+B -> C
+C -> a
+
+不管怎麼推都會推回去 a
 
 ---
 
