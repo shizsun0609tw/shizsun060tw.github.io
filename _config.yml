@@ -81,6 +81,3 @@ deploy:
   type: git
   repository: https://github.com/shizsun0609tw/shizsun0609tw.github.io.git
   branch: master
-
-# Disqus
-disqus_shortname: shizsun0609tw

@@ -90,6 +90,7 @@ Disqus 是用來讓部落格的文章有留言回復的功能的常用第三方�
 
 ### Amazing-Counters
 一樣是一個簡單使用的統計平台，可以顯示歷史瀏覽人數
+<font color='red'>不過網站為 HTTP 有資安疑慮的請謹慎使用</font>
 
 {% asset_img amazing_step0.png %}
 

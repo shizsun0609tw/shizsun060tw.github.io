@@ -111,7 +111,7 @@ RE包含在CFG內 所以 <font color='red'>RE可以換CFG 可是CFG不一定能�
 
 ##### Description
 
-最左優先推倒/最右優先推倒，在將開始符號推至目標字串時從最左或最右的 nonterminal 開始推
+最左優先推導/最右優先推導，在將開始符號推至目標字串時從最左或最右的 nonterminal 開始推
 
 ##### Example
 
