@@ -206,7 +206,7 @@ First 和 Follow 是 function 寫作 First(a) 或 Follow(a)
 **First**
 
 * 參數可以是 terminal 或 nonterminal
-* 找到接在參數<font color='red'>前面的字首</font>可能是哪些 nonterminal 的集合
+* 找到接在參數<font color='red'>前面的字首</font>可能是哪些 terminal 的集合
 
 **Follow**
 
