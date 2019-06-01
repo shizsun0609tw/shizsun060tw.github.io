@@ -56,7 +56,7 @@ S = {expression}
 
 ---
 
-### Parse-Tree
+### Parse Tree
 
 ##### Description
 
@@ -75,7 +75,7 @@ S => S S \* => S S + S \* => a S + S \* => a a + S \* => a a + a \*
 
 ---
 
-### NFA-to-CFG
+### NFA to CFG
 
 ##### Description
 
@@ -83,31 +83,47 @@ S => S S \* => S S + S \* => a S + S \* => a a + S \* => a a + a \*
 
 ##### Example
 
+(a|b)*abb
 <div style='width:50%;' align='left'>
 {% asset_img NFAtoCFG01.jpg %}
 </div>
+S<sub>0</sub> -> aS<sub>0</sub> | b S<sub>0</sub> | S<sub>1</sub>
+S<sub>1</sub> -> bS<sub>2</sub>
+S<sub>2</sub> -> bS<sub>3</sub>
+S<sub>3</sub> -> ε
 
 ---
 
-### CFG-vs-RE
+### CFG vs RE
 
 ##### Description
 
 RE包含在CFG內 所以 <font color='red'>RE可以換CFG 可是CFG不一定能換RE</font>
 
-<div style='width:50%;' align='left'>
-{% asset_img REvsCFG01.png %}
+<div style='width:20%;' align='left'>
+{% asset_img REvsCFG01.jpg %}
 </div>
 
 ##### Example
 
-<div style='width:50%;' align='left'>
-{% asset_img REvsCFG02.jpg %}
-</div>
+<font color = 'red'>RE to CFG</font>
+
+(a|b)*abb 
+=> 
+A -> BC
+B -> BB | a | b | ε
+C -> abb
+
+<font color='red'>CFG to RE</color>
+
+A -> aAb | ε
+=>
+???
+
 
 ---
 
-### <font color='red'>Leftmost-and-Rightmost-Derivation</font>
+### <font color='red'>Leftmost and Rightmost Derivation</font>
 
 ##### Description
 
@@ -157,7 +173,7 @@ E
 
 ---
 
-### <font color='red'>Elimination-of-Left-Recursion</font>
+### <font color='red'>Elimination of Left Recursion</font>
 
 ##### Description
 
@@ -183,7 +199,7 @@ E' -> +TE' | -TE' | ε
 
 ---
 
-### Top-Down-Parsing
+### Top-Down Parsing
 
 ##### Description
 
@@ -191,7 +207,15 @@ E' -> +TE' | -TE' | ε
 
 ##### Example
 
-<div style='width:70%;' align=left>
+E -> TE'
+E' -> +TE' | ε
+T -> FT'
+T' -> *FT' | ε
+F -> (E) | id
+
+String: id + id * id
+
+<div style='width:30%;' align=left>
 {% asset_img TopDown01.jpg %}
 </div>
 
@@ -219,12 +243,30 @@ First 和 Follow 是 function 寫作 First(a) 或 Follow(a)
 
 沒甚麼訣竅 暴力展開往前找就對了 <font color='red'>記得如果看到 ε 要往後看一個</font>
 
-<div style='width:50%;' align=left>
-{% asset_img First01.jpg %}
-</div>
-<div style='width:50%;' align=left>
-{% asset_img First02.jpg %}
-</div>
+
+<font color='red'>ex1</font>
+
+E -> TE'
+E' -> +TE' | ε
+T -> FT'
+T' -> *FT' | ε
+F -> (E) | id
+
+First(E) = First(T) = First(F) = {(, id)}
+First(E') = {+, ε}
+First(T') = {*, ε}
+
+<font color='red'>ex2</font>
+
+S -> ACB | CbB | Ba
+A -> da | BC
+B -> g | ε
+C -> h | ε
+
+First(S) = {d, g, h, ε, b, a}
+First(A) = {d, g, h, ε}
+First(B) = {g, ε}
+First(C) = {h, ε}
 
 **Follow**
 
@@ -240,10 +282,27 @@ Follow 比較麻煩一點，有幾條小弟自己整理出來的規則可以參�
 
 在換的過程中小弟是用有點像遞迴的方式去理解，邊用筆記錄換到哪才不會換到亂掉
 
-<div style='width:50%;' align=left>
-{% asset_img Follow01.jpg %}
-</div>
-<br/>
-<div style='width:50%;' align=left>
-{% asset_img Follow02.jpg %}
-</div>
+<font color='red'>ex1</font>
+
+*E -> TE'
+E' -> +TE' | ε
+T -> FT'
+T' -> *FT' | ε
+F -> (E) | id
+
+Follow(E) = Follow(E') = {), $)}
+Follow(T) = Follow(T') = {+, ), $}
+Follow(F) = {+, *, ), $}
+
+
+<font color='red'>ex2</font>
+
+S -> ACB | CbB | Ba
+A -> da | BC
+B -> g | ε
+C -> h | ε
+
+Follow(S) = {$}
+Follow(A) = {h, g, $}
+Follow(B) = {$, a, h, g}
+Follow(C) = {g, $, b, h}
