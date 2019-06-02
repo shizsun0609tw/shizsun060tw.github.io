@@ -284,7 +284,7 @@ Follow 比較麻煩一點，有幾條小弟自己整理出來的規則可以參�
 
 <font color='red'>ex1</font>
 
-*E -> TE'
+E -> TE'
 E' -> +TE' | ε
 T -> FT'
 T' -> *FT' | ε
