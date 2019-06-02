@@ -242,7 +242,7 @@ First 和 Follow 是 function 寫作 First(a) 或 Follow(a)
 **First**
 
 沒甚麼訣竅 暴力展開往前找就對了 <font color='red'>記得如果看到 ε 要往後看一個</font>
-
+<font color='red'>如果整個字串都可能為 ε 則也要將 ε 加進集合</font>
 
 <font color='red'>ex1</font>
 
