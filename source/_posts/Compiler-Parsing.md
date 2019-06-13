@@ -119,5 +119,37 @@ C -> a
 ### Bottom-Up Parsing
 
 <font color='red'>由 input 開始推，推回開始符號</font>
+基本上由 <font color='red'>shift(移入) reduce(化簡)</font> 組成
+
+---
+
+### LR(0)
+
+##### Description
+
+* L input 從左到右
+* R 最右優先推倒
+* 0 每次只會向前看零個
+* 不能有 Ambiguous
+
+**建表方法(Automation)**
+
+* 先寫一條新的產生式，產生開始符號
+* 將第一條產生式放入I<sub>0</sub>，並在右邊最前面放一 ●
+* 將 ● 後面的符號遞迴展開，加在 I<sub>0</sub> 下方
+* I<sub>0</sub>的每一成員將 ● 向後移一個，透過此符號產生新的 I<sub>k</sub>
+* 產生出來 I<sub>k</sub> 的再繼續遞迴上面步驟
+
+**Example**
+
+S -> a B
+B -> a B A B | ε
+A -> + | *
+
+=> S' -> S (先產生此產生式)
+
+**建表方法(Parsing Table)**
+
+* 
 
 ---
