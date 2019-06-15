@@ -1,9 +1,9 @@
 ---
 title: Hello-Blog
 date: 2019-05-29 20:41:39
-tags: 雜記
+tags: Diary
 category:
-- 雜記
+- Diary
 ---
 
 現在小弟是資工大三生，想說隨著東西越來越多，工具、理論、語言很多東西常常沒碰都容易忘

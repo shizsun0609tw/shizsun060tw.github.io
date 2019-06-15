@@ -1,13 +1,13 @@
 ---
-title: git+hexo-輕鬆架網站
+title: Git+Hexo-輕鬆架網站
 date: 2019-05-29 20:48:48
 tags: 
-- note 
-- git 
-- hexo
+- Note 
+- Git 
+- Hexo
 category: 
 - Tool 
-- hexo
+- Hexo
 ---
 
 ## 前言

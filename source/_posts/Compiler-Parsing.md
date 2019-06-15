@@ -2,7 +2,7 @@
 title: Compiler-Parsing
 date: 2019-06-01 16:44:08
 tags:
-- note
+- Note
 - Compiler
 category:
 - Compiler
