@@ -212,7 +212,7 @@ A -> + | *
 
 ---
 
-### LL(1)
+### LR(1)
 
 ##### Descrition 
 
@@ -241,7 +241,7 @@ B -> ε
 
 ##### Description
 
-* 將 LR(0) 如果產生式皆相同，但 lookahead set不同的部分合併
+* 將 LR(1) 如果產生式皆相同，但 lookahead set不同的部分合併
 * S 可以合併 R 不行
 
 <font color='red'>減少表的大小</font>
