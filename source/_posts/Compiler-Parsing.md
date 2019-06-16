@@ -163,9 +163,9 @@ A -> + | *
 * x軸先放上 terminal 再放上 nonterminal 兩者隔開
 * y軸放上 I
 * 如果此 I<sub>j</sub> 可以透過某個符號到另一個 I<sub>k</sub>
-  *  如果符號為 nonterminal 則在 (I<sub>j</sub>, nontermianl) 填上 S<sub>k</sub>
-  * 如果符號為 terminal 則在 (I<sub>j</sub>, terminal) 填上 k
-* 如果 I<sub>j</sub>內有產生式 P<sub>i</sub> 的 ● 已經在結尾，則將所有 nonterminal 填上 r<sub>i</sub>
+  * 如果符號為 terminal 則在 (I<sub>j</sub>, termianl) 填上 S<sub>k</sub>
+  * 如果符號為 nonterminal 則在 (I<sub>j</sub>, nonterminal) 填上 k
+* 如果 I<sub>j</sub>內有產生式 P<sub>i</sub> 的 ● 已經在結尾，則將所有 terminal 填上 r<sub>i</sub>
 
 <font color = 'red'>最後一項可能造成 Conflict</font>
 
@@ -181,7 +181,7 @@ A -> + | *
 
 基本上跟 LR(0) 的流程相同，但在建表的時候最後一項
 
-* 如果 I<sub>j</sub>內有產生式 P<sub>i</sub> ● 已經在結尾，則將<font color='red'>所有 nonterminal</font> 填上 r<sub>i</sub>
+* 如果 I<sub>j</sub>內有產生式 P<sub>i</sub> ● 已經在結尾，則將<font color='red'>所有 terminal</font> 填上 r<sub>i</sub>
 
 改為
 
