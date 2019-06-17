@@ -2,7 +2,7 @@
 title: Compiler-CFG
 date: 2019-05-30 10:13:28
 tags:
-- note
+- Note
 - Compiler
 category:
 - Compiler
@@ -10,14 +10,14 @@ category:
 
 ## CFG(Context Free Grammar)
 
-* [<font color='red'>Introduction</font>](#Introduction)
+* [Introduction](#Introduction)
 * [Parse Tree](#Parse-Tree)
 * [NFA->CFG](#NFA-to-CFG)
 * [CFG vs RE](#CFG-vs-RE)
-* [<font color='red'>Leftmost/Rightmost Derivation</font>](#Leftmost-and-Rightmost-Derivation)
-* [<font color='red'>Elimination of Left Recursion</font>](#Elimination-of-Left-Recursion)
+* [Leftmost/Rightmost Derivation](#Leftmost-and-Rightmost-Derivation)
+* [Elimination of Left Recursion](#Elimination-of-Left-Recursion)
 * [Top-Down Parsing](#Top-Down-Parsing)
-* [<font color='red'>First and Follow</font>](#First-and-Follow)
+* [First and Follow](#First-and-Follow)
 
 <!--more-->
 

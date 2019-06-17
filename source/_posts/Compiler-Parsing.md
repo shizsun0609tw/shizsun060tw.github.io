@@ -2,7 +2,7 @@
 title: Compiler-Parsing
 date: 2019-06-01 16:44:08
 tags:
-- note
+- Note
 - Compiler
 category:
 - Compiler
@@ -21,6 +21,9 @@ category:
 **Bottom-Up Parsing**
 
 * [Bottom-Up Parsing](#Bottom-Up-Parsing)
+* [LR(0)](#LR-0)
+* [SLR(1)](#SLR-1)
+* [LALR(1)](#LALR-1)
 
 <!--more-->
 
@@ -48,7 +51,7 @@ Parsing 就是要將輸入字串對於我們定義的規則查詢、分析，確
 
 * L input 從左到右
 * L 最左優先推導
-* 1 每一格只能有一種選擇(查表的時候只有一種可能)
+* 1 每一個只會往前看1個
 * 不能有左遞迴
 * 不能有 Ambiguous
 
@@ -61,7 +64,7 @@ Parsing 就是要將輸入字串對於我們定義的規則查詢、分析，確
 
 **Example**
 
-*E -> TE'
+E -> TE'
 E' -> +TE' | ε
 T -> FT'
 T' -> *FT' | ε
@@ -103,7 +106,7 @@ String: id + id * id
 
 ### LL(0)
 
-語法不存在著選擇性用來單一的判斷
+因為是 0 所以他不會偷看 OuO
 
 ##### Example
 
@@ -153,3 +156,125 @@ A -> + | *
 * 
 
 ---
+
+### LR(0)
+
+##### Description
+
+* L input 從左到右
+* L 最右優先推導
+* 0 每一個只會往前看0個
+* 不能有 Ambiguous
+* I = Item
+* r = reduse
+* s = shift
+
+**建表方法**
+
+先畫出 Automation 再利用畫出來的圖建表
+
+**<font color='red'>Automation</font>**
+
+* 先將所有產生式拆開並增加 S' -> S
+* I<sub>0</sub>為 S' -> ●S 開始推
+* ● 代表的是目前看到哪個位置
+* 如果同一個 I 下，● 後為 nonterminal 則將其產生式加入
+* 一個 I 完成後將每一個 ● 後還有東西的經過一個符號並產生新的 I 之後產生到結尾
+
+**Example**
+
+S -> a B
+B -> aBAB | ε
+A -> + | *
+<div style="width:60%;">
+{% asset_img LR0_automation.jpg LR0_Automation %}
+</div>
+
+**<font color='red'>Parsing Table</font>**
+
+* x軸先放上 terminal 再放上 nonterminal 兩者隔開
+* y軸放上 I
+* 如果此 I<sub>j</sub> 可以透過某個符號到另一個 I<sub>k</sub>
+  * 如果符號為 terminal 則在 (I<sub>j</sub>, termianl) 填上 S<sub>k</sub>
+  * 如果符號為 nonterminal 則在 (I<sub>j</sub>, nonterminal) 填上 k
+* 如果 I<sub>j</sub>內有產生式 P<sub>i</sub> 的 ● 已經在結尾，則將所有 terminal 填上 r<sub>i</sub>
+
+<font color = 'red'>最後一項可能造成 Conflict</font>
+
+**Example**
+
+請看 SLR 的示範
+
+---
+
+### SLR(1)
+
+##### Description
+
+基本上跟 LR(0) 的流程相同，但在建表的時候最後一項
+
+* 如果 I<sub>j</sub>內有產生式 P<sub>i</sub> ● 已經在結尾，則將<font color='red'>所有 terminal</font> 填上 r<sub>i</sub>
+
+改為
+
+* 如果 I<sub>j</sub>內有產生式 P<sub>i</sub> ● 已經在結尾，則將 <font color = 'red'>follow(P<sub>開始符號</sub>) </font>填上 r<sub>i</sub>
+
+<font color='red'>解決 LR(0) 的 Conflict</font>
+
+**Example**
+
+S -> a B
+B -> aBAB | ε
+A -> + | *
+
+<div style="width:40%;">
+{% asset_img SLRtable.jpg SLRtable %}
+</div>
+
+**Parsing**
+
+透過 table Parse
+* 查看下個要進來的 input 需透過現在 stack.top() 的狀態經過何種操作才能得到
+* 如果為 S<sub>i</sub> 將下個 input 放進 symbol ， Stack push(i)
+* 如果為 r<sub>i</sub> 將 P<sub>i</sub>右式符號數量從 stack pop掉並代換掉 symbol<sub>suffix</sub> 再查看 stack.top() 的 nonterminal<sub>P開始符號</sub> 要 push 哪個 I
+
+<div style="width:50%;">
+{% asset_img SLRparsing.jpg SLRparsing %}
+</div>
+
+---
+
+### LR(1)
+
+##### Descrition 
+
+* 在建立 Automation 的時候如果在 I 因拓展產生的 P 則偷看 ● 後的 first 並寫在後方(lookahead set)
+* 在建表的時候 reduce 透過後方的 lookahead 而不是 SLR 的 follow
+
+<font>lookahead 為 follow 的 subset 能減少 Conflict 的問題</font>
+
+**Example**
+
+S -> A a A b | B b B a
+A -> ε
+B -> ε
+
+<div style="width:60%;">
+{% asset_img LR1_automation.jpg LR1_automation %}
+<br/>
+</div>
+<div style="width:40%;">
+{% asset_img LR1_table.jpg LR1_table %}
+</div>
+
+---
+
+### LALR(1)
+
+##### Description
+
+* 將 LR(1) 如果產生式皆相同，但 lookahead set不同的部分合併
+* S 可以合併 R 不行
+
+<font color='red'>減少表的大小</font>
+
