@@ -15,6 +15,7 @@ category:
 * [Function](#Function)
 * [Comment](#Comment)
 * [Format](#Format)
+* [Object And Data Structure](#Object-And-Data-Structure)
 
 <!--more-->
 
@@ -496,4 +497,190 @@ public String render() throws Exception {
 ##### O
 
 應該在開發之前統一定好簡單的編排原則，讓成員在互相閱讀 code 時能輕鬆的閱讀
-而外人在閱讀時也能感受到團隊的專業性，且閱讀輕鬆順暢
+而外人在閱讀時也能感受到團隊的專業性，且閱讀輕鬆順暢 
+
+---
+
+### Object And Data Structure
+
+<font color='red'>**資料/物件的反對稱性**</font>
+
+* [資料結構與物件](#資料結構與物件)
+* [結構化與物件導向](#結構化與物件導向)
+* [混和體](#混和體)
+* [火車事故](#火車事故)
+* [隱藏結構](#隱藏結構)
+
+---
+
+#### 資料結構與物件
+
+我們在實作上經常遇到一個情況，這個類別的成員該如何操控或取得
+我們應該把類別分為兩種，資料結構與物件
+* <font color='red'>資料結構: 成員可以直接存取(public)，基本上沒有 member function ，結構簡單、無須介面而將成員直接暴露</font>
+```java
+public class Point {
+    public double X;
+    public double Y;
+}
+```
+* 我們會清楚的知道 Point 是含有 X, Y 的直角座標系
+
+* <font color='red'>物件: 成員需透過介面存取(private)，會有許多的 member function ，結構隱藏、透過抽象化界面對於成員操作</font>
+```java
+public interface Point {
+    double getX();
+    double getY();
+    void setCartesian(double x, double y);
+    double getR();
+    double getTheta();
+    void setPolar(double r, double theta);
+}
+```
+* 我們會知道可以透過一些虛擬的介面去獲得相關資料，而並不需要知道底下是由直角座標或是極座標實作
+
+---
+
+#### 結構化與物件導向
+
+* <font color='red'>結構化(使用資料結構的程式碼)</font>
+
+* 容易添加新的函式，而不需要變動已有的資料結構
+
+* 難以添加新的資料結構，因為必須改變所有的函式
+
+```java
+public class Square {
+    public Point topLeft;
+    public double side;
+}
+
+public class Rectangle {
+    public Point topLeft;
+    public double height;
+    public double width;
+}
+
+public class Circle {
+    public Point center;
+    public double radius;
+}
+
+public class Geometry {
+    public final double PI = 3.1415926;
+
+    public double area(Object shape) throws NoSuchShapeException {
+        if (shape instanceof Square) {
+            Square s = (Square)shape;
+            return s.side * s.side;
+        }
+        else if (shape instanceof Rectangle) {
+            Square r = (Rectangle)shape;
+            return r.height * r.width;
+        }
+        else if (shape instanceof Circle) {
+            Circle c = (Circle)shape;
+            return PI * c.radius * c.radius;
+        }
+        throw new NoSuchShapeException();
+    }
+}
+
+```
+* <font color='red'>物件導向</font>
+
+* 容易添加新的類別，而不需要變動已有的函式
+
+* 難以添加新的函式，因為必須改變所有的類別
+
+```java
+public class Square implements Shape {
+    private Point topLeft;
+    private double side;
+
+    public double area() {
+        return side * side;
+    }
+}
+
+public class Rectangle implements Shape {
+    private Point topLeft;
+    private double height;
+    private double width;
+
+    public double area() {
+        return height * width;
+    }
+}
+
+public class Circle implements Shape {
+    private Point center;
+    private double radius;
+
+    public final double PI = 3.1415926;
+    public double area() {
+        return PI * radius * radius;
+    }
+}
+```
+---
+
+### 混和體
+
+##### X
+
+程式設計師應該要能判斷哪些類別使用物件導向哪些類別使用結構化來撰寫，沒有一定的偏向哪種
+但混和體(半物件半資料結構)容易造成更加混亂，因此應該盡量避免
+
+---
+
+#### 德摩特爾法則
+
+##### X
+
+class 內不該有回傳底下物件的 function
+
+---
+
+#### 火車事故
+
+##### X
+
+有時候我們會寫出
+
+```java
+final String outputDir = ctxt.getOptions().getScratchDir().getAbsolutePath();
+```
+##### O
+
+應該寫成
+```java
+Options opts = ctxt.getOptions();
+File scratchDir = opts.getScratchDir();
+final String ouputDir = scratchDir.getAbsolutePath();
+```
+
+這樣還是違反了德摩特爾法則，因為他拿出了物件再對他進行操作不如思考是否為"資料結構"或是用"隱藏結構"的方法獲取
+
+---
+
+#### 隱藏結構
+
+##### X
+
+我們常常會寫出火車事故的 code
+是因為要拿它去做別的事情的操作但那樣也違反了摩德特爾法則
+```java
+String outFile = outputDir + "/" + className.replace('.', '/') + ".class";
+FileOutputStream fout = new FileOutputStream(outFile);
+BufferedOutputStream bos = new BufferedOutputStream(fout);
+```
+
+##### O
+
+我們可以用此方法代替，包在物件本身底下!
+```java
+BufferedOutputStream bos = ctxt.createScratchFileStream(classFileName);
+```
+
+---
