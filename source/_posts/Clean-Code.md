@@ -11,9 +11,10 @@ category:
 ## Clean Code
 
 * [Introduction](#Introduction)
-* [Variable](#Variable)
+* [Name](#Name)
 * [Function](#Function)
 * [Comment](#Comment)
+* [Format](#Format)
 
 <!--more-->
 
@@ -31,9 +32,9 @@ category:
 
 ---
 
-### Variable
+### Name
 
-<font color='red'>**一眼看出其變數代表的意義**</font>
+<font color='red'>**一眼看出其名稱代表的意義**</font>
 
 * [有意義的區別](#有意義的區別)
 * [能夠唸出來的名稱](#能夠唸出來的名稱)
@@ -418,3 +419,81 @@ TODO，待辦事項可以留下 TODO 但是請記得隔一些時間就要定期�
 
 ---
 
+### Format
+
+<font color='red'>**增加可讀性，並使人感受到你的專業性**</font>
+
+* [垂直的編排](#垂直的編排)
+* [垂直距離](#垂直距離)
+* [水平的編排](#水平的編排)
+* [縮排](#縮排)
+* [團隊的共同準則](#團隊的共同準則)
+
+---
+
+#### 垂直的編排
+
+##### O
+
+多數檔案應該都少於 200 行，較大的檔案也不應該超過 500 行
+將不同思緒的區段以空白區分，思緒相近的緊密相連
+
+---
+
+#### 垂直距離
+
+##### O
+
+function 呼叫時盡量使其一個接一個，垂直距離盡可能縮短，要讓 function 呼叫呈現向下的相依性
+盡可能讓操作的變數宣告在鄰近位置(由於 function 應該盡可能的短，因此以 function 最上方為原則)
+
+---
+
+#### 水平的編排
+
+##### X
+
+不需要做水平的對齊，那樣並不能較清楚的理解類別與變數的關係
+
+##### O
+
+寬度應在 100 ~ 120 字元以下，以能一眼看清楚整體面貌為原則
+不同元素間可適當的空白區隔，相近的運算元素可以緊密相連
+
+---
+
+#### 縮排
+
+##### X
+
+避免程式碼塌陷成一行，這樣並不會比較好閱讀
+```java
+public CommentWidget(ParentWidget parent, String text){super(parent, text);}
+public String render() throws Exception {return "";}
+```
+
+##### O
+
+盡量維持 scope 的完整性，以及統一性
+```java
+public CommentWidget(ParentWidget parent, String text) {
+    super(parent, text);
+}
+
+public String render() throws Exception {
+    return "";
+}
+```
+
+---
+
+#### 團隊的共同準則
+
+##### X
+
+不要參入個人風格的程式碼編排
+
+##### O
+
+應該在開發之前統一定好簡單的編排原則，讓成員在互相閱讀 code 時能輕鬆的閱讀
+而外人在閱讀時也能感受到團隊的專業性，且閱讀輕鬆順暢
