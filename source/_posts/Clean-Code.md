@@ -16,6 +16,7 @@ category:
 * [Comment](#Comment)
 * [Format](#Format)
 * [Object And Data Structure](#Object-And-Data-Structure)
+* [Error Handling](#Error-Handling)
 
 <!--more-->
 
@@ -682,5 +683,60 @@ BufferedOutputStream bos = new BufferedOutputStream(fout);
 ```java
 BufferedOutputStream bos = ctxt.createScratchFileStream(classFileName);
 ```
+
+---
+
+### Error Handling
+
+<font color='red'>**錯誤處理很重要，但請不要影響原本整潔的程式**</font>
+
+* [使用例外事件而非回傳錯誤碼](#使用例外事件而非回傳錯誤碼)
+* [在開頭寫下你的 Try-Catch-Finally 敘述](#在開頭寫下你的-Try-Catch-Finally-敘述)
+* [使用不檢查型例外](#使用不檢查型例外)
+* [提供發生例外的相關資訊](#提供發生例外的相關資訊)
+* [不要傳遞 null](#不要傳遞-null)
+
+---
+
+#### 使用例外事件而非回傳錯誤碼
+
+##### X
+
+盡量不要使用錯誤旗幟(flag)，或是回傳錯誤碼，這樣的程式並不整潔直觀
+
+##### O
+
+使用 Try-Catch-Finally 將錯誤捕捉
+
+---
+
+#### 在開頭寫下你的 Try-Catch-Finally 敘述
+
+##### O
+
+在開頭就先將 Try-Catch-Finally 的 scope 定出來可以幫助錯誤處理的思緒釐清，並讓程式碼一定會依照你所想的進行(就算有錯誤)
+
+---
+
+#### 使用不檢查型例外
+
+檢查型例外(checked exceptions)，指的是是否需要在"所有"地方都加上例外處理 ?
+在眾多討論的結果，我們認為在必須的地方加入就好，因為錯誤的丟出容易破壞"開放閉合準則"
+
+---
+
+#### 提供發生例外的相關資訊
+
+##### O
+
+拋出的例外應該要提供足夠的內文資訊，足以判斷錯誤的原因與位置，這個拋出的錯誤才是有益的
+
+---
+
+#### 不要傳遞 null
+
+##### X
+
+使用 null 去傳遞或回傳都是把問題丟給呼叫者的行為，使用上檢查起來不便，又會造成呼叫者的負擔
 
 ---
