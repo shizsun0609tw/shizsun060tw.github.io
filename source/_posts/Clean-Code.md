@@ -19,6 +19,7 @@ category:
 * [Error Handling](#Error-Handling)
 * [Boundary](#Boundary)
 * [Unit Test](#Unit-Test)
+* [Class](#Class)
 
 <!--more-->
 
@@ -770,14 +771,14 @@ BufferedOutputStream bos = ctxt.createScratchFileStream(classFileName);
 #### 使用尚未存在的程式
 
 我們常常會遇到某部分的程式與你負責部分有相關，但負責人尚未將 Prototype 寫出來，使你不知道該如何繼續撰寫有關的部分
-
 我們可以先預想出這些程式應該包含哪些"介面"是供你使用的，透過先將這些介面撰寫出來，再包裝再對方的程式上去做存取
-
 這時候我們只需要透過簡單小部分的修改介面部分的程式就能很好的契合，也能維持"簡潔的邊界的整潔"!
 
 ---
 
 ### Unit Test
+
+<font color='red'>**單元程式與主程式一樣重要**</font>
 
 * [TDD](#TDD)
 * [整潔的測試](#整潔的測試)
@@ -854,3 +855,31 @@ Test Driven Development
 單元測試最好在撰寫主程式前撰寫，並撰寫完後馬上撰寫主程式
 
 ---
+
+### Class
+
+<font color='red'>**保持簡短、抽象化**</font>
+
+* [類別要夠簡短](#類別要夠簡短)
+* [單一職責原則](#單一職責原則)
+
+---
+
+#### 類別要夠簡短
+
+類別要有個足以描述職責的命名，如果使用了 Processor, Manager, Super 通常代表擁有太多的職責了
+要能夠在不使用 if, and, or, but 等字眼下，能在 25 個字詞內簡短的秒數類別
+
+---
+
+#### 單一職責原則
+
+單一職責原則 SRP(Single Responsibility Principle)
+
+類別應該只有一個職責，唯一的一個修改的理由
+<font color='red'>多使用抽象化將抽象方法分離出來</font>
+系統是由許多小型類別所組成，而不是由少數幾個大型類別所組成
+每個小類別"封裝單一的職責"、"只有一個修改的理由"、"與其他少數幾個類別合作來完成系統要求的行為'
+
+---
+
