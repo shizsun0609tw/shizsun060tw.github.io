@@ -2,7 +2,6 @@
 title: Clean Code
 date: 2019-07-17 10:02:59
 tags:
-- Note
 - Software Engineering
 category:
 - Software Engineering

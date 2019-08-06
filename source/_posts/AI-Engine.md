@@ -2,7 +2,6 @@
 title: AI-Engine
 date: 2019-06-15 17:43:20
 tags:
-- Note
 - Computer Graphic
 - Game
 category:

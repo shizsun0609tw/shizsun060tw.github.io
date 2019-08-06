@@ -2,7 +2,6 @@
 title: Special Effect
 date: 2019-06-17 14:13:06
 tags:
-- Note
 - Computer Graphic
 category:
 - Computer Graphic

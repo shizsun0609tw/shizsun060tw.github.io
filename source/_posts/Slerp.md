@@ -2,7 +2,6 @@
 title: Slerp
 date: 2019-06-16 20:10:15
 tags:
-- Note
 - Math
 - Computer Graphic
 category:
