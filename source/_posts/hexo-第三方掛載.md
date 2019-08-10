@@ -5,7 +5,6 @@ tags:
 - Hexo
 category:
 - Tool
-- Hexo
 ---
 
 ## 前言
