@@ -14,6 +14,7 @@ category:
 * [Connected Component](#Connected-Component)
 * [Topological Sort](#Topological-Sort)
 * [Strong Connected Component](#Strong-Connected-Component)
+* [Minimum Spanning Tree](#Minimum-Spanning-Tree)
 
 <!--more-->
 
@@ -166,3 +167,53 @@ reverse 後會與原本找到相同的 strong connected components ，在 revers
 
 ---
 
+### Minimum Spanning Tree
+
+#### Prim's Minimun Spanning Tree
+
+* O(m<sup>2</sup>)
+* Greedy
+
+#### Step
+
+visit 記錄那些點走過/沒走過
+建立 d 來記錄到每一點的最短距離為多少
+每次尋找最少 cost 的邊連到未走過的點
+由此點可連到的其他邊更新 d 到各點的最短距離
+
+#### Psudocode
+
+```C++
+void findMST(vector<vector<int>> edgeData) {
+	vector<bool> visit;
+	vector<int> d;
+	long long sum = 0;
+
+	visit.resize(edgeData.size(), false);
+	d.resize(edgeData.size(), INT_MAX);
+	d[0] = 0;
+
+	for (int i = 0; i < edgeData.size(); ++i) {
+		int min = INT_MAX, node = -1;
+		for (int j = 0; j < edgeData[i].size(); ++j) {
+			if (visit[j] == false && min > d[j]) {
+				min = d[j];
+				node = j;
+			}
+		}
+
+		if (node == -1) break;
+		visit[node] = true;
+		sum += min;
+
+		for (int j = 0; j < edgeData[i].size(); ++j) {
+			if (visit[j] == false && edgeData[node][j] < d[j]) {
+				d[j] = edgeData[node][j];
+			}
+		}
+
+	}
+	
+	cout << sum << endl;
+}
+```
