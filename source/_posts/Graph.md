@@ -212,6 +212,6 @@ void findMST(vector<vector<int>> edgeData) {
             }
         }
     }
-	cout << sum << endl;
+    cout << sum << endl;
 }
 ```
