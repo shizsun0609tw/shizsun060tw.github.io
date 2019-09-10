@@ -68,8 +68,10 @@ Toydea 這間公司給人的印象真的非常非常好！在遊戲製作過程�
 
 #### Shoot & Bomb
 
-* [遊戲影片]()
-* [Github]()
+{% asset_img ShootAndBomb.jpg Shoot&Bomb %}
+
+* [遊戲影片](https://www.youtube.com/watch?v=TF9UhKWSh_U)
+* [Github](https://github.com/shizsun0609tw/ShootAndBomb)
 
 我主要負責的是引力、彈射、撞破隕石的程式撰寫(遊戲機制)，而另一位程式負責慢動作、畫面晃動、Particle System 與美術整合的作業(回饋感)。
 
@@ -113,8 +115,10 @@ Toydea 這間公司給人的印象真的非常非常好！在遊戲製作過程�
 
 #### 死了也要打 Boss
 
-* [遊戲影片](#)
-* [Github](#)
+{% asset_img BossFight.jpg 死了也要打Boss %}
+
+* [遊戲影片](https://www.youtube.com/watch?v=4LZ97KwNwAY)
+* [Github](https://github.com/davidpeng86/SummerTime_BossFight)
 
 我主要負責第一個場景除了球的投擲與收回的程式，包含 Boss AI ，Boss 移動，地板攻擊，腳色控制，攝影機控制等等，而另一位程式負責過場動畫與第二場景的程式與回饋感。
 
@@ -168,8 +172,10 @@ Toydea 這間公司給人的印象真的非常非常好！在遊戲製作過程�
 
 ### 發表
 
-* [遊戲影片]()
-* [Github]()
+{% asset_img PunchLight.jpg PunchLight %}
+
+* [遊戲影片](https://www.youtube.com/watch?v=0aB-Tqi170Q)
+* [Github](https://github.com/shizsun0609tw/PunchLight)
 
 我主要負責腳色控制與吸取、攻擊的程式撰寫，一位負責敵人 AI 與場景設計，一位負責 Shader 效果、整合、還有我的 Bug QQ
 
