@@ -2,9 +2,9 @@
 title: Animation
 date: 2019-06-16 16:06:03
 tags:
-- Computer Graphic
+- Computer Graphics
 category:
-- Computer Graphic
+- Computer Graphics
 ---
 
 ## Animation

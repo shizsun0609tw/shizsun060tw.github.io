@@ -2,9 +2,9 @@
 title: AI-Engine
 date: 2019-06-15 17:43:20
 tags:
-- Computer Graphic
+- Computer Graphics
 category:
-- Computer Graphic
+- Computer Graphics
 ---
 
 ## AI Engine

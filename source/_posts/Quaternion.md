@@ -2,9 +2,9 @@
 title: Quaternion
 date: 2019-06-15 21:14:18
 tags:
-- Computer Graphic
+- Computer Graphics
 category:
-- Computer Graphic
+- Computer Graphics
 ---
 
 ## Quaternion
