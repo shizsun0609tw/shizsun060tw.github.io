@@ -7,8 +7,6 @@ category:
 - Tool
 ---
 
-## QT 打包 Visual Studio 專案步驟
-
 ### Step1
 
 先在 Visual Studio 切成 Release 模式 編譯並執行確認程式無任何問題
