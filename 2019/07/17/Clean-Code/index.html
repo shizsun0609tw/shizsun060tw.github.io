@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Clean Code | Shizsun&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Clean Code Introduction Name Function Comment Format Object And Data Structure Error Handling Boundary Unit Test Class">
+<meta name="keywords" content="Software Engineering">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Clean Code">
+<meta property="og:url" content="https://shizsun0609tw.github.io/2019/07/17/Clean-Code/index.html">
+<meta property="og:site_name" content="Shizsun&#39;s blog">
+<meta property="og:description" content="Clean Code Introduction Name Function Comment Format Object And Data Structure Error Handling Boundary Unit Test Class">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-01-13T08:23:21.324Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Clean Code">
+<meta name="twitter:description" content="Clean Code Introduction Name Function Comment Format Object And Data Structure Error Handling Boundary Unit Test Class">
+  
+    <link rel="alternate" href="/atom.xml" title="Shizsun&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script data-ad-client="ca-pub-1559264755365586" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shizsun&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://shizsun0609tw.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Clean-Code" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/17/Clean-Code/" class="article-date">
+  <time datetime="2019-07-17T02:02:59.000Z" itemprop="datePublished">2019-07-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Software-Engineering/">Software Engineering</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Clean Code
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Clean-Code"><a href="#Clean-Code" class="headerlink" title="Clean Code"></a>Clean Code</h2><ul>
+<li><a href="#Introduction">Introduction</a></li>
+<li><a href="#Name">Name</a></li>
+<li><a href="#Function">Function</a></li>
+<li><a href="#Comment">Comment</a></li>
+<li><a href="#Format">Format</a></li>
+<li><a href="#Object-And-Data-Structure">Object And Data Structure</a></li>
+<li><a href="#Error-Handling">Error Handling</a></li>
+<li><a href="#Boundary">Boundary</a></li>
+<li><a href="#Unit-Test">Unit Test</a></li>
+<li><a href="#Class">Class</a></li>
+</ul>
+<a id="more"></a>
+
+<hr>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>本篇文章是閱讀 <a href="https://www.google.com/search?q=Clean+code" target="_blank" rel="noopener">Clean Code</a> 這本書寫下來的筆記<br>雖然 Clean Code 在剛開始撰寫上會比較花時間去思考，但我想這必須是多練習後融在你的血液裡的<br>雖然開發速度可能較慢，但在尋找 bug 上絕對比骯髒的 code 來的迅速許多，實際開發下來的時間並不會差太多的!
+而且如果你能將這些技巧觀念融在血液裡，我想開發效率也不會低到哪裡去</p>
+<p>以下使用作者代替寫 code 的人，讀者代替讀 code 的人<br>以下使用 X 代表避免使用這樣方式撰寫， 使用 O 代表應修正為此種寫法較為恰當</p>
+<hr>
+<h3 id="Name"><a href="#Name" class="headerlink" title="Name"></a>Name</h3><p><font color="red"><strong>一眼看出其名稱代表的意義</strong></font></p>
+<ul>
+<li><a href="#有意義的區別">有意義的區別</a></li>
+<li><a href="#能夠唸出來的名稱">能夠唸出來的名稱</a></li>
+<li><a href="#可被搜尋的名字">可被搜尋的名字</a></li>
+<li><a href="#類別的命名">類別的命名</a></li>
+<li><a href="#方法的命名">方法的命名</a></li>
+<li><a href="#每個概念用一種字詞">每個概念用一種字詞</a></li>
+<li><a href="#別說雙關語">別說雙關語</a></li>
+<li><a href="#使用方案領域的命名">使用方案領域的命名</a></li>
+<li><a href="#使用問題領域的命名">使用問題領域的命名</a></li>
+<li><a href="#避免使用過長的複合名稱">避免使用過長的複合名稱</a></li>
+</ul>
+<hr>
+<h4 id="有意義的區別"><a href="#有意義的區別" class="headerlink" title="有意義的區別"></a>有意義的區別</h4><h5 id="X"><a href="#X" class="headerlink" title="X"></a>X</h5><p>如果今天我們有一個 Product 類別，如果又有 ProductInfo, ProductData 等類別(變數亦同)<br>那並沒有辦法在第一眼就分辨出這些名稱的關係，無法直接區分他們的意義</p>
+<p>也不要使用 NameString, CustomerObject 等把資料型態放在變數上的命名</p>
+<h5 id="O"><a href="#O" class="headerlink" title="O"></a>O</h5><p>不使用相近意思的變數命名，讓每個變數都能正確一眼看出其內容</p>
+<hr>
+<h4 id="能夠唸出來的名稱"><a href="#能夠唸出來的名稱" class="headerlink" title="能夠唸出來的名稱"></a>能夠唸出來的名稱</h4><h5 id="X-1"><a href="#X-1" class="headerlink" title="X"></a>X</h5><p>我們常常因為懶惰所以將變數名稱簡寫，簡寫到不能一眼直觀的看出意思或正確的唸出<br>畢竟我們在讀 code 的時候其實也會依賴在腦中不自覺中念出的意思，取個沒有辦法很直接唸出的簡寫是會影響閱讀的</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DtaRcrd</span>&#123;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="O-1"><a href="#O-1" class="headerlink" title="O"></a>O</h5><p>正確的寫出完整可唸出的名稱</p>
+<hr>
+<h4 id="可被搜尋的名字"><a href="#可被搜尋的名字" class="headerlink" title="可被搜尋的名字"></a>可被搜尋的名字</h4><h5 id="X-2"><a href="#X-2" class="headerlink" title="X"></a>X</h5><p>不使用數字藏在程式碼內<br>不便修改，不便搜尋，也無法看出其意</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">30</span>; ++i)&#123;</span><br><span class="line">    sum += <span class="number">2000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也不要用 i, v, e 等單字母作為變數名稱 (迴圈迭代為慣用的例外)<br>用這些單字就會讓 Crtl + F 或是讓 IDE 跳出補齊字時跑出一大堆的結果</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span> v;</span><br><span class="line"><span class="keyword">float</span> e;</span><br></pre></td></tr></table></figure>
+
+<h5 id="O-2"><a href="#O-2" class="headerlink" title="O"></a>O</h5><p>使用正確的變數名字取代數字</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> DAYS_PER_MONTH = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> SALARY_PER_DAY = <span class="number">2000</span>;</span><br><span class="line"><span class="keyword">int</span> salary = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; DAYS_PER_MONTH; ++i)&#125;&#123;</span><br><span class="line">    salary += SALARY_PER_DAY;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>避免簡寫以及簡短變數</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span> customer;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> ERROR;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="類別的命名"><a href="#類別的命名" class="headerlink" title="類別的命名"></a>類別的命名</h4><h5 id="O-3"><a href="#O-3" class="headerlink" title="O"></a>O</h5><p>class 和 object 應該使用名次或名詞片語，且避免 Manager, Processor, Data, Info 等需揣測的字詞</p>
+<hr>
+<h4 id="方法的命名"><a href="#方法的命名" class="headerlink" title="方法的命名"></a>方法的命名</h4><h5 id="O-4"><a href="#O-4" class="headerlink" title="O"></a>O</h5><p>function 應該使用動詞或動詞片語(accsssors 用 get 當字首, mutators 用 set 當字首, predicates 用 is 當字首)</p>
+<hr>
+<h4 id="每個概念用一種字詞"><a href="#每個概念用一種字詞" class="headerlink" title="每個概念用一種字詞"></a>每個概念用一種字詞</h4><h5 id="X-3"><a href="#X-3" class="headerlink" title="X"></a>X</h5><p>避免同時使用 manager, controller 會讓人混淆類似的字義，請統一使用一種</p>
+<hr>
+<h4 id="別說雙關語"><a href="#別說雙關語" class="headerlink" title="別說雙關語"></a>別說雙關語</h4><h5 id="X-4"><a href="#X-4" class="headerlink" title="X"></a>X</h5><p>避免同一個字詞底下卻可能做不同的事情，例如: add 有些地方代表相加，有些地方代表新增</p>
+<hr>
+<h4 id="使用方案領域的命名"><a href="#使用方案領域的命名" class="headerlink" title="使用方案領域的命名"></a>使用方案領域的命名</h4><h5 id="O-5"><a href="#O-5" class="headerlink" title="O"></a>O</h5><p>可以盡量使用 CS 領域的術語，因為通常使用這些術語讀者就能一眼看出其意，例如: 演算法名字</p>
+<hr>
+<h4 id="使用問題領域的命名"><a href="#使用問題領域的命名" class="headerlink" title="使用問題領域的命名"></a>使用問題領域的命名</h4><h5 id="O-6"><a href="#O-6" class="headerlink" title="O"></a>O</h5><p>如果沒有比較好的 CS 領域術語，就使用問題領域的術語吧! 至少讀者可以透過詢問相關領域人員其意思</p>
+<hr>
+<h4 id="避免使用過長的複合名稱"><a href="#避免使用過長的複合名稱" class="headerlink" title="避免使用過長的複合名稱"></a>避免使用過長的複合名稱</h4><h5 id="X-5"><a href="#X-5" class="headerlink" title="X"></a>X</h5><p>有時候會因為詞意的關係寫出非常冗長的複合變數名稱，不僅造成閱讀上的困難，還會造成多個變數名稱無法用眼睛一眼清楚的分辨</p>
+<h5 id="O-7"><a href="#O-7" class="headerlink" title="O"></a>O</h5><p>如果變數名稱相當長(含有多個名詞)，通常代表使用了些無意義的字詞或是重複的字詞來自於另一個抽象的概念，把他們包成 class 吧!</p>
+<hr>
+<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><p><font color="red"><strong>簡短，一次只做一件事</strong></font></p>
+<ul>
+<li><a href="#簡短">簡短</a></li>
+<li><a href="#只做一件事情">只做一件事情</a></li>
+<li><a href="#降層準則">降層準則</a></li>
+<li><a href="#Switch">Switch</a></li>
+<li><a href="#使用具描述能力的名稱">使用具描述能力的名稱</a></li>
+<li><a href="#函式的參數">函式的參數</a></li>
+<li><a href="#要無副作用">要無副作用</a></li>
+<li><a href="#輸出型的參數">輸出型的參數</a></li>
+<li><a href="#指令和查詢的分離">指令和查詢的分離</a></li>
+<li><a href="#使用例外處理">使用例外處理</a></li>
+<li><a href="#結構化程式設計">結構化程式設計</a></li>
+</ul>
+<hr>
+<h4 id="簡短"><a href="#簡短" class="headerlink" title="簡短"></a>簡短</h4><h5 id="O-8"><a href="#O-8" class="headerlink" title="O"></a>O</h5><p>每個 function 都應該盡量的簡短，最多不應該大於 20 行 應維持在 10 行以下<br>每個 function 不應該大到包含巢狀結構，縮排不應該大過一或兩層<br>簡短的內容配上良好的命名能使讀者第一時間就直接看出做了甚麼事且 bug 也將很容易顯露出來</p>
+<hr>
+<h4 id="只做一件事情"><a href="#只做一件事情" class="headerlink" title="只做一件事情"></a>只做一件事情</h4><h5 id="X-6"><a href="#X-6" class="headerlink" title="X"></a>X</h5><p>在簡短的前提下， function 的大小也不能大到有分段，這代表你的 function 一次做了不只一件事</p>
+<h5 id="O-9"><a href="#O-9" class="headerlink" title="O"></a>O</h5><p>每個 function 應該做出符合命名的事情，這讓讀者可以簡單明瞭內容，將內容切小也可以 bug 更難出現<br>每個 function 只有一層抽象概念</p>
+<hr>
+<h4 id="降層準則"><a href="#降層準則" class="headerlink" title="降層準則"></a>降層準則</h4><h5 id="O-10"><a href="#O-10" class="headerlink" title="O"></a>O</h5><p>我們希望程式的閱讀像是由上而下的故事，而每個函式後面都緊接著下一層次的抽象概念<br>將每一層的層次分割出來</p>
+<hr>
+<h4 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h4><h5 id="X-7"><a href="#X-7" class="headerlink" title="X"></a>X</h5><p>Switch 通常很難簡短，而且只要新增一種類別可能就要進來修改，或是造成多個地方都要一直重複使用 switch 去做撰寫</p>
+<h5 id="O-11"><a href="#O-11" class="headerlink" title="O"></a>O</h5><p>我們可以盡量使其埋藏在底部的多型生成，而之後用 override 就不需要多處都需要判斷為哪種衍生類別</p>
+<hr>
+<h4 id="使用具描述能力的名稱"><a href="#使用具描述能力的名稱" class="headerlink" title="使用具描述能力的名稱"></a>使用具描述能力的名稱</h4><h5 id="O-12"><a href="#O-12" class="headerlink" title="O"></a>O</h5><p>每個 fumction 應該有個一目了然的命名<br>一個較長但具描述性質的名稱比一個較短且難以理解的名稱來的好</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">includeSetupAndTeardownPages();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="函式的參數"><a href="#函式的參數" class="headerlink" title="函式的參數"></a>函式的參數</h4><h5 id="X-8"><a href="#X-8" class="headerlink" title="X"></a>X</h5><p>多個參數容易造成參數傳錯，無法控管好各個參數，無法一目了然的看出參數的作用</p>
+<h5 id="O-13"><a href="#O-13" class="headerlink" title="O"></a>O</h5><p>盡量越少越好，最好為 0 個，最多不超過 3 個，如果性質類似的就再抽成新的 class 吧!
+(有時候我們希望傳遞不同數量的參數，如果不同數量的參數本質為同一種則可以視為一個參數)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">format</span><span class="params">(String format, Object... args)</span></span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="要無副作用"><a href="#要無副作用" class="headerlink" title="要無副作用"></a>要無副作用</h4><h5 id="X-9"><a href="#X-9" class="headerlink" title="X"></a>X</h5><p>在 function 裡不可做出與其名稱一眼無法看出的不符內容，這將會使 function 做出無法預期的結果造成時空的混亂!!
+例如: 在沒有預期會修改變數的 function 或是不對的時間點 initial 或是 set 到不應該修改的值<br>寫出這樣的 function 也代表著你違反了”一次只做一件事”的準則<br>(這種 bug 真的很難找，我自身之前也常遇過這樣子的 bug)</p>
+<hr>
+<h4 id="輸出型的參數"><a href="#輸出型的參數" class="headerlink" title="輸出型的參數"></a>輸出型的參數</h4><h5 id="X-10"><a href="#X-10" class="headerlink" title="X"></a>X</h5><p>有些人會使用參考或是指標的方式傳進 function 改值或是以回傳值再進行修改，會依語言與習慣的不同有不一樣的狀況<br>但這會造成使用上的困擾，需要擔心傳進的值是否會被修改到，或是我是否需要接收回傳值再進行修改</p>
+<h5 id="O-14"><a href="#O-14" class="headerlink" title="O"></a>O</h5><p>請統一寫出一樣風格的格式<br>更好的方法應該使用物件導向的方式，讓他自己修改自己!</p>
+<hr>
+<h4 id="指令和查詢的分離"><a href="#指令和查詢的分離" class="headerlink" title="指令和查詢的分離"></a>指令和查詢的分離</h4><h5 id="X-11"><a href="#X-11" class="headerlink" title="X"></a>X</h5><p>我們偶而會寫出</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">set</span><span class="params">(String attribute, String value)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>而使用起來像是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(set(<span class="string">"username"</span>, <span class="string">"John"</span>))&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我們知道你想表示的是此 function 會進行 set ， set 成功會回傳 true 失敗則為 false</p>
+<p>但這是需要幾秒鐘的思考，且你必須去 set 的 function 確認是否與你預期想的一樣，也會造成思考的中斷<br>這也使這個 function 在語意上一次做了兩件事(set, is)</p>
+<h5 id="O-15"><a href="#O-15" class="headerlink" title="O"></a>O</h5><p>我們應該分割開來</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(attributeExists(<span class="string">"username"</span>))&#123;</span><br><span class="line">    setAttribute(<span class="string">"username"</span>, <span class="string">"John"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣也能保持一次只做一件事的原則</p>
+<hr>
+<h4 id="使用例外處理"><a href="#使用例外處理" class="headerlink" title="使用例外處理"></a>使用例外處理</h4><h5 id="X-12"><a href="#X-12" class="headerlink" title="X"></a>X</h5><p>有時候我們會用 if else 或是 enum 做出 ERROR 的處理，但這並不是個清楚的表示方法</p>
+<h5 id="O-16"><a href="#O-16" class="headerlink" title="O"></a>O</h5><p>我們應該使用 try/catch 將錯誤訊息提取出來，且不要寫出巢狀的 try catch 那會造成 code 的混亂<br>try/catch 也算一件事，因此一個 function 盡量保持一個 try/catch 就好<br>而且也可以將 try/catch 的內容再另外寫出一個 function 使其邏輯敘述較為完整好閱讀</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(Page page)</span></span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        deletePageAndAllReferences(page);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        logError(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">deletePageAndAllReferences</span><span class="params">(Page page)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">    deletePage(page);</span><br><span class="line">    registry.deleteReference(page.name);</span><br><span class="line">    configKeys.deleteKey(page.name.makeKey());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">logError</span><span class="params">(Exception e)</span></span>&#123;</span><br><span class="line">    logger.log(e.getMessage());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="結構化程式設計"><a href="#結構化程式設計" class="headerlink" title="結構化程式設計"></a>結構化程式設計</h4><h5 id="O-17"><a href="#O-17" class="headerlink" title="O"></a>O</h5><p>盡量讓每個 function 只有一個離開點(return)，這可以讓每個 function 的結果一定<br>(當然還是要依實際狀況彈性調整，但離開點一定是越少越好)</p>
+<hr>
+<h3 id="Comment"><a href="#Comment" class="headerlink" title="Comment"></a>Comment</h3><p><font color="red"><strong>不要替糟糕的程式寫註解，請重寫他，且如果沒有註解更好</strong></font></p>
+<ul>
+<li><a href="#有益的註解">有益的註解</a></li>
+</ul>
+<hr>
+<h4 id="用程式碼表達你的本意"><a href="#用程式碼表達你的本意" class="headerlink" title="用程式碼表達你的本意"></a>用程式碼表達你的本意</h4><h5 id="X-13"><a href="#X-13" class="headerlink" title="X"></a>X</h5><p>註解沒辦法彌補糟糕的 code ，而且有可能還會把模組用的一團亂</p>
+<h5 id="O-18"><a href="#O-18" class="headerlink" title="O"></a>O</h5><p>最好的方法就是讓程式碼一眼看去就能明瞭意思，不需要註解的輔助<br>反正你看完註解還是得看一次程式碼，有時候註解的時間都比看程式碼理解花的時間來的久了</p>
+<hr>
+<h4 id="有益的註解"><a href="#有益的註解" class="headerlink" title="有益的註解"></a>有益的註解</h4><h5 id="X-14"><a href="#X-14" class="headerlink" title="X"></a>X</h5><p>不寫出比觀看程式碼還難理解的註解<br>不寫出不精確影響思考的註解<br>不寫多餘的註解<br>不寫日誌型註解(交給版控吧)<br>不寫排版或標誌型註解</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Actions //////////////////////////////</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="O-19"><a href="#O-19" class="headerlink" title="O"></a>O</h5><p>有些公司可能會要求寫上作者或是法律相關註解，最好放在程式碼之外，以不影響程式碼閱讀為原則<br>有時候你並不是使用一般的演算法，而是你自己想的處理方式，而此光以程式碼無法容易的看出背後的意思，這時候需要註解<br>對於執行後果的注意，例如: 此測試案例會花費大量時間<br>TODO，待辦事項可以留下 TODO 但是請記得隔一些時間就要定期清理<br>註解數量應該要少，能不用就不用(用你的程式碼表達)，這樣留下來的任何註解都會被當作重點而被注意<br>註解應該要精準解釋，不廢話，且不讓人感到疑惑</p>
+<hr>
+<h3 id="Format"><a href="#Format" class="headerlink" title="Format"></a>Format</h3><p><font color="red"><strong>增加可讀性，並使人感受到你的專業性</strong></font></p>
+<ul>
+<li><a href="#垂直的編排">垂直的編排</a></li>
+<li><a href="#垂直距離">垂直距離</a></li>
+<li><a href="#水平的編排">水平的編排</a></li>
+<li><a href="#縮排">縮排</a></li>
+<li><a href="#團隊的共同準則">團隊的共同準則</a></li>
+</ul>
+<hr>
+<h4 id="垂直的編排"><a href="#垂直的編排" class="headerlink" title="垂直的編排"></a>垂直的編排</h4><h5 id="O-20"><a href="#O-20" class="headerlink" title="O"></a>O</h5><p>多數檔案應該都少於 200 行，較大的檔案也不應該超過 500 行<br>將不同思緒的區段以空白區分，思緒相近的緊密相連</p>
+<hr>
+<h4 id="垂直距離"><a href="#垂直距離" class="headerlink" title="垂直距離"></a>垂直距離</h4><h5 id="O-21"><a href="#O-21" class="headerlink" title="O"></a>O</h5><p>function 呼叫時盡量使其一個接一個，垂直距離盡可能縮短，要讓 function 呼叫呈現向下的相依性<br>盡可能讓操作的變數宣告在鄰近位置(由於 function 應該盡可能的短，因此以 function 最上方為原則)</p>
+<hr>
+<h4 id="水平的編排"><a href="#水平的編排" class="headerlink" title="水平的編排"></a>水平的編排</h4><h5 id="X-15"><a href="#X-15" class="headerlink" title="X"></a>X</h5><p>不需要做水平的對齊，那樣並不能較清楚的理解類別與變數的關係</p>
+<h5 id="O-22"><a href="#O-22" class="headerlink" title="O"></a>O</h5><p>寬度應在 100 ~ 120 字元以下，以能一眼看清楚整體面貌為原則<br>不同元素間可適當的空白區隔，相近的運算元素可以緊密相連</p>
+<hr>
+<h4 id="縮排"><a href="#縮排" class="headerlink" title="縮排"></a>縮排</h4><h5 id="X-16"><a href="#X-16" class="headerlink" title="X"></a>X</h5><p>避免程式碼塌陷成一行，這樣並不會比較好閱讀</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">CommentWidget</span><span class="params">(ParentWidget parent, String text)</span></span>&#123;<span class="keyword">super</span>(parent, text);&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">render</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;<span class="keyword">return</span> <span class="string">""</span>;&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="O-23"><a href="#O-23" class="headerlink" title="O"></a>O</h5><p>盡量維持 scope 的完整性，以及統一性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">CommentWidget</span><span class="params">(ParentWidget parent, String text)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(parent, text);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">render</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="團隊的共同準則"><a href="#團隊的共同準則" class="headerlink" title="團隊的共同準則"></a>團隊的共同準則</h4><h5 id="X-17"><a href="#X-17" class="headerlink" title="X"></a>X</h5><p>不要參入個人風格的程式碼編排</p>
+<h5 id="O-24"><a href="#O-24" class="headerlink" title="O"></a>O</h5><p>應該在開發之前統一定好簡單的編排原則，讓成員在互相閱讀 code 時能輕鬆的閱讀<br>而外人在閱讀時也能感受到團隊的專業性，且閱讀輕鬆順暢 </p>
+<hr>
+<h3 id="Object-And-Data-Structure"><a href="#Object-And-Data-Structure" class="headerlink" title="Object And Data Structure"></a>Object And Data Structure</h3><p><font color="red"><strong>資料/物件的反對稱性</strong></font></p>
+<ul>
+<li><a href="#資料結構與物件">資料結構與物件</a></li>
+<li><a href="#結構化與物件導向">結構化與物件導向</a></li>
+<li><a href="#混和體">混和體</a></li>
+<li><a href="#火車事故">火車事故</a></li>
+<li><a href="#隱藏結構">隱藏結構</a></li>
+</ul>
+<hr>
+<h4 id="資料結構與物件"><a href="#資料結構與物件" class="headerlink" title="資料結構與物件"></a>資料結構與物件</h4><p>我們在實作上經常遇到一個情況，這個類別的成員該如何操控或取得<br>我們應該把類別分為兩種，資料結構與物件</p>
+<ul>
+<li><p><font color="red">資料結構: 成員可以直接存取(public)，基本上沒有 member function ，結構簡單、無須介面而將成員直接暴露</font></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">double</span> X;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">double</span> Y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我們會清楚的知道 Point 是含有 X, Y 的直角座標系</p>
+</li>
+<li><p><font color="red">物件: 成員需透過介面存取(private)，會有許多的 member function ，結構隱藏、透過抽象化界面對於成員操作</font></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getX</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getY</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setCartesian</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getR</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getTheta</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setPolar</span><span class="params">(<span class="keyword">double</span> r, <span class="keyword">double</span> theta)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我們會知道可以透過一些虛擬的介面去獲得相關資料，而並不需要知道底下是由直角座標或是極座標實作</p>
+</li>
+</ul>
+<hr>
+<h4 id="結構化與物件導向"><a href="#結構化與物件導向" class="headerlink" title="結構化與物件導向"></a>結構化與物件導向</h4><ul>
+<li><p><font color="red">結構化(使用資料結構的程式碼)</font></p>
+</li>
+<li><p>容易添加新的函式，而不需要變動已有的資料結構</p>
+</li>
+<li><p>難以添加新的資料結構，因為必須改變所有的函式</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Square</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> Point topLeft;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">double</span> side;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> Point topLeft;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">double</span> height;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">double</span> width;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Circle</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> Point center;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">double</span> radius;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Geometry</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">double</span> PI = <span class="number">3.1415926</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">area</span><span class="params">(Object shape)</span> <span class="keyword">throws</span> NoSuchShapeException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (shape <span class="keyword">instanceof</span> Square) &#123;</span><br><span class="line">            Square s = (Square)shape;</span><br><span class="line">            <span class="keyword">return</span> s.side * s.side;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (shape <span class="keyword">instanceof</span> Rectangle) &#123;</span><br><span class="line">            Square r = (Rectangle)shape;</span><br><span class="line">            <span class="keyword">return</span> r.height * r.width;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (shape <span class="keyword">instanceof</span> Circle) &#123;</span><br><span class="line">            Circle c = (Circle)shape;</span><br><span class="line">            <span class="keyword">return</span> PI * c.radius * c.radius;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchShapeException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><font color="red">物件導向</font></p>
+</li>
+<li><p>容易添加新的類別，而不需要變動已有的函式</p>
+</li>
+<li><p>難以添加新的函式，因為必須改變所有的類別</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Square</span> <span class="keyword">implements</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Point topLeft;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> side;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">area</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> side * side;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span> <span class="keyword">implements</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Point topLeft;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> height;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> width;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">area</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> height * width;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Circle</span> <span class="keyword">implements</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Point center;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> radius;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">double</span> PI = <span class="number">3.1415926</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">area</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> PI * radius * radius;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="混和體"><a href="#混和體" class="headerlink" title="混和體"></a>混和體</h3><h5 id="X-18"><a href="#X-18" class="headerlink" title="X"></a>X</h5><p>程式設計師應該要能判斷哪些類別使用物件導向哪些類別使用結構化來撰寫，沒有一定的偏向哪種<br>但混和體(半物件半資料結構)容易造成更加混亂，因此應該盡量避免</p>
+<hr>
+<h4 id="德摩特爾法則"><a href="#德摩特爾法則" class="headerlink" title="德摩特爾法則"></a>德摩特爾法則</h4><h5 id="X-19"><a href="#X-19" class="headerlink" title="X"></a>X</h5><p>class 內不該有回傳底下物件的 function</p>
+<hr>
+<h4 id="火車事故"><a href="#火車事故" class="headerlink" title="火車事故"></a>火車事故</h4><h5 id="X-20"><a href="#X-20" class="headerlink" title="X"></a>X</h5><p>有時候我們會寫出</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> String outputDir = ctxt.getOptions().getScratchDir().getAbsolutePath();</span><br></pre></td></tr></table></figure>
+
+<h5 id="O-25"><a href="#O-25" class="headerlink" title="O"></a>O</h5><p>應該寫成</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Options opts = ctxt.getOptions();</span><br><span class="line">File scratchDir = opts.getScratchDir();</span><br><span class="line"><span class="keyword">final</span> String ouputDir = scratchDir.getAbsolutePath();</span><br></pre></td></tr></table></figure>
+
+<p>這樣還是違反了德摩特爾法則，因為他拿出了物件再對他進行操作不如思考是否為”資料結構”或是用”隱藏結構”的方法獲取</p>
+<hr>
+<h4 id="隱藏結構"><a href="#隱藏結構" class="headerlink" title="隱藏結構"></a>隱藏結構</h4><h5 id="X-21"><a href="#X-21" class="headerlink" title="X"></a>X</h5><p>我們常常會寫出火車事故的 code<br>是因為要拿它去做別的事情的操作但那樣也違反了摩德特爾法則</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String outFile = outputDir + <span class="string">"/"</span> + className.replace(<span class="string">'.'</span>, <span class="string">'/'</span>) + <span class="string">".class"</span>;</span><br><span class="line">FileOutputStream fout = <span class="keyword">new</span> FileOutputStream(outFile);</span><br><span class="line">BufferedOutputStream bos = <span class="keyword">new</span> BufferedOutputStream(fout);</span><br></pre></td></tr></table></figure>
+
+<h5 id="O-26"><a href="#O-26" class="headerlink" title="O"></a>O</h5><p>我們可以用此方法代替，包在物件本身底下!</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BufferedOutputStream bos = ctxt.createScratchFileStream(classFileName);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Error-Handling"><a href="#Error-Handling" class="headerlink" title="Error Handling"></a>Error Handling</h3><p><font color="red"><strong>錯誤處理很重要，但請不要影響原本整潔的程式</strong></font></p>
+<ul>
+<li><a href="#使用例外事件而非回傳錯誤碼">使用例外事件而非回傳錯誤碼</a></li>
+<li><a href="#在開頭寫下你的-Try-Catch-Finally-敘述">在開頭寫下你的 Try-Catch-Finally 敘述</a></li>
+<li><a href="#使用不檢查型例外">使用不檢查型例外</a></li>
+<li><a href="#提供發生例外的相關資訊">提供發生例外的相關資訊</a></li>
+<li><a href="#不要傳遞-null">不要傳遞 null</a></li>
+</ul>
+<hr>
+<h4 id="使用例外事件而非回傳錯誤碼"><a href="#使用例外事件而非回傳錯誤碼" class="headerlink" title="使用例外事件而非回傳錯誤碼"></a>使用例外事件而非回傳錯誤碼</h4><h5 id="X-22"><a href="#X-22" class="headerlink" title="X"></a>X</h5><p>盡量不要使用錯誤旗幟(flag)，或是回傳錯誤碼，這樣的程式並不整潔直觀</p>
+<h5 id="O-27"><a href="#O-27" class="headerlink" title="O"></a>O</h5><p>使用 Try-Catch-Finally 將錯誤捕捉</p>
+<hr>
+<h4 id="在開頭寫下你的-Try-Catch-Finally-敘述"><a href="#在開頭寫下你的-Try-Catch-Finally-敘述" class="headerlink" title="在開頭寫下你的 Try-Catch-Finally 敘述"></a>在開頭寫下你的 Try-Catch-Finally 敘述</h4><h5 id="O-28"><a href="#O-28" class="headerlink" title="O"></a>O</h5><p>在開頭就先將 Try-Catch-Finally 的 scope 定出來可以幫助錯誤處理的思緒釐清，並讓程式碼一定會依照你所想的進行(就算有錯誤)</p>
+<hr>
+<h4 id="使用不檢查型例外"><a href="#使用不檢查型例外" class="headerlink" title="使用不檢查型例外"></a>使用不檢查型例外</h4><p>檢查型例外(checked exceptions)，指的是是否需要在”所有”地方都加上例外處理 ?<br>在眾多討論的結果，我們認為在必須的地方加入就好，因為錯誤的丟出容易破壞”開放閉合準則”</p>
+<hr>
+<h4 id="提供發生例外的相關資訊"><a href="#提供發生例外的相關資訊" class="headerlink" title="提供發生例外的相關資訊"></a>提供發生例外的相關資訊</h4><h5 id="O-29"><a href="#O-29" class="headerlink" title="O"></a>O</h5><p>拋出的例外應該要提供足夠的內文資訊，足以判斷錯誤的原因與位置，這個拋出的錯誤才是有益的</p>
+<hr>
+<h4 id="不要傳遞-null"><a href="#不要傳遞-null" class="headerlink" title="不要傳遞 null"></a>不要傳遞 null</h4><h5 id="X-23"><a href="#X-23" class="headerlink" title="X"></a>X</h5><p>使用 null 去傳遞或回傳都是把問題丟給呼叫者的行為，使用上檢查起來不便，又會造成呼叫者的負擔</p>
+<hr>
+<h3 id="Boundary"><a href="#Boundary" class="headerlink" title="Boundary"></a>Boundary</h3><p><font color="red"><strong>我們應該將各個套件、API、子系統切開，保持邊界的整潔</strong></font></p>
+<ul>
+<li><a href="#封裝第三方程式碼">封裝第三方程式碼</a></li>
+<li><a href="#探索及學習邊界">探索及學習邊界</a></li>
+<li><a href="#使用尚未存在的程式">使用尚未存在的程式</a></li>
+</ul>
+<hr>
+<h4 id="封裝第三方程式碼"><a href="#封裝第三方程式碼" class="headerlink" title="封裝第三方程式碼"></a>封裝第三方程式碼</h4><p>我們可以將第三方程式碼封裝起來再投過介面去操作，較能維持住我們程式的乾淨(不一定在所有情況下適用)</p>
+<hr>
+<h4 id="探索及學習邊界"><a href="#探索及學習邊界" class="headerlink" title="探索及學習邊界"></a>探索及學習邊界</h4><p>我們可以以學習式測試來練習使用我們不熟悉的 API<br>使用小程式片段邊學習 API 的使用方式，以及尋找 API 可能與你程式間造成的錯誤，或與你想像不同的執行結果<br>重點: 我們要用此 API 達到甚麼功能，功能執行結果是否與預期的相同</p>
+<hr>
+<h4 id="使用尚未存在的程式"><a href="#使用尚未存在的程式" class="headerlink" title="使用尚未存在的程式"></a>使用尚未存在的程式</h4><p>我們常常會遇到某部分的程式與你負責部分有相關，但負責人尚未將 Prototype 寫出來，使你不知道該如何繼續撰寫有關的部分<br>我們可以先預想出這些程式應該包含哪些”介面”是供你使用的，透過先將這些介面撰寫出來，再包裝再對方的程式上去做存取<br>這時候我們只需要透過簡單小部分的修改介面部分的程式就能很好的契合，也能維持”簡潔的邊界的整潔”!</p>
+<hr>
+<h3 id="Unit-Test"><a href="#Unit-Test" class="headerlink" title="Unit Test"></a>Unit Test</h3><p><font color="red"><strong>單元程式與主程式一樣重要</strong></font></p>
+<ul>
+<li><a href="#TDD">TDD</a></li>
+<li><a href="#整潔的測試">整潔的測試</a></li>
+<li><a href="#雙重標準">雙重標準</a></li>
+<li><a href="#一個測試一個概念">一個測試一個概念</a></li>
+<li><a href="#FIRST">FIRST</a></li>
+</ul>
+<hr>
+<h4 id="TDD"><a href="#TDD" class="headerlink" title="TDD"></a>TDD</h4><p>Test Driven Development</p>
+<ul>
+<li>(一) 在撰寫一個單元測試(測試失敗的單元測試)前，不可撰寫任何產品程式</li>
+<li>(二) 只撰寫剛好無法通過的單元測試</li>
+<li>(三) 只撰寫剛好能通過當前測試失敗的產品程式</li>
+</ul>
+<hr>
+<h4 id="整潔的測試"><a href="#整潔的測試" class="headerlink" title="整潔的測試"></a>整潔的測試</h4><h5 id="X-24"><a href="#X-24" class="headerlink" title="X"></a>X</h5><p>測試程式不應該為了迅速省時就沒有依照系統程式的準則去撰寫(如:命名，簡短，說明性)</p>
+<h5 id="O-30"><a href="#O-30" class="headerlink" title="O"></a>O</h5><p>測試程式與系統程式一樣重要，當測試程式越來越龐大也會讓你無法去掌握整個測試程式，最後造成面臨被丟掉的命運<br>因此測試程式應該也用系統程式的準則來撰寫，要正確地命名，簡短，整潔…</p>
+<hr>
+<h4 id="雙重標準"><a href="#雙重標準" class="headerlink" title="雙重標準"></a>雙重標準</h4><p>測試程式雖然要與系統程式有相同的軟體標準，但在某些部分可以有雙重標準<br>像是測試程式不一定要像系統程式一樣有效率，由於測試程式可能是在測試環境執行或是壓力測試等等</p>
+<hr>
+<h4 id="一個測試一個概念"><a href="#一個測試一個概念" class="headerlink" title="一個測試一個概念"></a>一個測試一個概念</h4><h5 id="O-31"><a href="#O-31" class="headerlink" title="O"></a>O</h5><p>每個測試要符合”單元”測試的標準，不要有過多的事物操作或是複數個測試，這樣會使查錯便困難、相依性變高</p>
+<hr>
+<h4 id="FIRST"><a href="#FIRST" class="headerlink" title="FIRST"></a>FIRST</h4><ul>
+<li>Fast(快速) </li>
+<li>Independent(獨立)</li>
+<li>Repeatable(可重複性)</li>
+<li>Self-Validating(自我驗證)</li>
+<li>Timely(及時)</li>
+</ul>
+<h5 id="Fast"><a href="#Fast" class="headerlink" title="Fast"></a>Fast</h5><p>單元測試要盡量夠快，否則你不會想執行</p>
+<h5 id="Independent"><a href="#Independent" class="headerlink" title="Independent"></a>Independent</h5><p>單元測試要獨立，不然相依會造成連續的失敗</p>
+<h5 id="Repeatable"><a href="#Repeatable" class="headerlink" title="Repeatable"></a>Repeatable</h5><p>單元測試要能重複的在不同環境下測試</p>
+<h5 id="Self-Validating"><a href="#Self-Validating" class="headerlink" title="Self-Validating"></a>Self-Validating</h5><p>單元測試只能回傳 True/False 不要回傳過程訊息</p>
+<h5 id="Timely"><a href="#Timely" class="headerlink" title="Timely"></a>Timely</h5><p>單元測試最好在撰寫主程式前撰寫，並撰寫完後馬上撰寫主程式</p>
+<hr>
+<h3 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h3><p><font color="red"><strong>保持簡短、抽象化</strong></font></p>
+<ul>
+<li><a href="#類別要夠簡短">類別要夠簡短</a></li>
+<li><a href="#單一職責原則">單一職責原則</a></li>
+</ul>
+<hr>
+<h4 id="類別要夠簡短"><a href="#類別要夠簡短" class="headerlink" title="類別要夠簡短"></a>類別要夠簡短</h4><p>類別要有個足以描述職責的命名，如果使用了 Processor, Manager, Super 通常代表擁有太多的職責了<br>要能夠在不使用 if, and, or, but 等字眼下，能在 25 個字詞內簡短的秒數類別</p>
+<hr>
+<h4 id="單一職責原則"><a href="#單一職責原則" class="headerlink" title="單一職責原則"></a>單一職責原則</h4><p>單一職責原則 SRP(Single Responsibility Principle)</p>
+<p>類別應該只有一個職責，唯一的一個修改的理由<br><font color="red">多使用抽象化將抽象方法分離出來</font><br>系統是由許多小型類別所組成，而不是由少數幾個大型類別所組成<br>每個小類別”封裝單一的職責”、”只有一個修改的理由”、”與其他少數幾個類別合作來完成系統要求的行為’</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shizsun0609tw.github.io/2019/07/17/Clean-Code/" data-id="ckjwiatsd0009csszg3dr9dhp" class="article-share-link">Share</a>
+      
+        <a href="https://shizsun0609tw.github.io/2019/07/17/Clean-Code/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Software-Engineering/">Software Engineering</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/08/04/Graph/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Graph
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/17/Special-Effect/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Special Effect</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+    <h3 class="widget-title">About</h3>
+    <div class="widget">
+          <div class="aboutImg">
+            <img src="https://i.imgur.com/IFmwrnC.jpg" width="120px" height="120px">
+          </div>
+          <div class="aboutInformation">
+            <span style="font-family:Microsoft JhengHei; color:black;">
+            <ul>
+                <li>&nbsp&nbsp陳鎮華</li>
+                <li>&nbsp&nbspZhen-Hua Chen</li>
+                <li>&nbsp</li>
+                <li>&nbsp&nbsp<a href="https://github.com/shizsun0609tw">Github</a></li>
+                <li>&nbsp&nbsp<a href="https://www.youtube.com/channel/UCdz5zI6t8_KF3lhIQg5edlw">Youtube</a></li>
+                <li>&nbsp&nbsp<a href="mailto:shizsun0609tw@gmail.com">Contact</a></li>
+            </ul>
+            </span>
+          </div>
+          <div style="clear:both;"></div>
+    </div>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/">Compiler</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Graphics/">Computer Graphics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Diary/">Diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network-Programming/">Network Programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software-Engineering/">Software Engineering</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compiler/">Compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Diary/">Diary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/">Math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NCTU/">NCTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTOU/">NTOU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network-Programming/">Network Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/">Software Engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/01/14/1091-交大-網路程式設計/">1091-交大-網路程式設計</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/20/研究新生活/">研究新生活</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/5th-Kind-Games-日本遊戲公司實習心得/">5th Kind Games 日本遊戲公司實習心得</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/26/海大資工四年心得/">海大資工四年心得</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/20/109年資工研究所推甄心得/">109年資工研究所推甄心得</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+    <div class="widget-wrap">
+      <h3 class="widget-title">views</h3>
+      <div class="widget" style="text-align:center">
+          <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=36593680&main=1"></script><noscript><img src="//counter1.fc2.com/counter_img.php?id=36593680&main=1"></noscript>
+      </div>
+    </div>
+  
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Zhen-Hua Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'shizsun0609tw';
+  
+  var disqus_url = 'https://shizsun0609tw.github.io/2019/07/17/Clean-Code/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

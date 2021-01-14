@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Quaternion | Shizsun&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Quaternion Introduction Description Operation Vector vs Quaternion Reference Extra Problem">
+<meta name="keywords" content="NTOU,Computer Graphics">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Quaternion">
+<meta property="og:url" content="https://shizsun0609tw.github.io/2019/06/15/Quaternion/index.html">
+<meta property="og:site_name" content="Shizsun&#39;s blog">
+<meta property="og:description" content="Quaternion Introduction Description Operation Vector vs Quaternion Reference Extra Problem">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-01-14T06:38:30.513Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Quaternion">
+<meta name="twitter:description" content="Quaternion Introduction Description Operation Vector vs Quaternion Reference Extra Problem">
+  
+    <link rel="alternate" href="/atom.xml" title="Shizsun&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script data-ad-client="ca-pub-1559264755365586" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shizsun&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://shizsun0609tw.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Quaternion" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/15/Quaternion/" class="article-date">
+  <time datetime="2019-06-15T13:14:18.000Z" itemprop="datePublished">2019-06-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Computer-Graphics/">Computer Graphics</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Quaternion
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Quaternion"><a href="#Quaternion" class="headerlink" title="Quaternion"></a>Quaternion</h2><ul>
+<li><a href="#Introduction">Introduction</a></li>
+<li><a href="#Description">Description</a></li>
+<li><a href="#Operation">Operation</a></li>
+<li><a href="#Vector-vs-Quaternion">Vector vs Quaternion</a></li>
+<li><a href="#Reference">Reference</a></li>
+<li><a href="#Extra-Problem">Extra Problem</a></li>
+</ul>
+<a id="more"></a>
+
+<hr>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>Quaternion 中文稱作四元數，是一種用來表示角度與用來旋轉的代數系統</p>
+<p>我們一般認識的座標系統為 Euler 角，假設在三維空間下就是 (x, y, z) 表示對三個座標軸旋轉多少角度</p>
+<p><font color="red">這個表示法不好嗎?</font></p>
+<p>由於我們的旋轉是<font color="red">動態</font>的，因此在某些情況下會造成 <a href="https://zh.wikipedia.org/wiki/%E7%92%B0%E6%9E%B6%E9%8E%96%E5%AE%9A" target="_blank" rel="noopener">Gimbal lock</a>，簡單來說 Gimbal lock 就是歐拉角在旋轉到某些位置時<font color="red">會造成某一軸的遺失，無法再進行那軸旋轉</font>的問題。而此問題是<font color="red">無法解決的</font>，因此才會設計出 Quaternion 的代數系統。</p>
+<hr>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Quaternion 是由 a + bi + cj + dk 所組成，其中 a, b, c, d 為實數 i, j, k 為虛數且</p>
+<ul>
+<li>i<sup>2</sup> = j<sup>2</sup> = k<sup>2</sup> = ijk = -1</li>
+</ul>
+<p>很神奇吧 我也不知道為什麼呢 不過他就是這樣 所以接受吧 XD<br>另外還有</p>
+<ul>
+<li>ij = k, jk = i, ki = j</li>
+<li>ji = -k, kj= -i, ik = -j</li>
+<li>ii = jj = kk = -1</li>
+</ul>
+<hr>
+<h3 id="Operation"><a href="#Operation" class="headerlink" title="Operation"></a>Operation</h3><blockquote>
+<p>Q<sub>0</sub> = w<sub>0</sub> + ix<sub>0</sub> + jy<sub>0</sub> + kz<sub>0</sub><br>Q<sub>1</sub> = w<sub>1</sub> + ix<sub>1</sub> + jy<sub>1</sub> + kz<sub>1</sub></p>
+</blockquote>
+<p><strong>Addition</strong></p>
+<blockquote>
+<p>Q<sub>0</sub> + Q<sub>1</sub> = (w<sub>0</sub> + w<sub>1</sub>) + i(x<sub>0</sub> + x<sub>1</sub>) + j(y<sub>0</sub> + y<sub>1</sub>) + k(z<sub>0</sub> + z<sub>1</sub>) </p>
+</blockquote>
+<blockquote>
+<p>Q<sub>0</sub> + Q<sub>1</sub> = Q<sub>1</sub> + Q<sub>0</sub></p>
+</blockquote>
+<p><strong><font color="red">Multiplication</font></strong></p>
+<blockquote>
+<p>Q<sub>0</sub> * Q<sub>1</sub> = (w<sub>0</sub> + ix<sub>0</sub> + jy<sub>0</sub> + kz<sub>0</sub>)(w<sub>1</sub> + ix<sub>1</sub> + jy<sub>1</sub> + kz<sub>1</sub>)</p>
+</blockquote>
+<blockquote>
+<p>= (w<sub>0</sub>w<sub>1</sub> - x<sub>0</sub>x<sub>1</sub> - y<sub>0</sub>y<sub>1</sub> - z<sub>0</sub>z<sub>1</sub>)</p>
+</blockquote>
+<blockquote>
+<p>+ i(w<sub>0</sub>x<sub>1</sub> + x<sub>0</sub>w<sub>1</sub> + y<sub>0</sub>z<sub>1</sub> - z<sub>0</sub>y<sub>1</sub>)</p>
+</blockquote>
+<blockquote>
+<p>+ j(w<sub>0</sub>y<sub>1</sub> + y<sub>0</sub>w<sub>1</sub> - x<sub>0</sub>z<sub>1</sub> + z<sub>0</sub>x<sub>1</sub>)</p>
+</blockquote>
+<blockquote>
+<p>+ k(w<sub>0</sub>z<sub>1</sub> + z<sub>0</sub>w<sub>1</sub> - y<sub>0</sub>x<sub>1</sub> + x<sub>0</sub>y<sub>1</sub>)</p>
+</blockquote>
+<blockquote>
+<p><font color="red">Q<sub>0</sub> * Q<sub>1</sub> != Q<sub>1</sub> * Q<sub>0</sub></font></p>
+</blockquote>
+<p><strong>Conjugate</strong></p>
+<blockquote>
+<p>Q<sub>0</sub><sup>*</sup> = (w<sub>0</sub> - ix<sub>0</sub> - jy<sub>0</sub> - kz<sub>0</sub>)</p>
+</blockquote>
+<p><strong><font color="red">Norm</font></strong></p>
+<blockquote>
+<p>||Q|| = N(Q) = sqrt(w<sup>2</sup> + x<sup>2</sup> + y<sup>2</sup> + z<sup>2</sup>)</p>
+</blockquote>
+<p><strong><font color="red">Inner Product</font></strong></p>
+<blockquote>
+<p>&lt;q<sub>0</sub>, q<sub>1</sub>&gt; = w<sub>0</sub>w<sub>1</sub> + x<sub>0</sub>x<sub>1</sub> + y<sub>0</sub>y<sub>1</sub> + z<sub>0</sub>z<sub>1</sub></p>
+</blockquote>
+<hr>
+<h3 id="Vector-vs-Quaternion"><a href="#Vector-vs-Quaternion" class="headerlink" title="Vector vs Quaternion"></a>Vector vs Quaternion</h3><p>接下來就是要將我們平常用的三維 vector 轉成 quaternion<br>而他們的關係為 vector 屬於 quaternion 的 subspace<br>如果我們有一個向量 v 要轉成 quaternion 要記成 v = (0, v) ，其中 0 為實部<br>然後再運用 quaternion 的運算</p>
+<p>如果要旋轉的話則使用</p>
+<blockquote>
+<p>q = (cos(&Theta;/2), sin(&Theta;/2)u)<br>v’ = qvq<sup>*</sup></p>
+</blockquote>
+<hr>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a href="https://www.zhihu.com/question/47736315" target="_blank" rel="noopener">了解四元數</a></li>
+<li><a href="https://www.youtube.com/watch?v=3BR8tK-LuB0" target="_blank" rel="noopener">教學影片1</a></li>
+<li><a href="https://www.youtube.com/watch?v=zjMuIxRvygQ" target="_blank" rel="noopener">教學影片2</a></li>
+</ul>
+<hr>
+<h3 id="Extra-Problem"><a href="#Extra-Problem" class="headerlink" title="Extra Problem"></a>Extra Problem</h3><p>如果你看完 Quaternion 還是用歐拉角寫 code 再往下看 XD</p>
+<br>
+<br>
+這個額外的問題是關於歐拉角旋轉的時候由於軸是<font color="red">有順序性的</font>，所以會被<font color="red">旋轉的順序互相影響</font>，因此在 coding 時會因為<font color="red">旋轉軸順序不同造成不當的亂轉</font>(如果你實作的方法是只記錄旋轉角度然後在每一個 frame 都重新由原位開始轉的話)
+
+<p>歐拉角是有順序性的，想想如果我們<font color="red">只記錄角度且在每一個 frame 重新旋轉</font>會有甚麼問題?</p>
+<p>一般來說，我們每次做旋轉的時候應該是以<font color="red">當前姿態去做旋轉</font>但如果只記錄角度而每一個 frame 重新轉會變成<font color="red">初始的姿態做旋轉</font></p>
+<p>比方說我們有架飛機，我們請他 x 軸旋轉 30&deg; y軸 旋轉 30&deg; x軸再旋轉 30&deg;<br>我們累積下來的角度為 x = 60&deg; y = 30&deg;<br>這時如果我們直接用這角度做出旋轉矩陣去旋轉<font color="red">是不會跟我們原本所期望的姿態 x 30&deg;, y 30&deg;, x 30&deg;不一樣的!!</font></p>
+<p><font color="red">這就是因為歐拉角的順序性</font></p>
+<p><strong>Solution</strong></p>
+<p>這方法算是碰巧在亂試之下試對的，當時也不知道為什麼，現在才仔細地想清楚原因 XD</p>
+<ul>
+<li><font color="red">每一個 frame 在旋轉的時候都將旋轉的角度累積到一個旋轉矩陣上</font>，最後 model matrix 再乘以這個旋轉矩陣，取代每一個 frame 重新計算的旋轉矩陣</li>
+</ul>
+<p><font color="red">How it works?</font></p>
+<p>由於我們是在每一個 frame 上累積旋轉的角度在我們的旋轉矩陣上，因次我們每次旋轉的角度都是代表著<font color="red">當前那個 frame 的姿態</font>，因次我們是<font color="red">維持我們旋轉的順序將矩陣累積起來</font>，最後再將 model matrix 乘上他，他就是依照我們的所旋轉的順序做旋轉了!!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shizsun0609tw.github.io/2019/06/15/Quaternion/" data-id="ckjwiatt6000qcsszcvyt380e" class="article-share-link">Share</a>
+      
+        <a href="https://shizsun0609tw.github.io/2019/06/15/Quaternion/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NTOU/">NTOU</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/16/Animation/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Animation
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/15/AI-Engine/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">AI-Engine</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+    <h3 class="widget-title">About</h3>
+    <div class="widget">
+          <div class="aboutImg">
+            <img src="https://i.imgur.com/IFmwrnC.jpg" width="120px" height="120px">
+          </div>
+          <div class="aboutInformation">
+            <span style="font-family:Microsoft JhengHei; color:black;">
+            <ul>
+                <li>&nbsp&nbsp陳鎮華</li>
+                <li>&nbsp&nbspZhen-Hua Chen</li>
+                <li>&nbsp</li>
+                <li>&nbsp&nbsp<a href="https://github.com/shizsun0609tw">Github</a></li>
+                <li>&nbsp&nbsp<a href="https://www.youtube.com/channel/UCdz5zI6t8_KF3lhIQg5edlw">Youtube</a></li>
+                <li>&nbsp&nbsp<a href="mailto:shizsun0609tw@gmail.com">Contact</a></li>
+            </ul>
+            </span>
+          </div>
+          <div style="clear:both;"></div>
+    </div>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/">Compiler</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Graphics/">Computer Graphics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Diary/">Diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network-Programming/">Network Programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software-Engineering/">Software Engineering</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compiler/">Compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Diary/">Diary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/">Math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NCTU/">NCTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTOU/">NTOU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network-Programming/">Network Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/">Software Engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/01/14/1091-交大-網路程式設計/">1091-交大-網路程式設計</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/20/研究新生活/">研究新生活</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/5th-Kind-Games-日本遊戲公司實習心得/">5th Kind Games 日本遊戲公司實習心得</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/26/海大資工四年心得/">海大資工四年心得</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/20/109年資工研究所推甄心得/">109年資工研究所推甄心得</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+    <div class="widget-wrap">
+      <h3 class="widget-title">views</h3>
+      <div class="widget" style="text-align:center">
+          <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=36593680&main=1"></script><noscript><img src="//counter1.fc2.com/counter_img.php?id=36593680&main=1"></noscript>
+      </div>
+    </div>
+  
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Zhen-Hua Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'shizsun0609tw';
+  
+  var disqus_url = 'https://shizsun0609tw.github.io/2019/06/15/Quaternion/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

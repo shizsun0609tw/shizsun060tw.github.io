@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Git+Hexo-輕鬆架網站 | Shizsun&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言原本一開始 google 用 github 架設網站清一色的是 jekyll，實際用了一下後發現感覺不太合胃口，用起來也不太順後來稍微再找一下就找到了 hexo ，而且在摸索過程中也幾乎沒甚麼採到雷，所以就選他了XD (而且聽說是台灣人做的可以支持一下) 在這邊也順便記錄一下 hexo 的基本安裝順序，如果你是在資工系有一點經驗的人，對於 git 也有點熟悉度，基本上在一個小時內應該都可以輕鬆">
+<meta name="keywords" content="Tool">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git+Hexo-輕鬆架網站">
+<meta property="og:url" content="https://shizsun0609tw.github.io/2019/05/29/git-hexo-輕鬆架網站/index.html">
+<meta property="og:site_name" content="Shizsun&#39;s blog">
+<meta property="og:description" content="前言原本一開始 google 用 github 架設網站清一色的是 jekyll，實際用了一下後發現感覺不太合胃口，用起來也不太順後來稍微再找一下就找到了 hexo ，而且在摸索過程中也幾乎沒甚麼採到雷，所以就選他了XD (而且聽說是台灣人做的可以支持一下) 在這邊也順便記錄一下 hexo 的基本安裝順序，如果你是在資工系有一點經驗的人，對於 git 也有點熟悉度，基本上在一個小時內應該都可以輕鬆">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/05/29/git-hexo-輕鬆架網站/step1_git.png">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/05/29/git-hexo-輕鬆架網站/step2_cmd.png">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/05/29/git-hexo-輕鬆架網站/step9_web.png">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/05/29/git-hexo-輕鬆架網站/step11_config.png">
+<meta property="og:updated_time" content="2021-01-13T08:23:21.422Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git+Hexo-輕鬆架網站">
+<meta name="twitter:description" content="前言原本一開始 google 用 github 架設網站清一色的是 jekyll，實際用了一下後發現感覺不太合胃口，用起來也不太順後來稍微再找一下就找到了 hexo ，而且在摸索過程中也幾乎沒甚麼採到雷，所以就選他了XD (而且聽說是台灣人做的可以支持一下) 在這邊也順便記錄一下 hexo 的基本安裝順序，如果你是在資工系有一點經驗的人，對於 git 也有點熟悉度，基本上在一個小時內應該都可以輕鬆">
+<meta name="twitter:image" content="https://shizsun0609tw.github.io/2019/05/29/git-hexo-輕鬆架網站/step1_git.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Shizsun&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script data-ad-client="ca-pub-1559264755365586" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shizsun&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://shizsun0609tw.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-git-hexo-輕鬆架網站" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/29/git-hexo-輕鬆架網站/" class="article-date">
+  <time datetime="2019-05-29T12:48:48.000Z" itemprop="datePublished">2019-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tool/">Tool</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Git+Hexo-輕鬆架網站
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>原本一開始 google 用 github 架設網站清一色的是 jekyll，實際用了一下後發現感覺不太合胃口，用起來也不太順<br>後來稍微再找一下就找到了 hexo ，而且在摸索過程中也幾乎沒甚麼採到雷，所以就選他了XD (而且聽說是台灣人做的可以支持一下)</p>
+<p>在這邊也順便記錄一下 hexo 的基本安裝順序，如果你是在資工系有一點經驗的人，對於 git 也有點熟悉度，基本上在一個小時內應該都可以輕鬆搞定拉</p>
+<p>環境: Window 10</p>
+<a id="more"></a>
+
+<h2 id="需求工具"><a href="#需求工具" class="headerlink" title="需求工具"></a>需求工具</h2><ul>
+<li><a href="https://git-scm.com/" target="_blank" rel="noopener">git</a></li>
+<li><a href="https://nodejs.org/en/" target="_blank" rel="noopener">nodejs</a></li>
+</ul>
+<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><h4 id="Step0"><a href="#Step0" class="headerlink" title="Step0"></a>Step0</h4><p>先將上面連結的 git 跟 nodejs 安裝好，就一般平常的安裝，應該是不需要多做教學拉XD</p>
+<h4 id="Step1"><a href="#Step1" class="headerlink" title="Step1"></a>Step1</h4><p>在個人的 github 上新增 repository 並命名為 “你的github帳號”.github.io<br>一定要這個名字喔，<font color="red">請不要打yourname</font>，要換成你的github帳號，不然會出事</p>
+<img src="/2019/05/29/git-hexo-輕鬆架網站/step1_git.png">
+
+<h4 id="Step2"><a href="#Step2" class="headerlink" title="Step2"></a>Step2</h4><p>先移動到你預計要擺放資料的資料夾並打開 cmd</p>
+<img src="/2019/05/29/git-hexo-輕鬆架網站/step2_cmd.png">
+
+<h4 id="Step3"><a href="#Step3" class="headerlink" title="Step3"></a>Step3</h4><p>輸入指令安裝 hexo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<h4 id="Step4"><a href="#Step4" class="headerlink" title="Step4"></a>Step4</h4><p>輸入指令初始化</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
+
+<h4 id="Step5"><a href="#Step5" class="headerlink" title="Step5"></a>Step5</h4><p>進入blog資料夾</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
+
+<h4 id="Step6"><a href="#Step6" class="headerlink" title="Step6"></a>Step6</h4><p>新增第一篇貼文</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new hello-blog</span><br></pre></td></tr></table></figure>
+
+<h4 id="Step7"><a href="#Step7" class="headerlink" title="Step7"></a>Step7</h4><p>產生靜態網站</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g <span class="comment"># g = generate</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Step8"><a href="#Step8" class="headerlink" title="Step8"></a>Step8</h4><p>開啟 local 的 server(預設為4000)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s <span class="comment"># s = server</span></span><br></pre></td></tr></table></figure>
+
+<p>如果port被占用造成失敗就換個port</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server -p 5000</span><br></pre></td></tr></table></figure>
+
+<h4 id="Step9"><a href="#Step9" class="headerlink" title="Step9"></a>Step9</h4><p>在瀏覽器輸入 localhost:”port的號碼” 就可以進入 local 的 blog 惹</p>
+<img src="/2019/05/29/git-hexo-輕鬆架網站/step9_web.png">
+
+<h4 id="Step10"><a href="#Step10" class="headerlink" title="Step10"></a>Step10</h4><p>如果要讓網站對外，上到 github 的話</p>
+<p>先安裝一下套件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h4 id="Step11"><a href="#Step11" class="headerlink" title="Step11"></a>Step11</h4><p>找到資料夾內的 _config.yml 並修改最下方的 deploy 部分</p>
+<p><font color="red">請將 your repository 改成之前新增在 github 的 repository.git</font></p>
+<img src="/2019/05/29/git-hexo-輕鬆架網站/step11_config.png">
+
+<h4 id="Step12"><a href="#Step12" class="headerlink" title="Step12"></a>Step12</h4><p>清出一下暫存及重新生成一次</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p>就可以部屬上去了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d <span class="comment"># deploy</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Step13"><a href="#Step13" class="headerlink" title="Step13"></a>Step13</h4><p>只要在網址上打 “你的github帳號”.github.io 就能成功看到惹(有時候要稍微等幾分鐘)</p>
+<br>
+<br>
+
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>484很簡單呢，我相信對於一般有稍微接觸這領域的應該都不太難才對<br>不只能用markdown寫網頁，也省去了自己寫那些複雜的框架問題(可以抓別人的框架改)<br>如果你自己本身是走網頁前端當然也可以自己寫囉<br>不過小弟對於網頁語言苦手，所以還是抓框架好了&gt;&lt;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shizsun0609tw.github.io/2019/05/29/git-hexo-輕鬆架網站/" data-id="ckjwiatts0014cssza4dzl8zc" class="article-share-link">Share</a>
+      
+        <a href="https://shizsun0609tw.github.io/2019/05/29/git-hexo-輕鬆架網站/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tool/">Tool</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/29/hexo-第三方掛載/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          hexo-第三方掛載
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/29/Hello-Blog/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello-Blog</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+    <h3 class="widget-title">About</h3>
+    <div class="widget">
+          <div class="aboutImg">
+            <img src="https://i.imgur.com/IFmwrnC.jpg" width="120px" height="120px">
+          </div>
+          <div class="aboutInformation">
+            <span style="font-family:Microsoft JhengHei; color:black;">
+            <ul>
+                <li>&nbsp&nbsp陳鎮華</li>
+                <li>&nbsp&nbspZhen-Hua Chen</li>
+                <li>&nbsp</li>
+                <li>&nbsp&nbsp<a href="https://github.com/shizsun0609tw">Github</a></li>
+                <li>&nbsp&nbsp<a href="https://www.youtube.com/channel/UCdz5zI6t8_KF3lhIQg5edlw">Youtube</a></li>
+                <li>&nbsp&nbsp<a href="mailto:shizsun0609tw@gmail.com">Contact</a></li>
+            </ul>
+            </span>
+          </div>
+          <div style="clear:both;"></div>
+    </div>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/">Compiler</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Graphics/">Computer Graphics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Diary/">Diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network-Programming/">Network Programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software-Engineering/">Software Engineering</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compiler/">Compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Diary/">Diary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/">Math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NCTU/">NCTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTOU/">NTOU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network-Programming/">Network Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/">Software Engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/01/14/1091-交大-網路程式設計/">1091-交大-網路程式設計</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/20/研究新生活/">研究新生活</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/5th-Kind-Games-日本遊戲公司實習心得/">5th Kind Games 日本遊戲公司實習心得</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/26/海大資工四年心得/">海大資工四年心得</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/20/109年資工研究所推甄心得/">109年資工研究所推甄心得</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+    <div class="widget-wrap">
+      <h3 class="widget-title">views</h3>
+      <div class="widget" style="text-align:center">
+          <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=36593680&main=1"></script><noscript><img src="//counter1.fc2.com/counter_img.php?id=36593680&main=1"></noscript>
+      </div>
+    </div>
+  
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Zhen-Hua Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'shizsun0609tw';
+  
+  var disqus_url = 'https://shizsun0609tw.github.io/2019/05/29/git-hexo-輕鬆架網站/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Compiler-Parsing | Shizsun&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Parsing Introduction  Top-Down Parsing  Top-Down Parsing LL(1) LL(0)  Bottom-Up Parsing  Bottom-Up Parsing LR(0) SLR(1) LALR(1)">
+<meta name="keywords" content="NTOU,Compiler">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Compiler-Parsing">
+<meta property="og:url" content="https://shizsun0609tw.github.io/2019/06/01/Compiler-Parsing/index.html">
+<meta property="og:site_name" content="Shizsun&#39;s blog">
+<meta property="og:description" content="Parsing Introduction  Top-Down Parsing  Top-Down Parsing LL(1) LL(0)  Bottom-Up Parsing  Bottom-Up Parsing LR(0) SLR(1) LALR(1)">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/06/01/Compiler-Parsing/LLtable01.jpg">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/06/01/Compiler-Parsing/LLtable02.jpg">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/06/01/Compiler-Parsing/LR0_automation.jpg">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/06/01/Compiler-Parsing/SLRtable.jpg">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/06/01/Compiler-Parsing/SLRparsing.jpg">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/06/01/Compiler-Parsing/LR1_automation.jpg">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/06/01/Compiler-Parsing/LR1_table.jpg">
+<meta property="og:updated_time" content="2021-01-14T06:38:09.507Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Compiler-Parsing">
+<meta name="twitter:description" content="Parsing Introduction  Top-Down Parsing  Top-Down Parsing LL(1) LL(0)  Bottom-Up Parsing  Bottom-Up Parsing LR(0) SLR(1) LALR(1)">
+<meta name="twitter:image" content="https://shizsun0609tw.github.io/2019/06/01/Compiler-Parsing/LLtable01.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Shizsun&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script data-ad-client="ca-pub-1559264755365586" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shizsun&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://shizsun0609tw.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Compiler-Parsing" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/01/Compiler-Parsing/" class="article-date">
+  <time datetime="2019-06-01T08:44:08.000Z" itemprop="datePublished">2019-06-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Compiler/">Compiler</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Compiler-Parsing
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Parsing"><a href="#Parsing" class="headerlink" title="Parsing"></a>Parsing</h2><ul>
+<li><a href="#Introduction">Introduction</a></li>
+</ul>
+<p><strong>Top-Down Parsing</strong></p>
+<ul>
+<li><a href="#Top-Down-Parsing">Top-Down Parsing</a></li>
+<li><a href="#LL-1">LL(1)</a></li>
+<li><a href="#LL-0">LL(0)</a></li>
+</ul>
+<p><strong>Bottom-Up Parsing</strong></p>
+<ul>
+<li><a href="#Bottom-Up-Parsing">Bottom-Up Parsing</a></li>
+<li><a href="#LR-0">LR(0)</a></li>
+<li><a href="#SLR-1">SLR(1)</a></li>
+<li><a href="#LALR-1">LALR(1)</a></li>
+</ul>
+<a id="more"></a>
+
+<hr>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>Parsing 就是要將輸入字串對於我們定義的規則查詢、分析，確認 input 是否為我們定義出的合法規則 </p>
+<p>我們要有系統、有規則的做 Parsing 而且還要有辦法寫成 Code 因此我們需要一些不同的 Parsing 方法，讓一切都是流程化的進行</p>
+<p>簡單來說我們會透過 First 與 Follow 建查詢的 table ，讓我們在新輸入一個 input 時，能夠查表進行 Parse 並轉出成目標的語法構造</p>
+<hr>
+<h3 id="Top-Down-Parsing"><a href="#Top-Down-Parsing" class="headerlink" title="Top-Down Parsing"></a>Top-Down Parsing</h3><p><font color="red">由開始符號開始推，推出目標的 input 語法</font></p>
+<hr>
+<h3 id="LL-1"><a href="#LL-1" class="headerlink" title="LL(1)"></a>LL(1)</h3><h6 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h6><ul>
+<li>L input 從左到右</li>
+<li>L 最左優先推導</li>
+<li>1 每一個只會往前看1個</li>
+<li>不能有左遞迴</li>
+<li>不能有 Ambiguous</li>
+</ul>
+<p><strong>建表方法</strong></p>
+<ul>
+<li>先畫出 x 軸為 terminal ， y 軸為 nonterminal 的表格</li>
+<li>從每一個判斷式依序做</li>
+<li>將產生式填入 (nonterminal, First(nonterminal)) 的位置</li>
+<li>如果 First 內含有 ε ，則將產生式填入 (nonterminal, Follow(nonterminal)) 的位置</li>
+</ul>
+<p><strong>Example</strong></p>
+<p>E -&gt; TE’<br>E’ -&gt; +TE’ | ε<br>T -&gt; FT’<br>T’ -&gt; *FT’ | ε<br>F -&gt; (E) | id</p>
+<p>First(E) = First(T) = First(F) = {(, id)}<br>First(E’) = {+, ε}<br>First(T’) = {*, ε}</p>
+<p>Follow(E) = Follow(E’) = {), $)}<br>Follow(T) = Follow(T’) = {+, ), $}<br>Follow(F) = {+, *, ), $}</p>
+<div style="width:60%;">
+<img src="/2019/06/01/Compiler-Parsing/LLtable01.jpg">
+</div>
+
+
+<p><strong>Parse</strong></p>
+<ul>
+<li>根據 input 將開始符號放入 stack 中 向左展開至目標 nonterminal 後消除</li>
+<li>查表讓 nonterminal 往 input 的目標 terminal 轉換</li>
+</ul>
+<p>String: id + id * id</p>
+<div style="width:60%;">
+<img src="/2019/06/01/Compiler-Parsing/LLtable02.jpg">
+</div>
+
+<p><strong><font color="red">How it works?</font></strong></p>
+<font color="red">
+如果我們需要將開始符號往目標字串轉換<br>
+由於此方法屬於最左優先推導，因此將 first 放入表中後，透過查表就能知道此 nonterminal 要如何往左換出目標 terminal<br>
+如果遇到 ε 的情況，由於 nonterminal 被換成 ε 所以他的 follow 也有可能讓他展開到目標 terminal
+</font>
+
+<hr>
+<h3 id="LL-0"><a href="#LL-0" class="headerlink" title="LL(0)"></a>LL(0)</h3><p>因為是 0 所以他不會偷看 OuO</p>
+<h5 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h5><p>G -&gt; AB<br>A -&gt; BC<br>B -&gt; C<br>C -&gt; a</p>
+<p>不管怎麼推都會推回去 a</p>
+<hr>
+<h3 id="Bottom-Up-Parsing"><a href="#Bottom-Up-Parsing" class="headerlink" title="Bottom-Up Parsing"></a>Bottom-Up Parsing</h3><p><font color="red">由 input 開始推，推回開始符號</font><br>基本上由 <font color="red">shift(移入) reduce(化簡)</font> 組成</p>
+<hr>
+<h3 id="LR-0"><a href="#LR-0" class="headerlink" title="LR(0)"></a>LR(0)</h3><h5 id="Description-1"><a href="#Description-1" class="headerlink" title="Description"></a>Description</h5><ul>
+<li>L input 從左到右</li>
+<li>R 最右優先推導</li>
+<li>0 每一個只會往前看0個</li>
+<li>不能有 Ambiguous</li>
+<li>I = Item</li>
+<li>r = reduse</li>
+<li>s = shift</li>
+</ul>
+<p><strong>建表方法</strong></p>
+<p>先畫出 Automation 再利用畫出來的圖建表</p>
+<p><strong><font color="red">Automation</font></strong></p>
+<ul>
+<li>先將所有產生式拆開並增加 S’ -&gt; S</li>
+<li>I<sub>0</sub>為 S’ -&gt; ●S 開始推</li>
+<li>● 代表的是目前看到哪個位置</li>
+<li>如果同一個 I 下，● 後為 nonterminal 則將其產生式加入</li>
+<li>一個 I 完成後將每一個 ● 後還有東西的經過一個符號並產生新的 I 之後產生到結尾</li>
+</ul>
+<p><strong>Example</strong></p>
+<p>S -&gt; a B<br>B -&gt; aBAB | ε<br>A -&gt; + | *</p>
+<div style="width:60%;">
+<img src="/2019/06/01/Compiler-Parsing/LR0_automation.jpg" title="LR0_Automation">
+</div>
+
+<p><strong><font color="red">Parsing Table</font></strong></p>
+<ul>
+<li>x軸先放上 terminal 再放上 nonterminal 兩者隔開</li>
+<li>y軸放上 I</li>
+<li>如果此 I<sub>j</sub> 可以透過某個符號到另一個 I<sub>k</sub><ul>
+<li>如果符號為 terminal 則在 (I<sub>j</sub>, termianl) 填上 S<sub>k</sub></li>
+<li>如果符號為 nonterminal 則在 (I<sub>j</sub>, nonterminal) 填上 k</li>
+</ul>
+</li>
+<li>如果 I<sub>j</sub>內有產生式 P<sub>i</sub> 的 ● 已經在結尾，則將所有 terminal 填上 r<sub>i</sub></li>
+</ul>
+<p><font color="red">最後一項可能造成 Conflict</font></p>
+<p><strong>Example</strong></p>
+<p>請看 SLR 的示範</p>
+<hr>
+<h3 id="SLR-1"><a href="#SLR-1" class="headerlink" title="SLR(1)"></a>SLR(1)</h3><h5 id="Description-2"><a href="#Description-2" class="headerlink" title="Description"></a>Description</h5><p>基本上跟 LR(0) 的流程相同，但在建表的時候最後一項</p>
+<ul>
+<li>如果 I<sub>j</sub>內有產生式 P<sub>i</sub> ● 已經在結尾，則將<font color="red">所有 terminal</font> 填上 r<sub>i</sub></li>
+</ul>
+<p>改為</p>
+<ul>
+<li>如果 I<sub>j</sub>內有產生式 P<sub>i</sub> ● 已經在結尾，則將 <font color="red">follow(P<sub>開始符號</sub>) </font>填上 r<sub>i</sub></li>
+</ul>
+<p><font color="red">解決 LR(0) 的 Conflict</font></p>
+<p><strong>Example</strong></p>
+<p>S -&gt; a B<br>B -&gt; aBAB | ε<br>A -&gt; + | *</p>
+<div style="width:40%;">
+<img src="/2019/06/01/Compiler-Parsing/SLRtable.jpg" title="SLRtable">
+</div>
+
+<p><strong>Parsing</strong></p>
+<p>透過 table Parse</p>
+<ul>
+<li>查看下個要進來的 input 需透過現在 stack.top() 的狀態經過何種操作才能得到</li>
+<li>如果為 S<sub>i</sub> 將下個 input 放進 symbol ， Stack push(i)</li>
+<li>如果為 r<sub>i</sub> 將 P<sub>i</sub>右式符號數量從 stack pop掉並代換掉 symbol<sub>suffix</sub> 再查看 stack.top() 的 nonterminal<sub>P開始符號</sub> 要 push 哪個 I</li>
+</ul>
+<div style="width:50%;">
+<img src="/2019/06/01/Compiler-Parsing/SLRparsing.jpg" title="SLRparsing">
+</div>
+
+<hr>
+<h3 id="LR-1"><a href="#LR-1" class="headerlink" title="LR(1)"></a>LR(1)</h3><h5 id="Descrition"><a href="#Descrition" class="headerlink" title="Descrition"></a>Descrition</h5><ul>
+<li>在建立 Automation 的時候如果在 I 因拓展產生的 P 則偷看 ● 後的 first 並寫在後方(lookahead set)</li>
+<li>在建表的時候 reduce 透過後方的 lookahead 而不是 SLR 的 follow</li>
+</ul>
+<p><font>lookahead 為 follow 的 subset 能減少 Conflict 的問題</font></p>
+<p><strong>Example</strong></p>
+<p>S -&gt; A a A b | B b B a<br>A -&gt; ε<br>B -&gt; ε</p>
+<div style="width:60%;">
+<img src="/2019/06/01/Compiler-Parsing/LR1_automation.jpg" title="LR1_automation">
+<br>
+</div>
+<div style="width:40%;">
+<img src="/2019/06/01/Compiler-Parsing/LR1_table.jpg" title="LR1_table">
+</div>
+
+<hr>
+<h3 id="LALR-1"><a href="#LALR-1" class="headerlink" title="LALR(1)"></a>LALR(1)</h3><h5 id="Description-3"><a href="#Description-3" class="headerlink" title="Description"></a>Description</h5><ul>
+<li>將 LR(1) 如果產生式皆相同，但 lookahead set不同的部分合併</li>
+<li>S 可以合併 R 不行</li>
+</ul>
+<p><font color="red">減少表的大小</font></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shizsun0609tw.github.io/2019/06/01/Compiler-Parsing/" data-id="ckjwiatsg000acsszerrp3n0g" class="article-share-link">Share</a>
+      
+        <a href="https://shizsun0609tw.github.io/2019/06/01/Compiler-Parsing/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Compiler/">Compiler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NTOU/">NTOU</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/15/AI-Engine/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          AI-Engine
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/30/Compiler-CFG/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Compiler-CFG</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+    <h3 class="widget-title">About</h3>
+    <div class="widget">
+          <div class="aboutImg">
+            <img src="https://i.imgur.com/IFmwrnC.jpg" width="120px" height="120px">
+          </div>
+          <div class="aboutInformation">
+            <span style="font-family:Microsoft JhengHei; color:black;">
+            <ul>
+                <li>&nbsp&nbsp陳鎮華</li>
+                <li>&nbsp&nbspZhen-Hua Chen</li>
+                <li>&nbsp</li>
+                <li>&nbsp&nbsp<a href="https://github.com/shizsun0609tw">Github</a></li>
+                <li>&nbsp&nbsp<a href="https://www.youtube.com/channel/UCdz5zI6t8_KF3lhIQg5edlw">Youtube</a></li>
+                <li>&nbsp&nbsp<a href="mailto:shizsun0609tw@gmail.com">Contact</a></li>
+            </ul>
+            </span>
+          </div>
+          <div style="clear:both;"></div>
+    </div>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/">Compiler</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Graphics/">Computer Graphics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Diary/">Diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network-Programming/">Network Programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software-Engineering/">Software Engineering</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compiler/">Compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Diary/">Diary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/">Math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NCTU/">NCTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTOU/">NTOU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network-Programming/">Network Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/">Software Engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/01/14/1091-交大-網路程式設計/">1091-交大-網路程式設計</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/20/研究新生活/">研究新生活</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/5th-Kind-Games-日本遊戲公司實習心得/">5th Kind Games 日本遊戲公司實習心得</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/26/海大資工四年心得/">海大資工四年心得</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/20/109年資工研究所推甄心得/">109年資工研究所推甄心得</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+    <div class="widget-wrap">
+      <h3 class="widget-title">views</h3>
+      <div class="widget" style="text-align:center">
+          <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=36593680&main=1"></script><noscript><img src="//counter1.fc2.com/counter_img.php?id=36593680&main=1"></noscript>
+      </div>
+    </div>
+  
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Zhen-Hua Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'shizsun0609tw';
+  
+  var disqus_url = 'https://shizsun0609tw.github.io/2019/06/01/Compiler-Parsing/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>AI-Engine | Shizsun&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="AI Engine Introduction Intelligent Agent AI Model Hierachical Behavior Tree Finite State Machine Fuzzy Logic">
+<meta name="keywords" content="NTOU,Computer Graphics">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI-Engine">
+<meta property="og:url" content="https://shizsun0609tw.github.io/2019/06/15/AI-Engine/index.html">
+<meta property="og:site_name" content="Shizsun&#39;s blog">
+<meta property="og:description" content="AI Engine Introduction Intelligent Agent AI Model Hierachical Behavior Tree Finite State Machine Fuzzy Logic">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-01-14T06:37:55.911Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AI-Engine">
+<meta name="twitter:description" content="AI Engine Introduction Intelligent Agent AI Model Hierachical Behavior Tree Finite State Machine Fuzzy Logic">
+  
+    <link rel="alternate" href="/atom.xml" title="Shizsun&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script data-ad-client="ca-pub-1559264755365586" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shizsun&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://shizsun0609tw.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-AI-Engine" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/15/AI-Engine/" class="article-date">
+  <time datetime="2019-06-15T09:43:20.000Z" itemprop="datePublished">2019-06-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Computer-Graphics/">Computer Graphics</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      AI-Engine
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="AI-Engine"><a href="#AI-Engine" class="headerlink" title="AI Engine"></a>AI Engine</h2><ul>
+<li><a href="#Introduction">Introduction</a></li>
+<li><a href="#Intelligent-Agent">Intelligent Agent</a></li>
+<li><a href="#AI-Model">AI Model</a></li>
+<li><a href="#Hierachical-Behavior-Tree">Hierachical Behavior Tree</a></li>
+<li><a href="#Finite-State-Machine">Finite State Machine</a></li>
+<li><a href="#Fuzzy-Logic">Fuzzy Logic</a></li>
+</ul>
+<a id="more"></a>
+
+<hr>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>在 3D 遊戲設計所定義的 AI 引擎通常是指</p>
+<ul>
+<li>能接受資訊</li>
+<li>能有計畫性的計畫性的判斷</li>
+<li>能有所回應</li>
+</ul>
+<hr>
+<h3 id="Intelligent-Agent"><a href="#Intelligent-Agent" class="headerlink" title="Intelligent Agent"></a>Intelligent Agent</h3><p>Intelligent Agent 中文稱作<font color="red">智慧代理人</font><br>用於管理底下所有物件要做出何種反應的管理處(virtual 的存在)<br>簡單來說就是工頭 XD</p>
+<p>這個工頭要負責所有外在進來的資訊(input variable)<br>可能是天氣太熱或是下大雨，或是內部的溝通資訊(interaction)，可能是員工吵架或是員工中暑</p>
+<p>蒐集完所有資訊之後這個工頭要判斷接下來這些員工要有甚麼樣的動作(action)與反應(responce)<br>例如員工中暑可以指派讓員工休息或是下大雨員工們先暫時躲雨等等</p>
+<p>某些時候可能也要跟其他的工地的工頭溝通協調各工地的進度狀況(interact with other IAs)</p>
+<p>比喻到這邊 <font color="red">為甚麼會需要 IA 去控制我們的物件，不讓他們各自控制呢?</font></p>
+<p>由於在實作 AI Engine 部分的程式，如果將各腳色的 AI 分開容易造成同群體間不好溝通， input variable 十分混亂，不同種類的 AI 也難以溝通，為了 implement 的方便，因此才使用此方法來實作</p>
+<p><font color="red">不過要小心一個 IA 下互相溝通時先後順序的 bug</font></p>
+<hr>
+<h3 id="AI-Model"><a href="#AI-Model" class="headerlink" title="AI Model"></a>AI Model</h3><p>通常在撰寫 AI 判斷部分會用兩種類的 model</p>
+<ul>
+<li>Deterministic<ul>
+<li>Finite state machine</li>
+<li>Hierachical finite state machine</li>
+<li>Push down automata</li>
+</ul>
+</li>
+<li>Non-deterministic<ul>
+<li>Fuzzy logic</li>
+<li>Neural network</li>
+<li>Genetic algorithm</li>
+<li>Non-deterministic automata</li>
+</ul>
+</li>
+</ul>
+<p>Deterministic 比較直觀簡單，收到甚麼樣的 input 就做出對應的反應，<font color="red">雖然程式好寫，但彈性跟有趣度就較低，也沒有不同程度上的差別</font></p>
+<p>Non-deterministic 較為複雜，可能透過不同種複雜的方式才得出最後的反應，<font color="red">程式難寫，但彈性跟反應也較多種類的變化</font></p>
+<hr>
+<h3 id="Hierachical-Behavior-Tree"><a href="#Hierachical-Behavior-Tree" class="headerlink" title="Hierachical Behavior Tree"></a>Hierachical Behavior Tree</h3><p>我們在讓腳色有反應動作時， IA 可能只有下達攻擊敵人、躲避或是逃跑等較不明確的至另，因此要透過 Hierachical Behavior Tree 去控制腳色的行為，例如: </p>
+<ul>
+<li>Run from enemy = turn + run</li>
+<li>turn = rotate + change gesture</li>
+<li>run = swing arms + motion of feets + translate + change gesture</li>
+</ul>
+<p>將他們分寫成較細且清楚的指令，最後只剩下旋轉及移動時再來 update</p>
+<hr>
+<h3 id="Finite-State-Machine"><a href="#Finite-State-Machine" class="headerlink" title="Finite State Machine"></a>Finite State Machine</h3><p><strong>Finite State Machine</strong></p>
+<p>FSM 這東西如果你再資訊領域學了一陣子應該不陌生<br>就是最直接的得到甚麼 input 就透過 transition 到不同的 state<br><font color="red">簡單 好寫，但無記憶性 也較無聊</font><br>通常可以用兩種方法 implement</p>
+<ul>
+<li>Event-driven 就是最直接的 if else 直接去跑 不多說 </li>
+<li>Table-driven 可以使用一個 table 把狀態關係定義好，在比較多狀態的時候 implement 才不會一團亂</li>
+</ul>
+<p><strong>Extends</strong></p>
+<p>雖然 FSM 這東西很簡單，但也可以用一些其他的拓展方法讓他有更多複雜的反應，例如</p>
+<ul>
+<li>使用多個 FSM 建出 Hierachical FSM </li>
+<li>將 FSM 的 state 放進 stack 裡就讓他有了記憶功能</li>
+<li>用 DFA 取代 NFA 可以更有隨機性</li>
+<li>用 Push down Automata 做出更複雜的 script</li>
+</ul>
+<hr>
+<h3 id="Fuzzy-Logic"><a href="#Fuzzy-Logic" class="headerlink" title="Fuzzy Logic"></a>Fuzzy Logic</h3><p>由於 FSM 基本上就是得到甚麼 input 就做出甚麼 responce 所以沒辦法有程度上的區別，例如 101m 跟 999m 可能都代表遠，而且也只能對一個 input 做反應，這時候就要出動 fuzzy logic 。</p>
+<p>Fuzzy logic 就是在<font color="red">判斷時以百分比做為判斷條件，再加上 fuzzy operator(and, or, not)，把多種條件複合起來再做反應</font>，例如:</p>
+<p>speed 50 m/s =&gt; 50% * 100 m/s =&gt; 50%(normal speed)<br>distanc 100 m =&gt; 10% * 1000m =&gt; 10%(far)</p>
+<p>50% and 10% =&gt; 10% =&gt; run normal</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shizsun0609tw.github.io/2019/06/15/AI-Engine/" data-id="ckjwiatrx0004cssztodnzzom" class="article-share-link">Share</a>
+      
+        <a href="https://shizsun0609tw.github.io/2019/06/15/AI-Engine/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NTOU/">NTOU</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/15/Quaternion/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Quaternion
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/01/Compiler-Parsing/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Compiler-Parsing</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+    <h3 class="widget-title">About</h3>
+    <div class="widget">
+          <div class="aboutImg">
+            <img src="https://i.imgur.com/IFmwrnC.jpg" width="120px" height="120px">
+          </div>
+          <div class="aboutInformation">
+            <span style="font-family:Microsoft JhengHei; color:black;">
+            <ul>
+                <li>&nbsp&nbsp陳鎮華</li>
+                <li>&nbsp&nbspZhen-Hua Chen</li>
+                <li>&nbsp</li>
+                <li>&nbsp&nbsp<a href="https://github.com/shizsun0609tw">Github</a></li>
+                <li>&nbsp&nbsp<a href="https://www.youtube.com/channel/UCdz5zI6t8_KF3lhIQg5edlw">Youtube</a></li>
+                <li>&nbsp&nbsp<a href="mailto:shizsun0609tw@gmail.com">Contact</a></li>
+            </ul>
+            </span>
+          </div>
+          <div style="clear:both;"></div>
+    </div>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/">Compiler</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Graphics/">Computer Graphics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Diary/">Diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network-Programming/">Network Programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software-Engineering/">Software Engineering</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compiler/">Compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Diary/">Diary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/">Math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NCTU/">NCTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTOU/">NTOU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network-Programming/">Network Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/">Software Engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/01/14/1091-交大-網路程式設計/">1091-交大-網路程式設計</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/20/研究新生活/">研究新生活</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/5th-Kind-Games-日本遊戲公司實習心得/">5th Kind Games 日本遊戲公司實習心得</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/26/海大資工四年心得/">海大資工四年心得</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/20/109年資工研究所推甄心得/">109年資工研究所推甄心得</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+    <div class="widget-wrap">
+      <h3 class="widget-title">views</h3>
+      <div class="widget" style="text-align:center">
+          <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=36593680&main=1"></script><noscript><img src="//counter1.fc2.com/counter_img.php?id=36593680&main=1"></noscript>
+      </div>
+    </div>
+  
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Zhen-Hua Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'shizsun0609tw';
+  
+  var disqus_url = 'https://shizsun0609tw.github.io/2019/06/15/AI-Engine/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

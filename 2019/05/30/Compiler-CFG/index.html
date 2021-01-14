@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Compiler-CFG | Shizsun&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CFG(Context Free Grammar) Introduction Parse Tree NFA-&amp;gt;CFG CFG vs RE Leftmost/Rightmost Derivation Elimination of Left Recursion Top-Down Parsing First and Follow">
+<meta name="keywords" content="NTOU,Compiler">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Compiler-CFG">
+<meta property="og:url" content="https://shizsun0609tw.github.io/2019/05/30/Compiler-CFG/index.html">
+<meta property="og:site_name" content="Shizsun&#39;s blog">
+<meta property="og:description" content="CFG(Context Free Grammar) Introduction Parse Tree NFA-&amp;gt;CFG CFG vs RE Leftmost/Rightmost Derivation Elimination of Left Recursion Top-Down Parsing First and Follow">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/05/30/Compiler-CFG/ParseTree01.jpg">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/05/30/Compiler-CFG/NFAtoCFG01.jpg">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/05/30/Compiler-CFG/REvsCFG01.jpg">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/05/30/Compiler-CFG/LeftMost01.jpg">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/05/30/Compiler-CFG/RightMost01.jpg">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/05/30/Compiler-CFG/LeftMost01.jpg">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/05/30/Compiler-CFG/RightMost01.jpg">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2019/05/30/Compiler-CFG/TopDown01.jpg">
+<meta property="og:updated_time" content="2021-01-14T06:38:05.392Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Compiler-CFG">
+<meta name="twitter:description" content="CFG(Context Free Grammar) Introduction Parse Tree NFA-&amp;gt;CFG CFG vs RE Leftmost/Rightmost Derivation Elimination of Left Recursion Top-Down Parsing First and Follow">
+<meta name="twitter:image" content="https://shizsun0609tw.github.io/2019/05/30/Compiler-CFG/ParseTree01.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Shizsun&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script data-ad-client="ca-pub-1559264755365586" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shizsun&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://shizsun0609tw.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Compiler-CFG" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/30/Compiler-CFG/" class="article-date">
+  <time datetime="2019-05-30T02:13:28.000Z" itemprop="datePublished">2019-05-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Compiler/">Compiler</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Compiler-CFG
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="CFG-Context-Free-Grammar"><a href="#CFG-Context-Free-Grammar" class="headerlink" title="CFG(Context Free Grammar)"></a>CFG(Context Free Grammar)</h2><ul>
+<li><a href="#Introduction">Introduction</a></li>
+<li><a href="#Parse-Tree">Parse Tree</a></li>
+<li><a href="#NFA-to-CFG">NFA-&gt;CFG</a></li>
+<li><a href="#CFG-vs-RE">CFG vs RE</a></li>
+<li><a href="#Leftmost-and-Rightmost-Derivation">Leftmost/Rightmost Derivation</a></li>
+<li><a href="#Elimination-of-Left-Recursion">Elimination of Left Recursion</a></li>
+<li><a href="#Top-Down-Parsing">Top-Down Parsing</a></li>
+<li><a href="#First-and-Follow">First and Follow</a></li>
+</ul>
+<a id="more"></a>
+
+<hr>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><font color="red">Introduction</font></h3><h5 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h5><p>CFG(Context Free Grammar)中文翻作<font color="red">上下文無關文法</font><br>CFG 主要由 4 種成員組成 記為 G = (V<sub>N</sub>, V<sub>T</sub>, P, S)</p>
+<ul>
+<li>V<sub>N</sub><ul>
+<li>nonterminals(非終止符號)</li>
+<li>可以換成別的符號的符號</li>
+</ul>
+</li>
+<li>V<sub>T</sub><ul>
+<li>terminals(終止符號)</li>
+<li>不可換成別的符號的符號</li>
+</ul>
+</li>
+<li>P<ul>
+<li>production(產生式)</li>
+<li>換算式</li>
+</ul>
+</li>
+<li>S<ul>
+<li>start symbol(開始符號) </li>
+<li>從此符號開始做<font color="red">(大部分都沒特別講就為第一個產生式的左符號)</font></li>
+</ul>
+</li>
+</ul>
+<h5 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h5><p>P0: expression -&gt; expression + term<br>P1: expression -&gt; expression - term<br>P2: expression -&gt; term<br>P3: term -&gt; term * factor | term / factor | factor<br>P4: factor -&gt; (expression) | id</p>
+<p>V<sub>N</sub> = {expression, term, factor}<br>V<sub>T</sub> = {+, -, *, /, (, ), id}<br>P = {P0, P1, P2, P3, P4}<br>S = {expression}</p>
+<hr>
+<h3 id="Parse-Tree"><a href="#Parse-Tree" class="headerlink" title="Parse Tree"></a>Parse Tree</h3><h5 id="Description-1"><a href="#Description-1" class="headerlink" title="Description"></a>Description</h5><p>直接看實例比較快懂</p>
+<h5 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h5><p>S -&gt; SS+ | SS* | a<br>String: aa+a*</p>
+<div style="width:200px;" align="left">
+<img src="/2019/05/30/Compiler-CFG/ParseTree01.jpg">
+</div>
+
+<p>S =&gt; S S * =&gt; S S + S * =&gt; a S + S * =&gt; a a + S * =&gt; a a + a *</p>
+<hr>
+<h3 id="NFA-to-CFG"><a href="#NFA-to-CFG" class="headerlink" title="NFA to CFG"></a>NFA to CFG</h3><h5 id="Description-2"><a href="#Description-2" class="headerlink" title="Description"></a>Description</h5><p>只要將各狀態拆成產生式(條件放前綴)</p>
+<h5 id="Example-2"><a href="#Example-2" class="headerlink" title="Example"></a>Example</h5><p>(a|b)*abb</p>
+<div style="width:50%;" align="left">
+<img src="/2019/05/30/Compiler-CFG/NFAtoCFG01.jpg">
+</div>
+S<sub>0</sub> -> aS<sub>0</sub> | b S<sub>0</sub> | S<sub>1</sub>
+S<sub>1</sub> -> bS<sub>2</sub>
+S<sub>2</sub> -> bS<sub>3</sub>
+S<sub>3</sub> -> ε
+
+<hr>
+<h3 id="CFG-vs-RE"><a href="#CFG-vs-RE" class="headerlink" title="CFG vs RE"></a>CFG vs RE</h3><h5 id="Description-3"><a href="#Description-3" class="headerlink" title="Description"></a>Description</h5><p>RE包含在CFG內 所以 <font color="red">RE可以換CFG 可是CFG不一定能換RE</font></p>
+<div style="width:20%;" align="left">
+<img src="/2019/05/30/Compiler-CFG/REvsCFG01.jpg">
+</div>
+
+<h5 id="Example-3"><a href="#Example-3" class="headerlink" title="Example"></a>Example</h5><p><font color="red">RE to CFG</font></p>
+<p>(a|b)*abb<br>=&gt;<br>A -&gt; BC<br>B -&gt; BB | a | b | ε<br>C -&gt; abb</p>
+<p><font color="red">CFG to RE</font></p>
+<p>A -&gt; aAb | ε<br>=&gt;<br>???</p>
+<hr>
+<h3 id="Leftmost-and-Rightmost-Derivation"><a href="#Leftmost-and-Rightmost-Derivation" class="headerlink" title="Leftmost and Rightmost Derivation"></a><font color="red">Leftmost and Rightmost Derivation</font></h3><h5 id="Description-4"><a href="#Description-4" class="headerlink" title="Description"></a>Description</h5><p>最左優先推導/最右優先推導，在將開始符號推至目標字串時從最左或最右的 nonterminal 開始推</p>
+<h5 id="Example-4"><a href="#Example-4" class="headerlink" title="Example"></a>Example</h5><p>E -&gt; E + E | E * E | (E) | -E | id<br>String: id + id * id</p>
+<p><strong>Leftmost Derivation</strong></p>
+<div style="width:50%;" align="left">
+<img src="/2019/05/30/Compiler-CFG/LeftMost01.jpg">
+</div>
+
+<p>E
+=&gt; E + E<br>=&gt; id + E<br>=&gt; id + E * E<br>=&gt; id + id * E<br>=&gt; id + id * id</p>
+<p><strong>Rightmost Derivation</strong></p>
+<div style="width:50%;" align="left">
+<img src="/2019/05/30/Compiler-CFG/RightMost01.jpg">
+</div>
+
+<p>E
+=&gt; E * E<br>=&gt; E * id<br>=&gt; E + E * id<br>=&gt; E + id * id<br>=&gt; id + id * id</p>
+<p><strong><font color="red">Ambiguity</font></strong></p>
+<p>一個合法的語法不能 Ambiguity (模稜兩可)<br>如果同一個 String 能透過 Grammar 寫出兩種 Parse Tree 則此語法 Ambiguity</p>
+<div style="width:50%;" align="left">
+<img src="/2019/05/30/Compiler-CFG/LeftMost01.jpg"><img src="/2019/05/30/Compiler-CFG/RightMost01.jpg">
+</div>
+
+<p><font color="red">我們上面的語法就讓 id + id * id 產生兩種 Parse Tree 因此上面的 Grammar 為 Ambiguity</font></p>
+<hr>
+<h3 id="Elimination-of-Left-Recursion"><a href="#Elimination-of-Left-Recursion" class="headerlink" title="Elimination of Left Recursion"></a><font color="red">Elimination of Left Recursion</font></h3><h5 id="Description-5"><a href="#Description-5" class="headerlink" title="Description"></a>Description</h5><p>消除左遞迴，如果有一產生式為 E -&gt; E + id ，則 Parse Tree 可能無限的往左展開，因此我們要消除左遞迴的情況</p>
+<h5 id="Example-5"><a href="#Example-5" class="headerlink" title="Example"></a>Example</h5><p><strong>Ex1</strong><br>A -&gt; Aa | b</p>
+<p>可以轉成</p>
+<p>A -&gt; bA’<br>A’ -&gt; aA’ | ε</p>
+<p><strong>Ex2</strong><br>E -&gt; E + T | E - T | T</p>
+<p>可以轉成</p>
+<p>E -&gt; TE’<br>E’ -&gt; +TE’ | -TE’ | ε</p>
+<hr>
+<h3 id="Top-Down-Parsing"><a href="#Top-Down-Parsing" class="headerlink" title="Top-Down Parsing"></a>Top-Down Parsing</h3><h5 id="Description-6"><a href="#Description-6" class="headerlink" title="Description"></a>Description</h5><p>就是用開始符號從上往下展開到目標字串</p>
+<h5 id="Example-6"><a href="#Example-6" class="headerlink" title="Example"></a>Example</h5><p>E -&gt; TE’<br>E’ -&gt; +TE’ | ε<br>T -&gt; FT’<br>T’ -&gt; *FT’ | ε<br>F -&gt; (E) | id</p>
+<p>String: id + id * id</p>
+<div style="width:30%;" align="left">
+<img src="/2019/05/30/Compiler-CFG/TopDown01.jpg">
+</div>
+
+<hr>
+<h3 id="First-and-Follow"><a href="#First-and-Follow" class="headerlink" title="First-and-Follow"></a><font color="red">First-and-Follow</font></h3><h5 id="Description-7"><a href="#Description-7" class="headerlink" title="Description"></a>Description</h5><p>First 和 Follow 是 function 寫作 First(a) 或 Follow(a)</p>
+<p><strong>First</strong></p>
+<ul>
+<li>參數可以是 terminal 或 nonterminal</li>
+<li>找到接在參數<font color="red">前面的字首</font>可能是哪些 terminal 的集合</li>
+</ul>
+<p><strong>Follow</strong></p>
+<ul>
+<li>參數只能是 terminal</li>
+<li>找到接在參數<font color="red">後面一個</font>可能是哪些 terminal 的集合</li>
+</ul>
+<h5 id="Example-7"><a href="#Example-7" class="headerlink" title="Example"></a>Example</h5><p><strong>First</strong></p>
+<p>沒甚麼訣竅 暴力展開往前找就對了 <font color="red">記得如果看到 ε 要往後看一個</font><br><font color="red">如果整個字串都可能為 ε 則也要將 ε 加進集合</font></p>
+<p><font color="red">ex1</font></p>
+<p>E -&gt; TE’<br>E’ -&gt; +TE’ | ε<br>T -&gt; FT’<br>T’ -&gt; *FT’ | ε<br>F -&gt; (E) | id</p>
+<p>First(E) = First(T) = First(F) = {(, id)}<br>First(E’) = {+, ε}<br>First(T’) = {*, ε}</p>
+<p><font color="red">ex2</font></p>
+<p>S -&gt; ACB | CbB | Ba<br>A -&gt; da | BC<br>B -&gt; g | ε<br>C -&gt; h | ε</p>
+<p>First(S) = {d, g, h, ε, b, a}<br>First(A) = {d, g, h, ε}<br>First(B) = {g, ε}<br>First(C) = {h, ε}</p>
+<p><strong>Follow</strong></p>
+<p>Follow 比較麻煩一點，有幾條小弟自己整理出來的規則可以參考看看</p>
+<p>假設參數為 A</p>
+<ul>
+<li>A 是開始符號，在集合尾巴放進 $</li>
+<li>有條產生式為 S -&gt; Ab ， b 為 terminal ，則把 b 加入進集合</li>
+<li>有條產生式為 S -&gt; AB ， B 為 nonterminal ，則把 <font color="red">First(B)</font> 加入進集合</li>
+<li>有條產生式為 S -&gt; ABC， B 為 nonterminal <font color="red">且 B 可能為 ε ，則把 Follow(B)</font> 加入進集合</li>
+<li>有條產生式為 S -&gt; AB ， B 為 nonterminal <font color="red">且 B 可能為 ε ，則把 Follow(S)</font> 加入進集合</li>
+</ul>
+<p>在換的過程中小弟是用有點像遞迴的方式去理解，邊用筆記錄換到哪才不會換到亂掉</p>
+<p><font color="red">ex1</font></p>
+<p>E -&gt; TE’<br>E’ -&gt; +TE’ | ε<br>T -&gt; FT’<br>T’ -&gt; *FT’ | ε<br>F -&gt; (E) | id</p>
+<p>Follow(E) = Follow(E’) = {), $)}<br>Follow(T) = Follow(T’) = {+, ), $}<br>Follow(F) = {+, *, ), $}</p>
+<p><font color="red">ex2</font></p>
+<p>S -&gt; ACB | CbB | Ba<br>A -&gt; da | BC<br>B -&gt; g | ε<br>C -&gt; h | ε</p>
+<p>Follow(S) = {$}<br>Follow(A) = {h, g, $}<br>Follow(B) = {$, a, h, g}<br>Follow(C) = {g, $, b, h}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shizsun0609tw.github.io/2019/05/30/Compiler-CFG/" data-id="ckjwiatsl000ecsszz510egg4" class="article-share-link">Share</a>
+      
+        <a href="https://shizsun0609tw.github.io/2019/05/30/Compiler-CFG/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Compiler/">Compiler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NTOU/">NTOU</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/01/Compiler-Parsing/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Compiler-Parsing
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/29/hexo-第三方掛載/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hexo-第三方掛載</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+    <h3 class="widget-title">About</h3>
+    <div class="widget">
+          <div class="aboutImg">
+            <img src="https://i.imgur.com/IFmwrnC.jpg" width="120px" height="120px">
+          </div>
+          <div class="aboutInformation">
+            <span style="font-family:Microsoft JhengHei; color:black;">
+            <ul>
+                <li>&nbsp&nbsp陳鎮華</li>
+                <li>&nbsp&nbspZhen-Hua Chen</li>
+                <li>&nbsp</li>
+                <li>&nbsp&nbsp<a href="https://github.com/shizsun0609tw">Github</a></li>
+                <li>&nbsp&nbsp<a href="https://www.youtube.com/channel/UCdz5zI6t8_KF3lhIQg5edlw">Youtube</a></li>
+                <li>&nbsp&nbsp<a href="mailto:shizsun0609tw@gmail.com">Contact</a></li>
+            </ul>
+            </span>
+          </div>
+          <div style="clear:both;"></div>
+    </div>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/">Compiler</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Graphics/">Computer Graphics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Diary/">Diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network-Programming/">Network Programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software-Engineering/">Software Engineering</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compiler/">Compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Diary/">Diary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/">Math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NCTU/">NCTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTOU/">NTOU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network-Programming/">Network Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/">Software Engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/01/14/1091-交大-網路程式設計/">1091-交大-網路程式設計</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/20/研究新生活/">研究新生活</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/5th-Kind-Games-日本遊戲公司實習心得/">5th Kind Games 日本遊戲公司實習心得</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/26/海大資工四年心得/">海大資工四年心得</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/20/109年資工研究所推甄心得/">109年資工研究所推甄心得</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+    <div class="widget-wrap">
+      <h3 class="widget-title">views</h3>
+      <div class="widget" style="text-align:center">
+          <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=36593680&main=1"></script><noscript><img src="//counter1.fc2.com/counter_img.php?id=36593680&main=1"></noscript>
+      </div>
+    </div>
+  
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Zhen-Hua Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'shizsun0609tw';
+  
+  var disqus_url = 'https://shizsun0609tw.github.io/2019/05/30/Compiler-CFG/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
