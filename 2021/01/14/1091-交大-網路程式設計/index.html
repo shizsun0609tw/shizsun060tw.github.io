@@ -7,18 +7,18 @@
   
   <title>1091-交大-網路程式設計 | Shizsun&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Introduction Project1 - Simple Shell Project2 - Remote Batch System Project3 - Single Process Server Porject4 - SOCKS4 Server Final Exam Final">
+  <meta name="description" content="Introduction Project1 - Simple Shell Project2 - Remote Working Ground Server Project3 - Remote Batch System Porject4 - SOCKS4 Server Final Exam Final">
 <meta name="keywords" content="NCTU,Network Programming">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1091-交大-網路程式設計">
 <meta property="og:url" content="https://shizsun0609tw.github.io/2021/01/14/1091-交大-網路程式設計/index.html">
 <meta property="og:site_name" content="Shizsun&#39;s blog">
-<meta property="og:description" content="Introduction Project1 - Simple Shell Project2 - Remote Batch System Project3 - Single Process Server Porject4 - SOCKS4 Server Final Exam Final">
+<meta property="og:description" content="Introduction Project1 - Simple Shell Project2 - Remote Working Ground Server Project3 - Remote Batch System Porject4 - SOCKS4 Server Final Exam Final">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2021-01-14T06:56:29.800Z">
+<meta property="og:updated_time" content="2021-01-15T08:06:36.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1091-交大-網路程式設計">
-<meta name="twitter:description" content="Introduction Project1 - Simple Shell Project2 - Remote Batch System Project3 - Single Process Server Porject4 - SOCKS4 Server Final Exam Final">
+<meta name="twitter:description" content="Introduction Project1 - Simple Shell Project2 - Remote Working Ground Server Project3 - Remote Batch System Porject4 - SOCKS4 Server Final Exam Final">
   
     <link rel="alternate" href="/atom.xml" title="Shizsun&#39;s blog" type="application/atom+xml">
   
@@ -95,25 +95,115 @@
         <ul>
 <li><a href="#Introduction">Introduction</a></li>
 <li><a href="#Project1-Simple-Shell">Project1 - Simple Shell</a></li>
-<li><a href="#Project2-Remote-Batch-System">Project2 - Remote Batch System</a></li>
-<li><a href="#Project3-Single-Process-Server">Project3 - Single Process Server</a></li>
+<li><a href="#Project2-Remote-Working-Ground-Server">Project2 - Remote Working Ground Server</a></li>
+<li><a href="#Project3-Remote-Batch-System">Project3 - Remote Batch System</a></li>
 <li><a href="#Project4-SOCKS4-Server">Porject4 - SOCKS4 Server</a></li>
 <li><a href="#Final-Exam">Final Exam</a></li>
 <li><a href="#Final">Final</a></li>
 </ul>
 <a id="more"></a>
 
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><hr>
-<h2 id="Project1-Simple-Shell"><a href="#Project1-Simple-Shell" class="headerlink" title="Project1 - Simple Shell"></a>Project1 - Simple Shell</h2><hr>
-<h2 id="Project2-Remote-Batch-System"><a href="#Project2-Remote-Batch-System" class="headerlink" title="Project2 - Remote Batch System"></a>Project2 - Remote Batch System</h2><hr>
-<h2 id="Project3-Single-Process-Server"><a href="#Project3-Single-Process-Server" class="headerlink" title="Project3 - Single Process Server"></a>Project3 - Single Process Server</h2><hr>
-<h2 id="Project4-SOCKS4-Server"><a href="#Project4-SOCKS4-Server" class="headerlink" title="Project4 - SOCKS4 Server"></a>Project4 - SOCKS4 Server</h2><hr>
-<h2 id="Final-Exam"><a href="#Final-Exam" class="headerlink" title="Final Exam"></a>Final Exam</h2><hr>
-<h2 id="Final"><a href="#Final" class="headerlink" title="Final"></a>Final</h2>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li><font color="red"><strong>作業量: 4</strong></font></li>
+<li><font color="red"><strong>考試量: 1</strong></font></li>
+<li><font color="red"><strong>整體難易度: 3</strong></font><br>(滿分 5 分)</li>
+</ul>
+<p>身為一個喜歡挑戰硬課的學生剛開始選課就有聽說這堂課的作業出了名的多 而且聽說有接觸到 Linux 相關的課程</p>
+<p>小弟本來就想修一些與 Linux 相關的課 雖然這是 CS 的基本功但我實在對這區塊沒很熟 因此就選這堂課來挑戰看看</p>
+<p>課程內容前面會簡單帶過 Linux 系統之後以網路程式為主內容包括各種 Server 與 Client 的溝通, Protocal, Firewall 等</p>
+<p>教授上課就是以投影片為主 但其實我覺得投影片很多地方寫得非常簡略 大部分都是老師上課的時候才會補充<br>如果想好好學好這門課最好需要寫一些上課筆記</p>
+<p><font color="red">這堂課是以實作為主 因此作業量較大 考試也僅有期末考 沒有出缺席分數</font></p>
+<p>Project將會提供 Server 有環境讓你撰寫或測試 需要對 TA Demo 你的作業<br>僅能使用 C/C++ 不可使用第三方 library</p>
+<p>Demo 方式分為兩部分</p>
+<ul>
+<li>Part1: 有測資自動化的測試你的程式 (通常一個測資/功能 5 分) 要注意小心極端測資 佔 70 分</li>
+<li>Part2: 現場抽題目讓你改程式達成需求 基本上題目都不難 時間也蠻充裕 如果作業都是自己寫的改出來應該沒太大問題 佔 30 分</li>
+</ul>
+<p>Project 的部分就佔了整體成績的 80% 因此作業都有寫完的話成績都不會太低<br>Project1 Project2 的作業量較後面兩個大 大部分人是撐不完前面兩個就退選了 有修課的大家請加油 :)</p>
+<hr>
+<h2 id="Project1-Simple-Shell"><a href="#Project1-Simple-Shell" class="headerlink" title="Project1 - Simple Shell"></a>Project1 - Simple Shell</h2><ul>
+<li><a href="https://github.com/shizsun0609tw/Simple-Shell" target="_blank" rel="noopener">Github</a></li>
+</ul>
+<p>第一個作業就是自己寫一個 Linux Shell<br>其實如果單就寫基本的 Shell 並不是件難事 網路也能找到許多人寫過的 code<br>但這作業麻煩的是後面自定義的要求 <font color="red">Number pipe</font></p>
+<h4 id="Number-pipe"><a href="#Number-pipe" class="headerlink" title="Number pipe"></a>Number pipe</h4><p>一般的 pipe 形式如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls | grep <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<p>ls 的結果 pipe 到後面當作 grep 的 input</p>
+<p>但自定義的 number pipe 為</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ls |2</span><br><span class="line">ls |1</span><br><span class="line">cat</span><br></pre></td></tr></table></figure>
+
+<p>|number 的意義代表將前面指令的 output 接到下面 number 行的 input<br>以上述的範例來說就要將 ls |2, ls |1 的結果都接去給 cat 的 input</p>
+<p>小弟最後的實作方式是建立一個 fd table<br>table 的 index 作為這個 fd 剩下幾行就要將 output 送給下面的 command<br>如果有同樣行數的就全部 pipe 到同一個 fd 裡 因此 table 的每一個 element 都只存一個 fd<br>每過一個 command 就將整個 table 內的 element 往前 shift 一格</p>
+<h4 id="Careful"><a href="#Careful" class="headerlink" title="Careful"></a>Careful</h4><p>在這個作業花最多時間就是在字串處理以及 dup, fd 接來接去的轉換<br><font color="red">然後小心有會將 pipe 的 buffer 塞爆的測資  因此要邊讀邊 pipe 不能等到接完所有輸入才 pipe 給下一個 command<br>以及記得回收 fork 出來的 child process 並且要注意回收的時間<br>否則有測資會不斷的 fork 沒回收會 fork 不出來  回收時機不對程式可能會卡住</font><br>最後麻煩的就是字串處理 這就慢慢耐心的 debug 吧</p>
+<h4 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h4><p>現場改 code 的題目抽到 程式可以讀一個檔案進來並執行 (此檔案裏面有 shell 的 command)<br>基本上沒甚麼難度 就讀檔 執行…</p>
+<h4 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h4><p>小弟想說既然要挑戰就挑戰到底 直接用純 C 下去寫搞死自己 奉勸大家還是用 C++ 配合 regex 寫起來比較輕鬆<br>Github Code 寫得很亂 畢竟用純 C 寫 還有時間的壓力東加西加就變得很亂沒時間整理 奉勸不要參考 XDDD</p>
+<hr>
+<h2 id="Project2-Remote-Working-Ground-Server"><a href="#Project2-Remote-Working-Ground-Server" class="headerlink" title="Project2 - Remote Working Ground Server"></a>Project2 - Remote Working Ground Server</h2><ul>
+<li><a href="https://github.com/shizsun0609tw/Remote-Working-Ground-Server" target="_blank" rel="noopener">Github</a></li>
+</ul>
+<p>第二個作業要用第一個作業作為基底 使其可以 remote 的連上並使用 外加簡單的聊天室<br>這個作業大概是四個裡面最麻煩的<br>首先基本要先使用 socket 讓 remote 可以連上<br>處理環境變數的部分<br>再來處理聊天室的部分 包括 who, tell, yell, name 幾個自定義的 command 以及 client 的 pipe<br>接著處理 error pipe<br>最後再處理兩種不同運作方式 (Concurrent connection-oriented, Single-process concurrent)</p>
+<h4 id="socket"><a href="#socket" class="headerlink" title="socket"></a>socket</h4><p>socket 的部分網路上有蠻多範例可以參考 投影片也有範例 這種流傳已久的程式架構基本上就是照著寫沒甚麼好改動的<br>但連不上的時候只能通靈慢慢找到底哪裡錯了 這真的是要有點耐心</p>
+<h4 id="enviroment"><a href="#enviroment" class="headerlink" title="enviroment"></a>enviroment</h4><p>這部分的實作 我想了一個比較特殊的方式寫<br>如果這個 client 有修改了環境變數我就會將 default 的環境變數存在這 client 的 table 上<br>等離開這個 client 的服務時再將 存起來的環境變數交換存回去以及還回原本 default 的變數<br>下次進來這個 client 的時候一樣做交換 將已經修改存起來的環境變數與 default 交換 存進去<br>用這種方式達到不會太花時間空間 但應該不會有 bug 的方式實作<br><del>(不知道這樣寫有沒有人看得懂XDDDD)</del></p>
+<h4 id="chat-room"><a href="#chat-room" class="headerlink" title="chat room"></a>chat room</h4><p>聊天室的實作部分我一樣用 table 把 client 的 fd 都記下來<br>who, tell, yell, name 這些 command 實作上不會太難 也不會花太多時間<br>哪個 client 對哪個 client 需要傳送甚麼訊息就直接往 table 那個 client 的 fd 去送<br>比較麻煩的在 client pipe 給其他 client 的這部分<br><font color="red">這部分也是要 dup 接來接去的 真的非常難 debug 常常會出現接收不到 pipe 爛掉之類的情況</font><br>也就請靜下心來好好想出<del>(通靈)</del>出錯在哪吧 :)</p>
+<h4 id="Concurrent-connection-oriented-Single-process-concurrent"><a href="#Concurrent-connection-oriented-Single-process-concurrent" class="headerlink" title="Concurrent connection-oriented, Single-process concurrent"></a>Concurrent connection-oriented, Single-process concurrent</h4><p>這兩項不同運作方式的轉換並沒有很難 Single-process 就只是不能使用 fork<br>只要稍微想一下用迴圈之類不同的方式讓 server 去接收 socket 以及服務 client 就好了~</p>
+<h4 id="Careful-1"><a href="#Careful-1" class="headerlink" title="Careful"></a>Careful</h4><p>一樣小心巨大測資把你的 buffer 卡住 (如果第一個作業能過這作業應該就沒問題)<br><font color="red">小心</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tell 1 hello word ls |2</span><br></pre></td></tr></table></figure>
+
+<p><font color="red">tell 後面本應該全部送出 但後面有些空白或是 command 之類的 可能讓你執行錯誤 <del>(我就是出錯的那個)</del><br>剩下的一樣就是靜下心慢慢 debug 還有當作修行 培養 programming 的能力</font><br>很多部分都不太有好的 trace bug 的方法 只能靠自己好好想清楚到底是哪裡有問題</p>
+<h4 id="Demo-1"><a href="#Demo-1" class="headerlink" title="Demo"></a>Demo</h4><p>這次 Demo 抽到的題目新增一個指令 block<br>若 client A 使用 block 將 client B block 住 client A 將不會收到 client B 的任何訊息 (跟禁音一樣)<br>直接一個 table 去記誰 block 誰在任何訊息傳送前查一下這個 table 若有 block 就跳過</p>
+<h4 id="PS-1"><a href="#PS-1" class="headerlink" title="PS"></a>PS</h4><p>這個作業量真的比較大一點 花了可能快一個禮拜分散寫才把他寫完<br>很多部分的 bug 真的非常難找 例如連不上就是連不上 pipe 爛掉就是爛掉 你也不知道從哪裡 trace 為什麼<br>但我認為有些部分的要求有點硬要 像是 tell 的行為其實沒有定義得很清楚 由其實這種有 space 的 command 要處理真的很麻煩<br><del>(畢竟我是用純 C 寫的笨蛋)</del></p>
+<hr>
+<h2 id="Project3-Remote-Batch-System"><a href="#Project3-Remote-Batch-System" class="headerlink" title="Project3 - Remote Batch System"></a>Project3 - Remote Batch System</h2><ul>
+<li><a href="https://github.com/shizsun0609tw/Remote-Batch-System" target="_blank" rel="noopener">Github</a></li>
+</ul>
+<p>這個作業 TA 會提供範例 CGI 以及 shell 所以與前面兩個作業無關 重新開始寫<br>主要的內容是要能透過瀏覽器連上你寫的 HTTP server 並且可以透過 CGI 的方式得到執行結果的頁面<br>實作分兩部分 第一部分用原本 linux 直接做 第二部分要讓 server 能在 windows 上面跑起來</p>
+<h4 id="Connect"><a href="#Connect" class="headerlink" title="Connect"></a>Connect</h4><p>剛開始寫連接的時候很容易有連接不上的狀況 就好好確認與範例寫法相比有沒有疏漏了甚麼<br>畢竟這些寫法蠻死的 就是按照一定的方式寫 連不上都一定是少了甚麼</p>
+<h4 id="boost"><a href="#boost" class="headerlink" title="boost"></a>boost</h4><p>這個作業開始會用 boost 這個 library 來實作 所有的網路相關 function 都得用這個 library 來寫<br>TA 也有提供 boost 的使用範例 只要了解 async, callback 等部分應該不會有太大的問題<br>只是這個 library 的 doc 其實我覺得不容易閱讀 還是多找找點範例看一下應該就能了解他的行為了</p>
+<h4 id="CGI"><a href="#CGI" class="headerlink" title="CGI"></a>CGI</h4><p>CGI 相接的方式其實就跟之前執行 command 的方式一樣 主要是理解一下原理就足夠了</p>
+<h4 id="Windows-Server"><a href="#Windows-Server" class="headerlink" title="Windows Server"></a>Windows Server</h4><p>其實這個才是比較麻煩的 畢竟你要在已經寫好的 linux 版本直接再寫 windows 版本對於架構怎麼安排真的蠻麻煩<br>這部分我直接硬用 ifdef 寫了 因為要大改架構太花時間<br>還有一些 function 在 windows 是沒有的 所以要稍微修改<br>花最多時間的在 console.cgi 需要自己在寫一遍自己 render HTML 的內容<br>用 C++ 去 print HTML 的內容全部自己打一遍真的蠻浪費時間</p>
+<h4 id="Careful-2"><a href="#Careful-2" class="headerlink" title="Careful"></a>Careful</h4><p><font color="red">在剛開始 connect 的時候記得先送 HTTP/1.1 200 OK 然後 \r\n 等東西都不能少送 規則就是這麼嚴格<br>可以觀察瀏覽器的狀態判斷是否有連上 傳送成功 接受失敗等訊息 (看瀏覽器在轉圈就是有甚麼還沒執行完在等待)</font><br>測資不太有特別奇怪的 這部分是 TA 肉眼 Demo 所以你寫的時候沒甚麼問題 在 Demo 應該也會有太大問題<br>還有要小心一下有些字元在 HTML 的時候要轉換一下 (例如: &amp;, , …)</p>
+<h4 id="Demo-2"><a href="#Demo-2" class="headerlink" title="Demo"></a>Demo</h4><p>這次抽到的題目是用 boost 的 async_wait 讓每個 command 都延遲一秒再送出<br>就查一下 library 在執行前多包一層 wait 解決</p>
+<h4 id="PS-2"><a href="#PS-2" class="headerlink" title="PS"></a>PS</h4><p>這個作業相比前兩個作業量就稍微減少了一點 只是前面一直連不上的時候一樣要慢慢找到漏了甚麼東西 好好想清楚(尤其 HTTP Protocal)<br>boost 是 C++ library 所以這次作業應該是只能用 C++ 寫<br>我覺得 part1 寫 linux server 部分是蠻好的練習 但我覺得 part2 寫 windows 的部分其實有點多了XD<del>(寫 windows 版真的很冗)</del> </p>
+<hr>
+<h2 id="Project4-SOCKS4-Server"><a href="#Project4-SOCKS4-Server" class="headerlink" title="Project4 - SOCKS4 Server"></a>Project4 - SOCKS4 Server</h2><ul>
+<li><a href="https://github.com/shizsun0609tw/SOCKS4-Server" target="_blank" rel="noopener">github</a></li>
+</ul>
+<p>終於來到最後一個作業<br>最後一個作業要達成的是寫一個 SOCK4 Protocal 的 server<br>這個 server 的功能有點類似 VPN, 跳板之類的用途<br>user 可以透過將請求都送去給這個 server 再讓 server 去目標地點取得資料後回傳給 user</p>
+<h4 id="SOCK4"><a href="#SOCK4" class="headerlink" title="SOCK4"></a>SOCK4</h4><p>網路上其實能找到些許範例這個協定的 packet 該怎麼打包  以及怎麼解析 ip 與 port 等等<br>原理弄清楚 然後把 server 的執行順序搞清楚 第一部分的 Bind 應該沒有太多坑</p>
+<h4 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h4><p>這個部分的原理我查了蠻多參考資料才看懂(如果有錯誤麻煩請幫忙留言更正)</p>
+<p>Bind 的執行順序如下</p>
+<ul>
+<li>client 發送 Bind 給 SOCK4 server</li>
+<li>SOCK4 server 回覆 client 一個 port</li>
+<li>SOCK4 server 打開這個 port 等待連接</li>
+<li>client 發送 Connect 給 SOCK4 server 再送去給目標 FTP (內容為請連上 SOCK4 剛打開的 port)</li>
+<li>FTP server 連上 SOCK4 剛打開的 port</li>
+<li>SOCK4 server 回覆給 client FTP 連線成功</li>
+<li>client 與 FTP server 兩邊只要透過 SOCK4 server 傳送訊息就把內容傳送給對方</li>
+</ul>
+<p>可以先用學校的 FTP server 測試能不能成功下載 (操作太多次學校好像會鎖 會有延遲有時候不是你寫的程式 bug)</p>
+<h4 id="CGI-Proxy"><a href="#CGI-Proxy" class="headerlink" title="CGI Proxy"></a>CGI Proxy</h4><p>這個部分拿 Project3 寫好的 console 來稍微修改一下連線 server 的方式就能解決</p>
+<h4 id="Firewall"><a href="#Firewall" class="headerlink" title="Firewall"></a>Firewall</h4><p>這個只有簡單的防火牆規則而以 前面都寫完這邊應該沒有難度 就不多做說明了</p>
+<h4 id="Careful-3"><a href="#Careful-3" class="headerlink" title="Careful"></a>Careful</h4><p><font color="red">剛開始寫 SOCK4 的時候最好將收到的 packet 檢查一下解析出來的東西 以免 parse 的部分寫錯沒發現<br>在 BIND FTP 這部分記得在收到 eof 之後要把 socket 關掉 否則傳輸收完資料會沒辦法正常結束</font><br>測資方面只要寫作業的時候沒有遇到甚麼奇怪的地方 Demo 的時候應該也能正常通過</p>
+<h4 id="Demo-3"><a href="#Demo-3" class="headerlink" title="Demo"></a>Demo</h4><p>抽到的題目為如果 client 連線超過 5秒 就禁止這個 ip 連線<br>用 time.h library 記一下 ip 甚麼時間連上 之後如果這個 ip 送請求已經超過時間就不接受請求</p>
+<h4 id="PS-3"><a href="#PS-3" class="headerlink" title="PS"></a>PS</h4><p>終於來到整學期最後一個作業 這個作業的重點比較著重於弄懂整個連線過程中發生了那些事<br>只要把這些連線的順序弄懂弄清楚應該是會比前面幾個作業都花較少時間<br>然後就恭喜你寫完全部的 Project 囉 :)</p>
+<hr>
+<h2 id="Final-Exam"><a href="#Final-Exam" class="headerlink" title="Final Exam"></a>Final Exam</h2><p>期末考會提供考古題 以問答為主 每個章節大概一兩題<br>正式題目也跟考古題不會差太多 適合小弟這種喜歡做作業不喜歡考試的人<br>考古都念一念拿到基本分應該不會有太大問題的~
+(而且期末才佔 20%)</p>
+<hr>
+<h2 id="Final"><a href="#Final" class="headerlink" title="Final"></a>Final</h2><p>恭喜你修完這堂課拉~
+以整學期學下來其實學到蠻多網路相關原理以及如何將這些架構能自己寫出來 (畢竟本堂課偏向實作)</p>
+<p>適合比較喜歡寫作業勝過於考試的人</p>
+<p>一個作業花的時間我自己大概零散的花 20-30 小時左右!?<br>可能是之前大學期間就常常修硬課了 老實說修完並沒有想像中的那麼恐怖 (之前常常修都是作業量比這個多還有考試)</p>
+<p>比較麻煩的是在寫 Project 的過程中沒有一個好的 debug 方法 很容易連不上或程式 crash 不知從何找起</p>
+<p><font color="red">這堂課帶給我最多的大概是要修身養性 靜下心來的慢慢 debug 冷靜思考整個地方到底漏了甚麼或寫錯了甚麼順序等</font></p>
+<p>雖然各個作業都算是蠻好的練習 也能鍛鍊自己 Programming 的技巧<br>但有些要求小弟自己主觀的認為還是有點硬要 XDDDD</p>
+<p>不過整體來說還算是一堂不錯的課拉 推薦給任何喜歡實作課的孩子們 :)</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://shizsun0609tw.github.io/2021/01/14/1091-交大-網路程式設計/" data-id="ckjwiatrl0000csszbsrfbcin" class="article-share-link">Share</a>
+      <a data-url="https://shizsun0609tw.github.io/2021/01/14/1091-交大-網路程式設計/" data-id="ckjy00fh5000044szmb9qmpao" class="article-share-link">Share</a>
       
         <a href="https://shizsun0609tw.github.io/2021/01/14/1091-交大-網路程式設計/#disqus_thread" class="article-comment-link">Comments</a>
       
