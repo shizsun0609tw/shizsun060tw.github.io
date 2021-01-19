@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>1091-交大-互動式形變 | Shizsun&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Introduction Careful Project1 - Feature Based Deformation Project2 - Least Squares Meshes Project3 - As-Rigid-As-Possible Surface Modeling Final Project - Embeeded Deformation for Shape Manipulation">
+<meta name="keywords" content="NCTU,Computer Graphics">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1091-交大-互動式形變">
+<meta property="og:url" content="https://shizsun0609tw.github.io/2021/01/18/1091-交大-互動式形變/index.html">
+<meta property="og:site_name" content="Shizsun&#39;s blog">
+<meta property="og:description" content="Introduction Careful Project1 - Feature Based Deformation Project2 - Least Squares Meshes Project3 - As-Rigid-As-Possible Surface Modeling Final Project - Embeeded Deformation for Shape Manipulation">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-01-19T07:02:25.141Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1091-交大-互動式形變">
+<meta name="twitter:description" content="Introduction Careful Project1 - Feature Based Deformation Project2 - Least Squares Meshes Project3 - As-Rigid-As-Possible Surface Modeling Final Project - Embeeded Deformation for Shape Manipulation">
+  
+    <link rel="alternate" href="/atom.xml" title="Shizsun&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script data-ad-client="ca-pub-1559264755365586" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shizsun&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://shizsun0609tw.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-1091-交大-互動式形變" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/18/1091-交大-互動式形變/" class="article-date">
+  <time datetime="2021-01-18T07:49:43.000Z" itemprop="datePublished">2021-01-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Computer-Graphics/">Computer Graphics</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      1091-交大-互動式形變
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><a href="#Introduction">Introduction</a></li>
+<li><a href="#Careful">Careful</a></li>
+<li><a href="#Project1-Feature-Based-Deformation">Project1 - Feature Based Deformation</a></li>
+<li><a href="#Project2-Least-Squares-Meshes">Project2 - Least Squares Meshes</a></li>
+<li><a href="#Project3-As-Rigid-As-Possible-Surface-Modeling">Project3 - As-Rigid-As-Possible Surface Modeling</a></li>
+<li><a href="#Final-Project-Embedded-Deformation-for-Shape-Manipulation">Final Project - Embeeded Deformation for Shape Manipulation</a></li>
+<li><a href="#Final">Final</a></li>
+</ul>
+<a id="more"></a>
+
+<hr>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li><font color="red"><strong>作業量: 2</strong></font></li>
+<li><font color="red"><strong>考試量: 0</strong></font></li>
+<li><font color="red"><strong>整體難易度: 2</strong></font><br>(滿分 5 分)</li>
+</ul>
+<p>自己實驗室老闆開的課 而且本來大學就主修圖學的我不修一下這門課說不過去</p>
+<p>這堂課學生人數少 (6, 7個) 由於內容已經是比較深入一點的圖學課程 會來修這門課的就少很多<br>英文授課 老師的英文連我這種英文很差的人都很好聽懂 但在數學較多老師看我們一臉茫然的時候就會用中文教 XD</p>
+<p>這門課沒有任何考試 只有作業 作業量也中偏少 但若沒有寫過數學類型的程式經驗可能剛開始會不知道從何下手<br>上課內容幾乎都是傳統圖學的論文 老師將論文製作成投影片後上課<br>每一個作業也都是論文的內容 會提供 Project 只需寫重點部分(數學)<br>最後期末老師會給 list 讓你自己挑論文實作  這部分就看個人功力</p>
+<p>這門課的 loading 並不重  推薦給對於圖學有興趣或是想要練習把數學式寫為程式碼的高手</p>
+<hr>
+<h2 id="Careful"><a href="#Careful" class="headerlink" title="Careful"></a>Careful</h2><p>每個作業要小心的部分其實差不多 就統一寫起來<br><font color="red"><br>老師提供的 glm vertex 的 index 是從 1 開始數 而非 0<br>所以 vertices[0-2] 是沒有東西的 並且小心迴圈開始的 index 以及 +1 -1 的問題以及更新原本的 mesh<br></font><br>基本上都是在解線性代數的 Ax = b 起頭的時候先清楚這個矩陣的 rows, cols 各有多少 避免一開始大小就寫錯<br>最好先把數學式以及其代表的意義看懂再開始寫 最好先用紙筆寫一下矩陣內的 element 該如何擺放 降低擺錯的機會<br>在解矩陣的時候通常解不出來或爆掉都是矩陣擺錯了 所以得細心檢查迴圈在擺放時有沒有寫錯</p>
+<p>如果有多項需要 optimize 的式子 可以觀察解出來的結果判斷可能哪項是錯的 或是只留一項拔掉其他幾項 一項一項檢查<br>如果有多個步驟每寫完一項步驟就應該驗證這項解出來的數學結果是否正確 不然全部寫完才找錯會很浪費時間</p>
+<hr>
+<h2 id="Project1-Feature-Based-Deformation"><a href="#Project1-Feature-Based-Deformation" class="headerlink" title="Project1 - Feature Based Deformation"></a>Project1 - Feature Based Deformation</h2><ul>
+<li><a href="https://github.com/shizsun0609tw/Local-Deformation" target="_blank" rel="noopener">Github</a></li>
+<li><a href="https://www.youtube.com/watch?v=RmACwctLrEc" target="_blank" rel="noopener">Demo</a></li>
+</ul>
+<p>簡單的 transform 想法  mesh 的變化會受到控制點移動的距離乘上乘上權重與距離的影響<br>有點類似內差的方法適合用於簡單的幾個控制點以及較小的形變與臉部變化</p>
+<p>先將多個控制點聯立解出變形權重<br>之後再將整個 mesh 所有點跑過去依照距離加上控制點的移動乘上對應的距離影響</p>
+<hr>
+<h2 id="Project2-Least-Squares-Meshes"><a href="#Project2-Least-Squares-Meshes" class="headerlink" title="Project2 - Least Squares Meshes"></a>Project2 - Least Squares Meshes</h2><ul>
+<li><a href="https://github.com/shizsun0609tw/Least-Square-Meshes" target="_blank" rel="noopener">Github</a></li>
+<li><a href="https://www.youtube.com/watch?v=nweNsmKeMiY" target="_blank" rel="noopener">Demo</a></li>
+</ul>
+<p>這次的作業主要的目的為 mesh 的重建</p>
+<p>我們有的資訊為原 mesh 10% vertex 的位置以及所有 vertex 的連線關係<br>依照 vertex 之間的關係 用 Laplacian 建出 sparse matrix</p>
+<p>A 矩陣的上半部擺放 vertex 的連線關係(距離權重) 下半部擺放確定的 10% vertex<br>解出來的 x 就是重建過後 mesh 的 vertex</p>
+<hr>
+<h2 id="Project3-As-Rigid-As-Possible-Surface-Modeling"><a href="#Project3-As-Rigid-As-Possible-Surface-Modeling" class="headerlink" title="Project3 - As-Rigid-As-Possible Surface Modeling"></a>Project3 - As-Rigid-As-Possible Surface Modeling</h2><ul>
+<li><a href="https://github.com/shizsun0609tw/ARAP-Deformation" target="_blank" rel="noopener">Github</a></li>
+<li><a href="https://youtu.be/UmWazyS02hE" target="_blank" rel="noopener">Demo</a></li>
+</ul>
+<p>這個變形方法假設形變由旋轉及位移組成與必須保持 local 的形狀</p>
+<p>前面的作業都是解線性的 但由於旋轉是非線性的 這次需要用迭代來解(其實只是迴圈多解幾次)</p>
+<p>其實建矩陣的概念與 Project2 很像 A 矩陣的上半部是 Laplacian 下半部是 constraint 只是這次上半部的權重都擺 -1<br>b 矩陣擺上維持 local 形狀式子的結果 下半部一樣是 constraint</p>
+<p>這次數學式看似複雜 但在矩陣的 element 的擺法與前一個作業相去不遠 只是假設與權重稍微不同而已</p>
+<hr>
+<h2 id="Final-Project-Embedded-Deformation-for-Shape-Manipulation"><a href="#Final-Project-Embedded-Deformation-for-Shape-Manipulation" class="headerlink" title="Final Project - Embedded Deformation for Shape Manipulation"></a>Final Project - Embedded Deformation for Shape Manipulation</h2><ul>
+<li><a href="https://people.inf.ethz.ch/~sumnerb/research/embdef/Sumner2007EDF.pdf" target="_blank" rel="noopener">Paper</a></li>
+<li><a href="https://github.com/shizsun0609tw/Embedded-Deforamtion-for-Shape-Manipulation" target="_blank" rel="noopener">Github</a></li>
+<li><a href="https://www.youtube.com/watch?v=-eKmFhUUOuU" target="_blank" rel="noopener">Demo</a></li>
+</ul>
+<p>最後期末我選擇的是難度 4 的這篇 paper - <font color="red">Embedded Deformation for Shape Manipulation</font></p>
+<p>主要的流程是先將原 mesh embed 到作者定義的另一個空間 Deformation Graph<br>之後在這個 Deformation Graph 上解形變 包括三個需要 optimize 的 energy (rotation, regularization, constraint)<br>再將解完的結果 transform 回去原來的 mesh<br>這樣做的優點是 可以將原本 vertex 過多的 mesh 降低非常多的數量來加速<br>以及各種 mesh 的形式(animation, partical)都能 embed 到 Deformation Graph 達到通用性</p>
+<p>實作方面在一開始 embed 的時候原 paper 使用 uniform sampling 因為這有點麻煩 這邊我用 MeshLab 來幫我做(Voxel based)<br>再來將主迭代流程先 implent 出來 (Gaussian Newton)<br>之後先寫了計算 error 的部分 (Erot, Ereg, Econ)<br>最後將微分的 function f 跟 Jacobi 寫出來(這裡花最多時間)</p>
+<p>在微分出來的 f 跟 Jacobi 這邊蠻容易寫錯的 因此要反覆確認各個 energy function 有沒有問題</p>
+<p>在網路上本來有找到一份這篇 paper 實作的 code 但似乎某些地方是有寫錯的 (還害我懷疑很久到底是我寫錯還是他寫錯)<br>本來還想做 Partical 的部分 但最後由於時間關係有把最基本的形變寫出來就完成交作業了</p>
+<hr>
+<h2 id="Final"><a href="#Final" class="headerlink" title="Final"></a>Final</h2><p>整學期修下來其實這門課的 loading 不算太重 但在寫這種數學形式的 code 比起一般寫 application 的思考方式會有點不太一樣<br>但由於在大學時就有寫過蠻多類似的 code 因此在這部分算是沒有太深的鴻溝</p>
+<p>不過這種解數學式的 code bug 相對難找 因為不管你擺錯了任何東西 任何 bug 結果都是一樣 mesh 爆掉或程式直接 crash<br>在寫作業的過程就耐心的好好檢查每一個 index 以及矩陣擺放的 element 有沒有放錯吧</p>
+<p>因為小弟自身就對圖學有頗有興趣 所以這門課學的東西學起來蠻快樂的 每一個作業可以玩玩自己寫出來的形變操作也蠻酷的<br>對於能看到自己寫 code 結果的人有興趣的 還是蠻推薦可以修一下的 :)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shizsun0609tw.github.io/2021/01/18/1091-交大-互動式形變/" data-id="ckk29yurv0000rkszwcdah0ag" class="article-share-link">Share</a>
+      
+        <a href="https://shizsun0609tw.github.io/2021/01/18/1091-交大-互動式形變/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NCTU/">NCTU</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/01/14/1091-交大-網路程式設計/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">1091-交大-網路程式設計</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+    <h3 class="widget-title">About</h3>
+    <div class="widget">
+          <div class="aboutImg">
+            <img src="https://i.imgur.com/IFmwrnC.jpg" width="120px" height="120px">
+          </div>
+          <div class="aboutInformation">
+            <span style="font-family:Microsoft JhengHei; color:black;">
+            <ul>
+                <li>&nbsp&nbsp陳鎮華</li>
+                <li>&nbsp&nbspZhen-Hua Chen</li>
+                <li>&nbsp</li>
+                <li>&nbsp&nbsp<a href="https://github.com/shizsun0609tw">Github</a></li>
+                <li>&nbsp&nbsp<a href="https://www.youtube.com/channel/UCdz5zI6t8_KF3lhIQg5edlw">Youtube</a></li>
+                <li>&nbsp&nbsp<a href="mailto:shizsun0609tw@gmail.com">Contact</a></li>
+            </ul>
+            </span>
+          </div>
+          <div style="clear:both;"></div>
+    </div>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/">Compiler</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Graphics/">Computer Graphics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Diary/">Diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network-Programming/">Network Programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software-Engineering/">Software Engineering</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compiler/">Compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Diary/">Diary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/">Math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NCTU/">NCTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTOU/">NTOU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network-Programming/">Network Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/">Software Engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/01/18/1091-交大-互動式形變/">1091-交大-互動式形變</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/14/1091-交大-網路程式設計/">1091-交大-網路程式設計</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/20/研究新生活/">研究新生活</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/5th-Kind-Games-日本遊戲公司實習心得/">5th Kind Games 日本遊戲公司實習心得</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/26/海大資工四年心得/">海大資工四年心得</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+    <div class="widget-wrap">
+      <h3 class="widget-title">views</h3>
+      <div class="widget" style="text-align:center">
+          <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=36593680&main=1"></script><noscript><img src="//counter1.fc2.com/counter_img.php?id=36593680&main=1"></noscript>
+      </div>
+    </div>
+  
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Zhen-Hua Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'shizsun0609tw';
+  
+  var disqus_url = 'https://shizsun0609tw.github.io/2021/01/18/1091-交大-互動式形變/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
