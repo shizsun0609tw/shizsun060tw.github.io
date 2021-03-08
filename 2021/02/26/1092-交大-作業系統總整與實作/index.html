@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>1092-交大-作業系統總整與實作 | Shizsun&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Introduction Week1 - Before OSDI Week2 - Booting">
+<meta name="keywords" content="NCTU,Operating System">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1092-交大-作業系統總整與實作">
+<meta property="og:url" content="https://shizsun0609tw.github.io/2021/02/26/1092-交大-作業系統總整與實作/index.html">
+<meta property="og:site_name" content="Shizsun&#39;s blog">
+<meta property="og:description" content="Introduction Week1 - Before OSDI Week2 - Booting">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2021/02/26/1092-交大-作業系統總整與實作/Elf-layout.png">
+<meta property="og:image" content="https://shizsun0609tw.github.io/2021/02/26/1092-交大-作業系統總整與實作/memoryLayoutC.jpg">
+<meta property="og:updated_time" content="2021-03-08T10:07:50.705Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1092-交大-作業系統總整與實作">
+<meta name="twitter:description" content="Introduction Week1 - Before OSDI Week2 - Booting">
+<meta name="twitter:image" content="https://shizsun0609tw.github.io/2021/02/26/1092-交大-作業系統總整與實作/Elf-layout.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Shizsun&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script data-ad-client="ca-pub-1559264755365586" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shizsun&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://shizsun0609tw.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-1092-交大-作業系統總整與實作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/02/26/1092-交大-作業系統總整與實作/" class="article-date">
+  <time datetime="2021-02-26T04:47:12.000Z" itemprop="datePublished">2021-02-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Operating-System/">Operating System</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      1092-交大-作業系統總整與實作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><a href="#Introduction">Introduction</a></li>
+<li><a href="#Week1-Before-OSDI">Week1 - Before OSDI</a></li>
+<li><a href="#Week2-Booting">Week2 - Booting</a></li>
+</ul>
+<a id="more"></a>
+
+<hr>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><strong>待補</strong></p>
+<hr>
+<h2 id="Week1-Before-OSDI"><a href="#Week1-Before-OSDI" class="headerlink" title="Week1 - Before OSDI"></a>Week1 - Before OSDI</h2><p><font color="red"><strong>OS 根本上就是支巨大且複雜的程式、Application</strong></font></p>
+<p>開發 OS 與大型軟體程式的開發相似但牽涉到領域知識太多，基本上幾乎是把 CS 學過的各種知識彙整並應用<br>在念 CS 領域大部分也都會有寫 OS 的人通常都是各種大神才能應付的領域<br>這門課程會將許多在學習 CS 過程中大家較為模糊的區塊以及概念拿出來討論<br>小弟在寫這篇文章的時候也會跟著每周上課進度以及 lab 的進度做撰寫，如果有錯誤的部分也歡迎大家一起在留言區討論</p>
+<p>在大型的軟體與程式開發之前需要大致上了解一下幾個區塊</p>
+<ul>
+<li><a href="#Kernel-Space-and-User-Space">Kernel Space and User Space</a></li>
+<li><a href="#Host-computer-and-Target-computer">Host computer and Target computer</a></li>
+<li><a href="#Editor">Editor</a></li>
+<li><a href="#Compiler">Compiler</a></li>
+<li><a href="#Assembler">Assembler</a></li>
+<li><a href="#Library">Library</a></li>
+<li><a href="#Linker">Linker</a></li>
+<li><a href="#Executable-File">Executable File</a></li>
+<li><a href="#Memory">Memory</a></li>
+<li><a href="#Makefile">Makefile</a></li>
+<li><a href="#Autoconf-tool">Autoconf tool</a></li>
+<li><a href="#Debugger">Debugger</a></li>
+<li><a href="#Simulator-Enumerator-VM">Simulator Enumerator VM</a></li>
+<li><a href="#Version-Control">Version Control</a></li>
+</ul>
+<h3 id="Kernel-Space-and-User-Space"><a href="#Kernel-Space-and-User-Space" class="headerlink" title="Kernel Space and User Space"></a>Kernel Space and User Space</h3><p>我們先前在 OS 的課程中學過，程式的執行區塊會分為 Kernel space 以及 User space ，一般撰寫的 code 都會在 User space 中編譯並執行<br>而本門課的內容是 OS code 的撰寫，因此大多時候都會在 Kernel space 進行作業</p>
+<p>Kernel Space 可以想成在電腦執行工作的管理階層，擁有較大的權限、處理電腦運行過程中所需要決定的事項<br>管理階層也有他們需要執行的工作，例如:決定工作地點(管理記憶體)、安排工作順序(Schedule)…</p>
+<p>User Space 的權利較小，主要執行一般應用程式，如果需要使用到系統資源等功能就須使用 <font color="red">System call</font> 請 Kernel 代為執行</p>
+<p>因此 Kernel Space 會有自己的 Library 在撰寫時不會用到 User Space 的 Library 在 User Space 寫 code 也是相同的情況</p>
+<h3 id="Host-computer-and-Target-computer"><a href="#Host-computer-and-Target-computer" class="headerlink" title="Host computer and Target computer"></a>Host computer and Target computer</h3><p>Host computer定義為目前你正在寫 code 的電腦，要將寫完的 code 可以在 Target computer 上 run 起來<br>這個 Target computer 不一定要是實體的電腦，也可能是 Simulator, VM, … 等模擬環境</p>
+<h3 id="Editor"><a href="#Editor" class="headerlink" title="Editor"></a>Editor</h3><p>我想這個大家應該很熟悉，指的是單純的編輯器，在寫 code 的時候需要有一些能夠寫 code 地方，就是透過 Editor，也算是 IDE 的前身<br>常用的 IDE 例如: Visual Studio Code, Code Blocks, InteliJ…<br>常用的 Editor 例如: Notepad++, Vim, …</p>
+<p>Editor 如同 OS 一樣也是由他人透過程式寫出來的，因此也會有它的 source code 以及編譯他的 Compiler</p>
+<h3 id="Compiler"><a href="#Compiler" class="headerlink" title="Compiler"></a>Compiler</h3><p>大部分情況下我們所寫的 source code 是屬於高階語言(C, Java, …)<br>我們必需透過編譯器(Compiler)將程式碼轉成 Low level 的 Machine code 才能夠讓電腦有辦法看懂，例如: gcc 編出來的 .o 檔<br>在 Compile 前也有可能會有 Preprocessor 的參與，以 C 的 Preprocesser 來說就是處理 # 開頭的 code</p>
+<h3 id="Assembler"><a href="#Assembler" class="headerlink" title="Assembler"></a>Assembler</h3><p>組合語言的 Compiler ，將組合語言編成 Machine code<br>組合語言本身就較高階語言 Low level 些，處理的工作也較為底層，但一樣要轉為最後的 Machine code 再執行</p>
+<h3 id="Library"><a href="#Library" class="headerlink" title="Library"></a>Library</h3><p>在寫 code 過程中有些重複常用的功能就會被包成 library 方便使用<br>因此 library 可以視為已經先幫你編好功能的 code 可以讓你自由使用<br>例如: C 語言常用的標準函示庫 stdlib.h</p>
+<h3 id="Linker"><a href="#Linker" class="headerlink" title="Linker"></a>Linker</h3><p>當 source code 被編成 .o 檔之後將要透過 Linker 將各個零散的 .o 檔以及用到的 library link 在一起產生最後的可執行檔<br><font color="red">link 過程中主要決定的是將各個 .o 檔裡面程式沒有決定位置的部分連結在一起，以及一些外部符號等進行解析(C 的 extern)</font><br>例如:A Program 用到 B Program 的 Function，原先在 A Program 這個部分的位置並沒有確定，因此就要透過 Linker 決定位置</p>
+<p>在提到 link 過程中最常提到的也就是 Static link 與 Dynamic link</p>
+<ul>
+<li><p>Static link<br>在編譯、連結階段就會將 lib 直接編入，佔空間但速度快</p>
+</li>
+<li><p>Dynamic link<br>在程式執行階段才會載入 lib，不佔空間但速度較慢</p>
+</li>
+</ul>
+<p>最後補充一下 Linker 是由 linker script 所組成</p>
+<h3 id="Executable-File"><a href="#Executable-File" class="headerlink" title="Executable File"></a>Executable File</h3><p>Linker link 完的檔案(a.out)便是可執行檔，一般存於硬碟中<br>而 Executable file 的內容大致從上到下會有</p>
+<div style="width:50%;">
+<img src="/2021/02/26/1092-交大-作業系統總整與實作/Elf-layout.png">
+</div>
+
+<ul>
+<li>ELF Header (Executable and Linkable Format) 標頭檔</li>
+<li>Program-Header Table</li>
+<li>.text 存放程式</li>
+<li>.rodata 存放唯讀資料</li>
+<li>.data 存放已初始化的 global variables</li>
+<li>.bss 存放未出化的 global variables</li>
+</ul>
+<h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><p>當程式執行時，會有 loader 將硬碟中的 Executable file 解析並放進 Memory 裡面待 CPU 執行<br>這部分的架構如下，大家應該是差不多看到爛掉了</p>
+<img src="/2021/02/26/1092-交大-作業系統總整與實作/memoryLayoutC.jpg" title="memoryLayout">
+
+<p>記憶體從最下面是 0x0000 到上面 0xffff<br>最下面的 text 放程式碼<br>再來先放 initialized data 再放 uninitialized data<br>之後是 heap 從下往上放，放動態記憶體，例如:malloc, new<br>最後從上往下放的是 stack ，包含 local variable 或是 recursive 的 code(遞迴會爆掉就是這塊壓到下面的空間)</p>
+<p><font color="red">最後在這邊整理一下完成程式的執行過程</font></p>
+<ul>
+<li>先將原始碼(source code, assembly source code)經過 preprocesser 以及 Compiler, Assembler 編成 .o 檔</li>
+<li>將 .o 檔與 lib 透過 link 連結成可執行檔(a.out)存到硬碟等待執行</li>
+<li>Loader 將硬碟中的可執行檔解析並搬至記憶體中再交給 CPU 執行</li>
+</ul>
+<h3 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h3><p>當 Program 的程式量越來越大的時候，我們如果一個一個手動編成 .o 檔還要自己 link 是非常費神且沒有效率的事情<br>因此我們可以透過撰寫 Makefile 來幫我們自動化的進行這些動作，並依照是否有修改檔案決定是否需要重新 compile 與 link</p>
+<h3 id="Autoconf-tool"><a href="#Autoconf-tool" class="headerlink" title="Autoconf tool"></a>Autoconf tool</h3><p>在我們完成 program 後，我們會希望他在各個平台都有辦法執行<br>因此 Autoconf tool 可以幫我們做各平台檢查與轉換的工作</p>
+<h3 id="Debugger"><a href="#Debugger" class="headerlink" title="Debugger"></a>Debugger</h3><p>基本上寫 code 的過程中不可能會沒寫出 bug，因此我們需要 debugger 來輔助我們能更方便的找出程式在哪裡當掉<br>debugger 能夠找到這些資訊的原理為<br> <font color="red">debugger 會將我們寫好的程式編出來之後抹掉一個 Byte，並且告訴 CPU 說遇到這些部分當掉就跳過去找他</font></p>
+<p>我們就可以在這樣的情況下取得當下程式的資訊(Callstack)</p>
+<p>另外要提到的是在 User space 的 debugger 會由 kernel space 執行<br>那 Kernel space 的 debugger 怎麼辦?<br>聽說當初最早的創作人表示，如果會寫出 bug 就不要寫 kernel XD<br>不過由於我們都是普通人，因此現在還是有一些小程式可以輔助我們 debug，但這些 debugger 該怎麼 debug 就不要問我了</p>
+<p>常見的 Debugger 有: gdb, kgdb, …</p>
+<h3 id="Simulator-Enumerator-VM"><a href="#Simulator-Enumerator-VM" class="headerlink" title="Simulator Enumerator VM"></a>Simulator Enumerator VM</h3><p>大致上理解的分別如下</p>
+<ul>
+<li>Simulator 看起來跟正常環境一樣，但其實內容並不一樣</li>
+<li>Enumerator 看起來跟正常環境一樣，內容也做得幾乎一樣，但也有可能透過其他方法達成一樣的效果</li>
+<li>VM(Virtual Machine) 透過真正的環境切出部份資源產生出模擬環境，基本上與真正環境無異</li>
+</ul>
+<h3 id="Version-Control"><a href="#Version-Control" class="headerlink" title="Version Control"></a>Version Control</h3><p>在多人大型軟體開發的情況下版本控制有多重要應該不用多做說明了<br>版本控制的原理主要是在每次更新的時候存下相異的部分(如果整個檔案重存太耗資源)<br>如果沒多人修改同一個檔案就直接將相異部分 merge 就好<br>如果有多人修改同一個檔案就先去打一架決定要用誰的再合併</p>
+<p>常見有: git, SVN, …</p>
+<hr>
+<h2 id="Week2-Booting"><a href="#Week2-Booting" class="headerlink" title="Week2 - Booting"></a>Week2 - Booting</h2><p><font color="red"><strong>本周介紹的內容由按下開機鍵之後到你可以登入開始使用電腦的過程中發生了哪些事</strong></font></p>
+<p>按下開機鍵 -&gt; 喚醒 CPU -&gt; CPU 到指定的 Permanen Memory(通常是ROM) 拿第一個程式 (Bootloader1)<br>-&gt; Bootloader1 做初步的初始化以及喚醒一些可以 drive 各個裝置的 Program (Bootloader2)<br>-&gt; Bootloader2 將 device 內 load OS 的 Program 讀出來 (Bootloader3)<br>-&gt; Bootloader3 將 OS load 出來執行 (Bootloader4)<br>-&gt; Bootloader4(OS) 執行使用者需要的各種 Program</p>
+<ul>
+<li><a href="#Bootloader1">Bootloader1</a></li>
+<li><a href="#Bootloader2">Bootloader2</a></li>
+<li><a href="#Bootloader3">Bootloader3</a></li>
+<li><a href="#Bootloader4">Bootloader4</a></li>
+</ul>
+<h3 id="Bootloader1"><a href="#Bootloader1" class="headerlink" title="Bootloader1"></a>Bootloader1</h3><p>CPU 剛被喚醒後並不清楚外面環境(device)的任何狀況，會先到指定的 Memory 位置執行指定的 Program，也就是 Bootloader1<br>SoC(System on Chip)，因此會找指定的 Memory(ROM) 去執行 Program<br>因此在出廠的時候就已經燒在 firmware 上<br>這個 Program 會將部分參數初始化後並檢查周邊的 hardware 狀況<br>可能會提供簡單的 Shell 提供使用(ex:x86/BIOS)<br>將 device 內的 Program(Bootloader2) load 進 Memory 並將主導權轉交給 Bootloader2</p>
+<h3 id="Bootloader2"><a href="#Bootloader2" class="headerlink" title="Bootloader2"></a>Bootloader2</h3><p>將 OS 的 loader 給 load 進 Memory<br>可能提供簡單的 Shell 提供使用(選擇何種 OS 開機)<br>不是所有裝置都有這個部分的 Bootloader(ex:Smart Phone 開機時就已經決定是 Android 或是 IOS)<br>到目前為止都是在絕對位置去取得所需的資料，CPU 還不認得 filesystem<br>將主導權交給 Bootloader3</p>
+<h3 id="Bootloader3"><a href="#Bootloader3" class="headerlink" title="Bootloader3"></a>Bootloader3</h3><p>將 OS load 進 Memory 並作一些初始化<br>load kernel, 各種 table, schedulder 等 Program<br>將主導權交給 OS(Bootloader4)</p>
+<h3 id="Bootloader4"><a href="#Bootloader4" class="headerlink" title="Bootloader4"></a>Bootloader4</h3><p>OS 執行 Shell 提供 User 可以進行各種指令與程式的執行(fork)</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://shizsun0609tw.github.io/2021/02/26/1092-交大-作業系統總整與實作/" data-id="ckm0f8uhj000mkcsz6ou064vt" class="article-share-link">Share</a>
+      
+        <a href="https://shizsun0609tw.github.io/2021/02/26/1092-交大-作業系統總整與實作/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NCTU/">NCTU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Operating-System/">Operating System</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/01/18/1091-交大-互動式形變/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">1091-交大-互動式形變</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+    <h3 class="widget-title">About</h3>
+    <div class="widget">
+          <div class="aboutImg">
+            <img src="https://i.imgur.com/IFmwrnC.jpg" width="120px" height="120px">
+          </div>
+          <div class="aboutInformation">
+            <span style="font-family:Microsoft JhengHei; color:black;">
+            <ul>
+                <li>&nbsp&nbsp陳鎮華</li>
+                <li>&nbsp&nbspZhen-Hua Chen</li>
+                <li>&nbsp</li>
+                <li>&nbsp&nbsp<a href="https://github.com/shizsun0609tw">Github</a></li>
+                <li>&nbsp&nbsp<a href="https://www.youtube.com/channel/UCdz5zI6t8_KF3lhIQg5edlw">Youtube</a></li>
+                <li>&nbsp&nbsp<a href="mailto:shizsun0609tw@gmail.com">Contact</a></li>
+            </ul>
+            </span>
+          </div>
+          <div style="clear:both;"></div>
+    </div>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm/">Algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/">Compiler</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Graphics/">Computer Graphics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Diary/">Diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Network-Programming/">Network Programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/">Operating System</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software-Engineering/">Software Engineering</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compiler/">Compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Diary/">Diary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/">Math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NCTU/">NCTU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTOU/">NTOU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network-Programming/">Network Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Operating-System/">Operating System</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/">Software Engineering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tool/">Tool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/02/26/1092-交大-作業系統總整與實作/">1092-交大-作業系統總整與實作</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/18/1091-交大-互動式形變/">1091-交大-互動式形變</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/14/1091-交大-網路程式設計/">1091-交大-網路程式設計</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/20/研究新生活/">研究新生活</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/07/5th-Kind-Games-日本遊戲公司實習心得/">5th Kind Games 日本遊戲公司實習心得</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+    <div class="widget-wrap">
+      <h3 class="widget-title">views</h3>
+      <div class="widget" style="text-align:center">
+          <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=36593680&main=1"></script><noscript><img src="//counter1.fc2.com/counter_img.php?id=36593680&main=1"></noscript>
+      </div>
+    </div>
+  
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Zhen-Hua Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'shizsun0609tw';
+  
+  var disqus_url = 'https://shizsun0609tw.github.io/2021/02/26/1092-交大-作業系統總整與實作/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
