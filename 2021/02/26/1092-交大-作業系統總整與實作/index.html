@@ -7,20 +7,20 @@
   
   <title>1092-交大-作業系統總整與實作 | Shizsun&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Introduction Week1 - Before OSDI Week2 - Booting Week3 - Interrupt and Interrupt Handling I Week4 - Interrupt and Interrupt Handling II Week5 - Process Management I">
+  <meta name="description" content="Introduction Week1 - Before OSDI Week2 - Booting Week3 - Interrupt and Interrupt Handling I Week4 - Interrupt and Interrupt Handling II Week5 - Process Management I Week6 - Process Management II">
 <meta name="keywords" content="NCTU,Operating System">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1092-交大-作業系統總整與實作">
 <meta property="og:url" content="https://shizsun0609tw.github.io/2021/02/26/1092-交大-作業系統總整與實作/index.html">
 <meta property="og:site_name" content="Shizsun&#39;s blog">
-<meta property="og:description" content="Introduction Week1 - Before OSDI Week2 - Booting Week3 - Interrupt and Interrupt Handling I Week4 - Interrupt and Interrupt Handling II Week5 - Process Management I">
+<meta property="og:description" content="Introduction Week1 - Before OSDI Week2 - Booting Week3 - Interrupt and Interrupt Handling I Week4 - Interrupt and Interrupt Handling II Week5 - Process Management I Week6 - Process Management II">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://shizsun0609tw.github.io/2021/02/26/1092-交大-作業系統總整與實作/Elf-layout.png">
 <meta property="og:image" content="https://shizsun0609tw.github.io/2021/02/26/1092-交大-作業系統總整與實作/memoryLayoutC.jpg">
-<meta property="og:updated_time" content="2021-03-22T04:09:12.398Z">
+<meta property="og:updated_time" content="2021-04-12T02:33:41.934Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1092-交大-作業系統總整與實作">
-<meta name="twitter:description" content="Introduction Week1 - Before OSDI Week2 - Booting Week3 - Interrupt and Interrupt Handling I Week4 - Interrupt and Interrupt Handling II Week5 - Process Management I">
+<meta name="twitter:description" content="Introduction Week1 - Before OSDI Week2 - Booting Week3 - Interrupt and Interrupt Handling I Week4 - Interrupt and Interrupt Handling II Week5 - Process Management I Week6 - Process Management II">
 <meta name="twitter:image" content="https://shizsun0609tw.github.io/2021/02/26/1092-交大-作業系統總整與實作/Elf-layout.png">
   
     <link rel="alternate" href="/atom.xml" title="Shizsun&#39;s blog" type="application/atom+xml">
@@ -102,6 +102,7 @@
 <li><a href="#Week3-Interrupt-and-Interrupt-Handling-I">Week3 - Interrupt and Interrupt Handling I</a></li>
 <li><a href="#Week4-Interrupt-and-Interrupt-Handling-II">Week4 - Interrupt and Interrupt Handling II</a></li>
 <li><a href="#Week5-Process-Management-I">Week5 - Process Management I</a></li>
+<li><a href="#Week6-Process-Management-II">Week6 - Process Management II</a></li>
 </ul>
 <a id="more"></a>
 
@@ -200,7 +201,9 @@
 <h3 id="Exception-timing"><a href="#Exception-timing" class="headerlink" title="Exception timing"></a>Exception timing</h3><p>Interrupt 的整個過程 (Interrupt response time) 會包含 Interrupt lantency 與 Processing time<br>Interrupt lantency 為 device 送出訊號直到 CPU 收到訊號中間的時間，IO 需要點時間延遲送進 CPU<br>Processing time 為 CPU 開始執行對應的程式碼，可以透過撰寫者控制執行速度</p>
 <h3 id="Interrupt-Handler"><a href="#Interrupt-Handler" class="headerlink" title="Interrupt Handler"></a>Interrupt Handler</h3><p>Interrupt Handler 大致會分為 Top Half 與 Bottom Half (概念上的設計方式)<br>某些 device 需要即時性的處理(例如網卡收封包)，就會在 Interrupt 之後在 Top Half 的部分先做處理<br>在 Top Half 的執行過程中，也有機會被 Priorty 較高的 Interrupt 所打斷<br>而封包的解析並沒有這麼的需要即時性，因此會先讓 CPU 回去處理原本的事物並接受其他 Interrupt<br>並將封包的處理排進 scedule 內等待處理，後半段處理的部分我們稱為 Bottom Half<br>透過上述的概念我們可以知道 Interrupt Handler 的執行可能會分散在 CPU 的工作時間內</p>
 <h3 id="Driver"><a href="#Driver" class="headerlink" title="Driver"></a>Driver</h3><p>當有新的 driver 進出時，會有 init 與 cleanup 的 module 讓 OS 去註冊<br>driver 會由許多定義好的 API 所組成，將 function 對應到 OS 的執行工作表上<br>例如當 OS 執行 write 時，就會將 function 對應到 C: 或是 D: 上 driver 的 API 執行</p>
-<h3 id="Softirq"><a href="#Softirq" class="headerlink" title="Softirq"></a>Softirq</h3><p>在 linux 系統中，Interrupt Handler 的處理會透過 Softirq 的方式執行<br>Interrupt Handler 被分為 Top Half 與 Bottom Half，Softirq 會把 Bottom Half 的部分在不同的 CPU 上去執行<br>在處理上會較快速且有效率，但也有可能造成兩個 CPU 互相 lock (一支程式會被兩個 CPU 執行)<br>常一起比較的為 Tasklet 最大不同是 Top 與 Bottom 會在同一個 CPU 上執行，因此不會產生 lock 的問題，但效率也較差</p>
+<h3 id="Softirq"><a href="#Softirq" class="headerlink" title="Softirq"></a>Softirq</h3><p>Softirq 為 linux 系統提供的功能(Library)，起因是由於 Interrupt 之間存在許多互相打斷等等複雜的關係，因此 Linux 提供這項功能讓撰寫者能更方便的使用<br>Interrupt Handler 可以透過 Softirq 的方式執行，撰寫者必須 follow softirq 的建議的撰寫方法達到執行快速的效果<br>Softirq 內部會幫你做些整理或是排程，有可能把 Bottom Half 的部分在不同的 CPU 上去執行…等等<br>這些內部事項都是為了讓執行起來更快更有效率而做</p>
+<p>舉例來說，假設 Softirq 內是空的時發生了 Interrupt A 之後在 Interrupt A 的 Bottom Half 執行時發生了 Interrupt B<br>完整的過程為<br>origin program -&gt; Interrupt A -&gt; A Top Half -&gt; Softirq(目前只有 Interrupt A) -&gt; A Bottom Half<br>-&gt; Interrupt B -&gt; B Top Half -&gt; Softirq(裡面有 Interrupt A, B) -&gt; A Bottom Half<br>-&gt; Softirq(只剩 Interrupt B) -&gt; B Bottom Half -&gt; Softirq(空了) -&gt; origin program </p>
+<h3 id="Tasklet"><a href="#Tasklet" class="headerlink" title="Tasklet"></a>Tasklet</h3><p>常被 Softirq 拿來比較的 Tasklet 為 Softirq 裡面的一項功能<br>就我的理解，Tasklet 就像是一個小的 Softirq 並且在 Softirq 裡面參與排程<br>相對較不重要的 program bottom half 就會被丟到 Tasklet 裡面<br>Softirq 在排程的過程中也會執行到 Tasklet 這個功能，Tasklet 就會去看自己裡面有哪些待執行的 Bottom Half 並且排程後執行<br>例如 printer 的執行速度較不重要，就可以被丟到 Tasklet 裡面，待重要的部分執行完後再由 Tasklet 將一群都沒有很重要的排程後執行</p>
 <hr>
 <h2 id="Week5-Process-Management-I"><a href="#Week5-Process-Management-I" class="headerlink" title="Week5 Process Management I"></a>Week5 Process Management I</h2><p>OS 讓 CPU 執行 user 的指令經過以下步驟</p>
 <p><strong>CPU 跑第一個 Program A(init)</strong><br><strong>-&gt; System call 請求 load Program B</strong><br><strong>-&gt; OS 幫忙處理 Program, process, thread</strong><br><strong>-&gt; OS Fork Program B</strong><br><strong>-&gt; Execute</strong><br><strong>-&gt; OS schedule</strong><br><strong>-&gt; Context switch</strong><br><strong>-&gt; CPU 執行 Program B</strong></p>
@@ -208,16 +211,23 @@
 <h3 id="System-Call"><a href="#System-Call" class="headerlink" title="System Call"></a>System Call</h3><p><font color="red">在某些程式執行的過程中會需要使用到某些 lib 裡面包含較危險、敏感的資料與操作(fork, open, …)</font><br>因此這些 lib 內會透過 System Call 讓 OS 幫你完成這些指令</p>
 <p>目前 x86 使用 Exception 的方式，使 CPU 中斷去執行指定的服務<br><font color="red">Exception 可以被理解為一道道被預設在 CPU 內的指令(Unknown Instruction, Divied by Zero, …)</font><br>OS 會在開機的時候將 Exception 對應的指令放在記憶體內(Vector Table)<br>當 CPU 執行 Program 的過程中觸發了某些意外 Exception 就會透過 Vector Table 去執行對應的指令</p>
 <h3 id="Process-Context"><a href="#Process-Context" class="headerlink" title="Process Context"></a>Process Context</h3><p>在不同 Process 執行時會自己有相關的資料需要紀錄(Context)<br>在 CPU 執行指令時，如果有 System Call 進入 Kernel Space 不算是 Context Switch 最多只有更改 mode</p>
-<h3 id="Kernel-Space-and-User-Space-1"><a href="#Kernel-Space-and-User-Space-1" class="headerlink" title="Kernel Space and User Space"></a>Kernel Space and User Space</h3><p>User space 與 Kernel Space 各有自己的 stack (User stack, Kernel stack)<br>在不同的 space 執行會把 sp (stack pointer) 指到自己 space 的 stack 上</p>
-<p>不同指令需要的權限不同，因此也會依權限將指令分為 Kernel mode 與 User mode 來管理</p>
+<h3 id="Kernel-Space-and-User-Space-1"><a href="#Kernel-Space-and-User-Space-1" class="headerlink" title="Kernel Space and User Space"></a>Kernel Space and User Space</h3><p>User space 與 Kernel Space 實際上放在記憶體的兩個區塊<br>User space 與 Kernel Space 各有自己的 stack (User stack, Kernel stack)<br>在不同的 space 執行會把 sp (stack pointer) 指到自己 space 的 stack 上</p>
+<p>不同指令需要的權限不同，因此也會依權限將指令分為 Kernel mode 與 User mode 來管理<br>Kernel mode 與 User mode 的狀態為 CPU 在硬體上的狀態轉換，當在 Kernel mode 的底下，CPU 就能辦到更多的事情(傭有更多的權限)</p>
 <h3 id="Program-and-Process"><a href="#Program-and-Process" class="headerlink" title="Program and Process"></a>Program and Process</h3><p>在 Disk 裡面尚未執行的 Elf files(Execute file)，稱為 Program<br>將 Program load 到 Memory 裡面執行，稱為 Process</p>
 <h3 id="Fork"><a href="#Fork" class="headerlink" title="Fork"></a>Fork</h3><p>在 Program A 透過 OS fork 出 Program B 的時候會紀錄在 OS 的 Task structe 內<br>此 data structure 用來記錄執行時的相關資訊(discriptor, PID, parent, …)，以及執行狀態(也會用於 schedule)</p>
 <hr>
+<h2 id="Week6-Process-Management-II"><a href="#Week6-Process-Management-II" class="headerlink" title="Week6 Process Management II"></a>Week6 Process Management II</h2><h3 id="Context-Switch"><a href="#Context-Switch" class="headerlink" title="Context Switch"></a>Context Switch</h3><p>Context Switch 指的是在不同 Process 之間的切換需要有相關資料的備份，與執行到的位置等等的儲存，實際上為 register 的備份行為<br>Context Switch 的過程必定是比只做一件事耗時的，但目前為了使用者體驗的原因(ex:一邊播音樂、一邊寫報告)<br>因此會使用 Context Switch 讓多個工作都能輪流被執行到<br>原則上應該使 Context Switch 的時間佔執行工作的比例較少的 % 數，否則 CPU 可能會一直在執行 Context Switch 不怎麼執行工作導致效率差</p>
+<h3 id="Interrupt-Context"><a href="#Interrupt-Context" class="headerlink" title="Interrupt Context"></a>Interrupt Context</h3><p>在 Interrupt 時，因為要求速度快且有會馬上回原 Program 的假設<br>因此僅有部分的 Context 儲存與備份，但並不是完整的 Context Switch，也通常不稱為 Context Switch<br>(Ex:收到網路封包 Interrupt 到分析確定是哪個 Program 的封包之前就屬於 Interrupt Context)</p>
+<h3 id="Scheduler"><a href="#Scheduler" class="headerlink" title="Scheduler"></a>Scheduler</h3><p>在多個程式之間的切換與執行需要優先度、執行時間等等的安排，這邊所依靠的就是 Scheduler<br>在一般的 Process 開始執行前，Kernel 會加上 Timer Interrupt，每隔一段時間就會打進 User 的程式，就有機會被 Scheduler switch 掉<br>又或者是 User Program call 到任一 System Call 都有可能藏有 Scheduler 的呼叫在裡面，讓 Kernel 有機會將你 switch 掉</p>
+<p>通常 IO bound 的 Process 優先度會較高(因為較高機會是 Interactive 的 Process，ex:browser)<br>各種 OS ，各種版本，Schedule 的方法都可能會有些差異</p>
+<h3 id="User-preemption"><a href="#User-preemption" class="headerlink" title="User preemption"></a>User preemption</h3><p>作業系統是否有將 User Process Interrupt 後切換成另一個 User Process 的能力 (較簡單)</p>
+<h3 id="Kernel-preemption"><a href="#Kernel-preemption" class="headerlink" title="Kernel preemption"></a>Kernel preemption</h3><p>作業系統是否有在 User Process 透過 System Call 進入 Kernel 後 Interrupt 成另一個 User Process 的能力 (較困難)</p>
+<h3 id="Process-and-Thread"><a href="#Process-and-Thread" class="headerlink" title="Process and Thread"></a>Process and Thread</h3><p>如果今天開了很多個 word process，每個都要完整的資料結構會浪費空間<br>因此 thread 的用途就會將程式的部分重用，資料的部分 copy on write 以節省資源</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://shizsun0609tw.github.io/2021/02/26/1092-交大-作業系統總整與實作/" data-id="ckmk1cjnn00010oszv7bq97ty" class="article-share-link">Share</a>
+      <a data-url="https://shizsun0609tw.github.io/2021/02/26/1092-交大-作業系統總整與實作/" data-id="ckne02jld00017ssz0crhsjff" class="article-share-link">Share</a>
       
         <a href="https://shizsun0609tw.github.io/2021/02/26/1092-交大-作業系統總整與實作/#disqus_thread" class="article-comment-link">Comments</a>
       
